@@ -29,10 +29,6 @@ class GalleryHandler(webapp2.RequestHandler):
     def get(self):
         pass
 
-class MainHandler(webapp2.RequestHandler):
-    def get(self):
-        pass
-
 class MapHandler(webapp2.RequestHandler):
     def get(self):
         pass
@@ -53,13 +49,17 @@ class AboutHandler(webapp2.RequestHandler):
     def get(self):
         pass
 
+class MainHandler(webapp2.RequestHandler):
+    def get(self):
+        pass
+
 app = webapp2.WSGIApplication([
     ('/favorites.html', FavoritesHandler),
     ('/gallery.html', GalleryHandler),
-    ('/main.html', MainHandler),
     ('/map.html', MapHandler),
     ('/post.html', PostHandler),
     ('/results.html', ResultsHandler),
     ('/search.html', SearchHandler),
-    ('/about.html', AboutHandler)
+    ('/about.html', AboutHandler),
+    ('/', MainHandler)
 ], debug=True)
