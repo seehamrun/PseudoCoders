@@ -1,5 +1,6 @@
 from google.appengine.ext import ndb
 
+
 class Event(ndb.Model):
     name = ndb.StringProperty()
     location = ndb.StringProperty()
@@ -8,5 +9,5 @@ class Event(ndb.Model):
     user_rating = ndb.IntegerProperty()
     price_level = ndb.IntegerProperty()
 
-
 class Schedule(ndb.Model):
+    events = ndb.StructuredProperty(Event, repeated=True)
