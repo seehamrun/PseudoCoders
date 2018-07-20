@@ -68,12 +68,12 @@ class MainHandler(webapp2.RequestHandler):
         return self.response.write(template.render())
 
 app = webapp2.WSGIApplication([
-    ('/favorites.html', FavoritesHandler),
-    ('/gallery.html', GalleryHandler),
-    ('/map.html', MapHandler),
-    ('/post.html', PostHandler),
-    ('/results.html', ResultsHandler),
-    ('/search.html', SearchHandler),
-    ('/about.html', AboutHandler),
+    ('/favorites', FavoritesHandler),
+    ('/gallery', GalleryHandler),
+    ('/map', MapHandler),
+    ('/post', PostHandler),
+    ('/results', ResultsHandler),
+    ('/search', SearchHandler),
+    ('/about', AboutHandler),
     ('/', MainHandler)
 ], debug=True)
