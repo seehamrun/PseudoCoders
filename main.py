@@ -42,6 +42,11 @@ class PostHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/post.html')
         return self.response.write(template.render())
 
+    def post(self):
+        events = self.request.get('schedule')
+        stored_schedule = Schedule(events=events)
+        stored_schedule.put()
+
 class ResultsHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_env.get_template('templates/results.html')
