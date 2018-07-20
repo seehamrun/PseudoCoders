@@ -1,0 +1,11 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <a  class="logout" href="{{logoutUrl}}">Log Out</a>
+    {% for favorite in favorites %}
+      <div><img src="{{favorite.url}}" /></div>
+    {% endfor %}
+  </body>
+</html>
