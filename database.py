@@ -10,3 +10,4 @@ class Event(ndb.Model):
 
 
 class Schedule(ndb.Model):
+    events = ndb.StructuredProperty(Event, repeated=True)
