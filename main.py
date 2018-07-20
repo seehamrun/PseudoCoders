@@ -23,35 +23,43 @@ jinja_env = jinja2.Environment(
 
 class FavoritesHandler(webapp2.RequestHandler):
     def get(self):
-        pass
+        template = jinja_env.get_template('templates/favorites.html')
+        return self.response.write(template.render())
 
 class GalleryHandler(webapp2.RequestHandler):
     def get(self):
-        pass
+        template = jinja_env.get_template('templates/gallery.html')
+        return self.response.write(template.render())
 
 class MapHandler(webapp2.RequestHandler):
     def get(self):
-        pass
+        template = jinja_env.get_template('templates/map.html')
+        return self.response.write(template.render())
 
 class PostHandler(webapp2.RequestHandler):
     def get(self):
-        pass
+        template = jinja_env.get_template('templates/post.html')
+        return self.response.write(template.render())
 
 class ResultsHandler(webapp2.RequestHandler):
     def get(self):
-        pass
+        template = jinja_env.get_template('templates/results.html')
+        return self.response.write(template.render())
 
 class SearchHandler(webapp2.RequestHandler):
     def get(self):
-        pass
+        template = jinja_env.get_template('templates/search.html')
+        return self.response.write(template.render())
 
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
-        pass
+        template = jinja_env.get_template('templates/about.html')
+        return self.response.write(template.render())
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        pass
+        template = jinja_env.get_template('templates/main.html')
+        return self.response.write(template.render())
 
 app = webapp2.WSGIApplication([
     ('/favorites.html', FavoritesHandler),
