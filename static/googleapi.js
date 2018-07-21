@@ -1,4 +1,8 @@
-var api_key = "HIDDEN";
+//IGNORE THIS FOR NOW
+
+
+
+/*var api_key = "HIDDEN";
 
 
 //-----------------------------------------------------------------------------//
@@ -49,8 +53,8 @@ function fetchPlaceDetailsHelper(strjson) {
     //runs jQuery to fetch data and waits for completion
     var id = findPlaceRequestHelper(data)
     //stores ID from JSON menu in id variable
-            /*console.log(id)
-            //logs ID*/
+            //console.log(id)
+            //logs ID//
     fetchPlaceDetails(id)
     //triggers place detail fetch with this id
   })
