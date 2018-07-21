@@ -9,5 +9,5 @@ class Event(ndb.Model):
     user_rating = ndb.IntegerProperty()
     price_level = ndb.IntegerProperty()
 
-class Schedule(ndb.Model):
+class Schedule(ndb.Model): #for now, this will be a single-day schedule
     events = ndb.StructuredProperty(Event, repeated=True)

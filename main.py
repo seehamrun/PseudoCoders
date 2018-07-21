@@ -20,7 +20,7 @@ import database
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
-    autoescape=True)
+    autoescape=True) #creates environment variable for HTML rendering
 
 class FavoritesHandler(webapp2.RequestHandler):
     def get(self):
@@ -46,6 +46,7 @@ class PostHandler(webapp2.RequestHandler):
         events = self.request.get('schedule')
         stored_schedule = database.Schedule(events=events)
         stored_schedule.put()
+        #not sure how exactly this will work
 
 class ResultsHandler(webapp2.RequestHandler):
     def get(self):
