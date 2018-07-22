@@ -1,24 +1,28 @@
 <html>
   <head>
     <link rel="stylesheet" href="/static/style.css"></link>
+    <script type='text/javascript' src='/static/search_script.js'></script>
   </head>
   <body>
 <h1>Search Page</h1>
 
-<p>Select your budget:</p>
-<select>
-  <option value="one_dollar">$ (cheap) </option>
-  <option value="two_dollar">$$ (intermediate)</option>
-  <option value="three_dollar">$$$ (pricey) </option>
-  <option value="four_dollar">$$$$ (bank🤑💸)</option>
-</select>
-<p>Select the rating:</p>
+<form>
+  <p>Select your budget:</p>
+  <select>
+    <option value="one_dollar">$ (cheap) </option>
+    <option value="two_dollar">$$ (intermediate)</option>
+    <option value="three_dollar">$$$ (pricey) </option>
+    <option value="four_dollar">$$$$ (bank🤑💸)</option>
+  </select>
+  <p>Select the rating:</p>
   <select>
     <option value="one_star">One Star</option>
     <option value="two_star">Two Stars</option>
     <option value="three_star">Three Stars</option>
     <option value="four_star">Four Stars</option>
     <option value="five_star">Five Stars</option>
-</select>
+  </select>
+  <<button type="submit" id="submitButton">Submit</button>
+</form>
   </body>
 </html>

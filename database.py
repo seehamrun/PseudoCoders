@@ -11,3 +11,13 @@ class Event(ndb.Model):
 
 class Schedule(ndb.Model): #for now, this will be a single-day schedule
     events = ndb.StructuredProperty(Event, repeated=True)
+    ID = ndb.IntegerProperty() #this will help us communicate with client quickly
+    usersWhoSaved = ndb.StringProperty(repeated=True)
+
+class GalleryPost(ndb.Model):
+    schedule = ndb.StructuredProperty(Schedule, repeated=False)
+    ID = ndb.IntegerProperty()
+    description = ndb.StringProperty()
+    rating = ndb.IntegerProperty()
+    title = ndb.StringProperty()
+    poster = ndb.StringProperty() #this will be their email

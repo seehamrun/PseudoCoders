@@ -44,7 +44,7 @@ class PostHandler(webapp2.RequestHandler):
 
     def post(self):
         events = self.request.get('schedule')
-        stored_schedule = database.Schedule(events=events)
+        stored_schedule = database.Schedule(events=events) #ADD ID HERE
         stored_schedule.put()
         #not sure how exactly this will work
 
