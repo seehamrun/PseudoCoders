@@ -16,6 +16,7 @@ import webapp2
 import jinja2
 import os
 import database
+import logging
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -24,21 +25,25 @@ jinja_env = jinja2.Environment(
 
 class FavoritesHandler(webapp2.RequestHandler):
     def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/favorites.html')
         return self.response.write(template.render())
 
 class GalleryHandler(webapp2.RequestHandler):
     def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/gallery.html')
         return self.response.write(template.render())
 
 class MapHandler(webapp2.RequestHandler):
     def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/map.html')
         return self.response.write(template.render())
 
 class PostHandler(webapp2.RequestHandler):
     def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/post.html')
         return self.response.write(template.render())
 
@@ -48,23 +53,43 @@ class PostHandler(webapp2.RequestHandler):
         stored_schedule.put()
         #not sure how exactly this will work
 
-class ResultsHandler(webapp2.RequestHandler):
-    def get(self):
-        template = jinja_env.get_template('templates/results.html')
-        return self.response.write(template.render())
+# WE MIGHT NOT NEED THIS IF THE POST METHOD ABOVE RETURNS THIS
+# class ResultsHandler(webapp2.RequestHandler):
+#     def get(self):
+#         template = jinja_env.get_template('templates/results.html')
+#         return self.response.write(template.render())
 
 class SearchHandler(webapp2.RequestHandler):
     def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/search.html')
         return self.response.write(template.render())
 
+    def post(self):
+        budgetVar = self.request.get('budget')
+        ratingVar = self.request.get('rating')
+        self.response.headers['Content-Type'] = 'text/html'
+        # stored_dog = database.DatabaseDog(age=int(dogAge),
+        #     color=dogColor, bark_intensity=int(dogBark), name=dogName)
+        # stored_dog.put()
+        logging.info(budgetVar)
+        logging.info(ratingVar)
+        response_html = jinja_env.get_template('templates/results.html')
+        data = {
+            'var_budget': budgetVar,
+            'var_rating': ratingVar
+        }
+        self.response.write(response_html.render(data))
+
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/about.html')
         return self.response.write(template.render())
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/main.html')
         return self.response.write(template.render())
 
@@ -73,7 +98,7 @@ app = webapp2.WSGIApplication([
     ('/gallery', GalleryHandler),
     ('/map', MapHandler),
     ('/post', PostHandler),
-    ('/results', ResultsHandler),
+    #('/results', ResultsHandler),
     ('/search', SearchHandler),
     ('/about', AboutHandler),
     ('/', MainHandler)
