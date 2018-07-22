@@ -19,6 +19,6 @@ function addFavoriteClick() {
 }
 
 window.addEventListener('load', () => {
-  document.querySelector('#submitButton').addEventListener("click", submitClick)
+  document.querySelector('#submit').addEventListener("click", submitClick)
   //document.querySelector('#addFavorite').addEventListener('click', addFavoriteClick)
 });
