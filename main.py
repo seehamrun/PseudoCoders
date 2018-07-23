@@ -17,6 +17,7 @@ import jinja2
 import os
 import database
 import logging
+import api_implementation
 from google.appengine.api import users
 
 jinja_env = jinja2.Environment(
@@ -83,6 +84,9 @@ class SearchHandler(webapp2.RequestHandler):
     def post(self):
         budgetVar = self.request.get('budget')
         ratingVar = self.request.get('rating')
+        dateVar = self.request.get('date')
+        locationVar = self.request.get('location')
+        radiusVar = self.request.get('radius')
         # searchQuery = {
         #     'var_budget': budgetVar,
         #     'var_rating': ratingVar,
@@ -92,13 +96,17 @@ class SearchHandler(webapp2.RequestHandler):
 
         userItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
         if userItem == []:
-            newItem = database.LastSearchQuery(userID=users.get_current_user().user_id(), budget=budgetVar, rating=ratingVar)
+            newItem = database.LastSearchQuery(userID=users.get_current_user().user_id(), budget=budgetVar, rating=ratingVar, date=dateVar, location=locationVar, radius=radiusVar)
             newItem.put()
         else:
             userItem[0].budget = budgetVar
             userItem[0].rating = ratingVar
+            userItem[0].date = dateVar
+            userItem[0].location = locationVar
+            userItem[0].radius = radiusVar
             userItem[0].put()
 
+        logging.info(userItem)
         userItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
         userItem[0].put()
         # lastQuery.budget = budgetVar
