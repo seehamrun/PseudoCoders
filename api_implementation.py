@@ -62,13 +62,8 @@ def getLatitudeLongitude(location):
 
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
-<<<<<<< HEAD
-    #return response['results']['geometry']['location']
     return response
-
-=======
-    return (response['results']['geometry']['location']['lat'], response['results']['geometry']['location']['lng'])
->>>>>>> a4920bfaa19768e2213cc1d1ab829da98e132526
+    #return (response['results']['geometry']['location']['lat'], response['results']['geometry']['location']['lng'])
 
 #       console.log(google_url)
 #   jQuery.get(google_url, (data) => {
