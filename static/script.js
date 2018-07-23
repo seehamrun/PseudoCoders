@@ -3,7 +3,7 @@
 //this will be all of our non-API js code
 
 // When the user scrolls the page, execute myFunction
-window.onscroll = function() {myFunction()};
+window.onscroll = function() {navBar()};
 
 // Get the navbar
 var navbar = document.getElementById("navbar");

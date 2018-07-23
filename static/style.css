@@ -43,12 +43,20 @@ h1 {
   padding: 20px;
 }
 
+.navbar {
+  overflow: hidden;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+}
+
 #main-text {
   font-size: 100px;
 }
 /* Page content */
 .content {
   padding: 16px;
+  margin-top: 40px;
 }
 
 /* The sticky class is added to the navbar with JS when it reaches its scroll position */
