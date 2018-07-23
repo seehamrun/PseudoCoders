@@ -16,64 +16,118 @@ import webapp2
 import jinja2
 import os
 import database
+import logging
+from google.appengine.api import users
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
-    autoescape=True)
+    autoescape=True) #creates environment variable for HTML rendering
 
 class FavoritesHandler(webapp2.RequestHandler):
     def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/favorites.html')
         return self.response.write(template.render())
 
 class GalleryHandler(webapp2.RequestHandler):
     def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/gallery.html')
         return self.response.write(template.render())
 
 class MapHandler(webapp2.RequestHandler):
     def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/map.html')
         return self.response.write(template.render())
 
 class PostHandler(webapp2.RequestHandler):
     def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/post.html')
         return self.response.write(template.render())
 
     def post(self):
         events = self.request.get('schedule')
-        stored_schedule = database.Schedule(events=events)
+        stored_schedule = database.Schedule(events=events) #ADD ID HERE
         stored_schedule.put()
+        #not sure how exactly this will work
+
 
 class ResultsHandler(webapp2.RequestHandler):
     def get(self):
-        template = jinja_env.get_template('templates/results.html')
-        return self.response.write(template.render())
+        self.response.headers['Content-Type'] = 'text/html'
+        response_html = jinja_env.get_template('templates/results.html')
+        data = {
+            'queryObject': database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
+        }
+        return self.response.write(response_html.render(data))
+
+    def post(self):
+        logging.data("")
 
 class SearchHandler(webapp2.RequestHandler):
     def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/search.html')
         return self.response.write(template.render())
 
+        # self.response.headers['Content-Type'] = 'text/html'
+        # # logging.info(budgetVar)
+        # # logging.info(ratingVar)
+        # response_html = jinja_env.get_template('templates/results.html')
+        #
+        # self.response.write(response_html.render(data))
+
+    def post(self):
+        budgetVar = self.request.get('budget')
+        ratingVar = self.request.get('rating')
+        # searchQuery = {
+        #     'var_budget': budgetVar,
+        #     'var_rating': ratingVar,
+        #     'var_ID': 0 #later a real ID will be added here
+        # }
+        # template = jinja_env.get_template('templates/temp_screen.html')
+
+        userItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        if userItem == []:
+            newItem = database.LastSearchQuery(userID=users.get_current_user().user_id(), budget=budgetVar, rating=ratingVar)
+            newItem.put()
+        else:
+            userItem[0].budget = budgetVar
+            userItem[0].rating = ratingVar
+            userItem[0].put()
+
+        userItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        userItem[0].put()
+        # lastQuery.budget = budgetVar
+        # lastQuery.rating = ratingVar
+         #lastQuery.put()
+
+        #return self.response.write(template.render(searchQuery))
+        return webapp2.redirect('/results')
+
+
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/about.html')
         return self.response.write(template.render())
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/main.html')
         return self.response.write(template.render())
 
 app = webapp2.WSGIApplication([
-    ('/favorites.html', FavoritesHandler),
-    ('/gallery.html', GalleryHandler),
-    ('/map.html', MapHandler),
-    ('/post.html', PostHandler),
-    ('/results.html', ResultsHandler),
-    ('/search.html', SearchHandler),
-    ('/about.html', AboutHandler),
+    ('/favorites', FavoritesHandler),
+    ('/gallery', GalleryHandler),
+    ('/map', MapHandler),
+    ('/post', PostHandler),
+    ('/results', ResultsHandler),
+    ('/search', SearchHandler),
+    ('/about', AboutHandler),
     ('/', MainHandler)
 ], debug=True)

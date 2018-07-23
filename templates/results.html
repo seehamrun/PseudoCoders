@@ -1,8 +1,18 @@
 <html>
   <head>
     <link rel="stylesheet" href="/static/style.css"></link>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- <script src="/static/results_script.js"></script> -->
   </head>
   <body>
-        <h1> Results Page</h1>
+        <h1> Results -- Here is a summary of your search query:</h1>
+        <p> DATE: {{queryObject.date}} </p>
+        <p> LOCATION: {{queryObject.location}} </p>
+        <p> RADIUS: {{queryObject.radius}} </p>
+        <p> BUDGET: {{queryObject.budget}} </p>
+        <p> RATING: {{queryObject.rating}} </p>
+        <button id="addFavorite" value={{var_ID}}>Add To Favorites!</button>
+        <button id="getAnother">Get Another Schedule!</button>
+        <a href="/search">NEW SEARCH</a>
   </body>
 </html>

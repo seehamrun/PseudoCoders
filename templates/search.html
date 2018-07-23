@@ -1,24 +1,33 @@
 <html>
   <head>
     <link rel="stylesheet" href="/static/style.css"></link>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- <script src="/static/search_script.js"></script> -->
   </head>
   <body>
 <h1>Search Page</h1>
 
-<p>Select your budget:</p>
-<select>
-  <option value="one_dollar">$ (cheap) </option>
-  <option value="two_dollar">$$ (intermediate)</option>
-  <option value="three_dollar">$$$ (pricey) </option>
-  <option value="four_dollar">$$$$ (bank🤑💸)</option>
-</select>
-<p>Select the rating:</p>
-  <select>
+<form method="post">
+  <p>Date: <input type="date" id="date" name="date"></p>
+  <p>Location: <input type="text" id="location" name="location"></p>
+  <p>Radius: <input type="number" id="radius" name="radius"></p>
+  <p>Select your budget:</p>
+  <select id="budget" name="budget">
+    <option value="zero_dollars"> (free) </option>
+    <option value="one_dollar">$ (cheap) </option>
+    <option value="two_dollar">$$ (intermediate)</option>
+    <option value="three_dollar">$$$ (pricey) </option>
+    <option value="four_dollar">$$$$ (bank🤑💸)</option>
+  </select>
+  <p>Select the rating:</p>
+  <select id="rating" name="rating">
     <option value="one_star">One Star</option>
     <option value="two_star">Two Stars</option>
     <option value="three_star">Three Stars</option>
     <option value="four_star">Four Stars</option>
     <option value="five_star">Five Stars</option>
-</select>
+  </select>
+  <input id="submit" type="submit">
+</form>
   </body>
 </html>
