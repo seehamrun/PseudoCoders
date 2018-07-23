@@ -6,6 +6,12 @@ handlers:
 - url: /static.*
   static_dir: static
   login: required
+- url: /
+  script: main.app
+- url: /about
+  script: main.app
+- url: /gallery
+  script: main.app
 - url: /.*
   script: main.app
   login: required
