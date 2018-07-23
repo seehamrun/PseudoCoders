@@ -127,7 +127,6 @@ class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/main.html')
-        return self.response.write(template.render())
 
         user = users.get_current_user()
         if user:
@@ -138,6 +137,8 @@ class MainHandler(webapp2.RequestHandler):
         else:
             login_url = users.create_login_url('/')
             greeting = '<a href="{}">Sign in</a>'.format(login_url)
+
+        return self.response.write(template.render())
 
         # user = users.get_current_user()
         # logging.info('current user is %s' % (user.nickname()))
