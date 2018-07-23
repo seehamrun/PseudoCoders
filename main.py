@@ -129,6 +129,21 @@ class MainHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/main.html')
         return self.response.write(template.render())
 
+        # user = users.get_current_user()
+        # logging.info('current user is %s' % (user.nickname()))
+        # template = jinja_env.get_template('templates/main.html')
+        # data = {
+        #   'user_name': user.name(),
+        #   'logout_url': users.create_logout_url('/')
+        # }
+        # return self.response.write(template.render(data))
+
+class TestHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        template = jinja_env.get_template('templates/test.html')
+        return self.response.write(template.render())
+
 app = webapp2.WSGIApplication([
     ('/favorites', FavoritesHandler),
     ('/gallery', GalleryHandler),
@@ -137,5 +152,6 @@ app = webapp2.WSGIApplication([
     ('/results', ResultsHandler),
     ('/search', SearchHandler),
     ('/about', AboutHandler),
+    ('/test', TestHandler),
     ('/', MainHandler)
 ], debug=True)
