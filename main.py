@@ -150,6 +150,16 @@ class TestHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/test.html')
         return self.response.write(template.render())
 
+    def post(self):
+        placeID = self.request.get("placeID")
+        self.response.headers['Content-Type'] = 'text/html'
+        json = api_implementation.fetchPlaceDetails(placeID)
+        data = {
+            "results" : json
+        }
+        responseHTML = jinja_env.get_template('templates/test.html')
+        self.response.write(responseHTML.render(data))
+
 app = webapp2.WSGIApplication([
     ('/favorites', FavoritesHandler),
     ('/gallery', GalleryHandler),
