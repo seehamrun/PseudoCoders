@@ -130,15 +130,18 @@ class MainHandler(webapp2.RequestHandler):
 
         user = users.get_current_user()
         if user:
-            nickname = user.nickname()
+            logging.info('current user is %s' % (user.nickname()))
             logout_url = users.create_logout_url('/')
-            greeting = 'Welcome, {}! (<a href="{}">sign out</a>)'.format(
-                nickname, logout_url)
+            #greeting = 'Welcome, {}! (<a href="{}">sign out</a>)'.format(nickname, logout_url)
+            data = {
+              'user_name': user.nickname(),
+              'logout_url': users.create_logout_url('/')
+            }
         else:
             login_url = users.create_login_url('/')
             greeting = '<a href="{}">Sign in</a>'.format(login_url)
 
-        return self.response.write(template.render())
+        return self.response.write(template.render(data))
 
         # user = users.get_current_user()
         # logging.info('current user is %s' % (user.nickname()))
