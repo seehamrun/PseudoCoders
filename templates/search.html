@@ -1,28 +1,29 @@
 <html>
   <head>
     <link rel="stylesheet" href="/static/style.css"></link>
-    <!-- <script type='text/javascript' src='/static/search_script.js'></script> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- <script src="/static/search_script.js"></script> -->
   </head>
   <body>
 <h1>Search Page</h1>
 
 <form method="post">
   <p>Select your budget:</p>
-  <select name="budget">
+  <select id="budget" name="budget">
     <option value="one_dollar">$ (cheap) </option>
     <option value="two_dollar">$$ (intermediate)</option>
     <option value="three_dollar">$$$ (pricey) </option>
     <option value="four_dollar">$$$$ (bank🤑💸)</option>
   </select>
   <p>Select the rating:</p>
-  <select name="rating">
+  <select id="rating" name="rating">
     <option value="one_star">One Star</option>
     <option value="two_star">Two Stars</option>
     <option value="three_star">Three Stars</option>
     <option value="four_star">Four Stars</option>
     <option value="five_star">Five Stars</option>
   </select>
-  <input type="submit">
+  <input id="submit" type="submit">
 </form>
   </body>
 </html>

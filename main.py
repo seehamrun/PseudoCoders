@@ -18,6 +18,8 @@ import os
 import database
 import logging
 
+searchQuery = []
+
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
@@ -53,11 +55,21 @@ class PostHandler(webapp2.RequestHandler):
         stored_schedule.put()
         #not sure how exactly this will work
 
-# WE MIGHT NOT NEED THIS IF THE POST METHOD ABOVE RETURNS THIS
-# class ResultsHandler(webapp2.RequestHandler):
-#     def get(self):
-#         template = jinja_env.get_template('templates/results.html')
-#         return self.response.write(template.render())
+
+#WE MIGHT NOT NEED THIS IF THE POST METHOD ABOVE RETURNS THIS
+class ResultsHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        response_html = jinja_env.get_template('templates/results.html')
+        # data = {
+        #     # 'var_budget': budgetVar,
+        #     # 'var_rating': ratingVar,
+        #     'var_ID': 0 #later a real ID will be added here
+        # }
+        return self.response.write(response_html.render(searchQuery))
+
+    def post(self):
+        logging.data("")
 
 class SearchHandler(webapp2.RequestHandler):
     def get(self):
@@ -65,21 +77,24 @@ class SearchHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/search.html')
         return self.response.write(template.render())
 
+        # self.response.headers['Content-Type'] = 'text/html'
+        # # logging.info(budgetVar)
+        # # logging.info(ratingVar)
+        # response_html = jinja_env.get_template('templates/results.html')
+        #
+        # self.response.write(response_html.render(data))
+
     def post(self):
         budgetVar = self.request.get('budget')
         ratingVar = self.request.get('rating')
-        self.response.headers['Content-Type'] = 'text/html'
-        # stored_dog = database.DatabaseDog(age=int(dogAge),
-        #     color=dogColor, bark_intensity=int(dogBark), name=dogName)
-        # stored_dog.put()
-        logging.info(budgetVar)
-        logging.info(ratingVar)
-        response_html = jinja_env.get_template('templates/results.html')
-        data = {
+        searchQuery = {
             'var_budget': budgetVar,
-            'var_rating': ratingVar
+            'var_rating': ratingVar,
+            'var_ID': 0 #later a real ID will be added here
         }
-        self.response.write(response_html.render(data))
+        template = jinja_env.get_template('templates/temp_screen.html')
+        return self.response.write(template.render(searchQuery))
+
 
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
@@ -98,7 +113,7 @@ app = webapp2.WSGIApplication([
     ('/gallery', GalleryHandler),
     ('/map', MapHandler),
     ('/post', PostHandler),
-    #('/results', ResultsHandler),
+    ('/results', ResultsHandler),
     ('/search', SearchHandler),
     ('/about', AboutHandler),
     ('/', MainHandler)

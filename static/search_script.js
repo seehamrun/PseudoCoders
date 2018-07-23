@@ -1,29 +1,12 @@
-//IGNORE THIS FOR NOW
-
-
-// //THIS FILE MIGHT NOT EVEN BE NECESSARY
-//
-// // contacts our server, and asks it to add gifUrl to the list of favorite GIFs.
-// // doneCallback should be a function, which addGifToFavorites will invoke when
-// // the gifUrl is saved successfully.
-// function addToFavorites(scheduleID, doneCallback) {
-//   jQuery.post("/favorites", {ID: scheduleID}, doneCallback);
-// }
-//
 // function submitClick() {
-//   //var inputBox = document.querySelector('#queryBox')
-//   //var userInput = inputBox.value
-//   //queryGiphy(userInput, displayResult)
-//   console.log("SUBMIT CLICKED")
-// }
-//
-// function addFavoriteClick() {
-//   addToFavorites(currentGifUrl, () => {
-//     alert("saved!")
-//   })
+//   var budgetSelector = document.querySelector('#budget')
+//   var budget = budgetSelector.value
+//   var ratingSelector = document.querySelector('#rating')
+//   var rating = ratingSelector.value
+//   //window.location.href="http://google.com";
+//   jQuery.get("/results", {var_budget: budget, var_rating: rating}, (data) => {console.log(data)});
 // }
 //
 // window.addEventListener('load', () => {
 //   document.querySelector('#submit').addEventListener("click", submitClick)
-//   //document.querySelector('#addFavorite').addEventListener('click', addFavoriteClick)
 // });
