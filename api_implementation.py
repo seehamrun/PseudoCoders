@@ -63,7 +63,6 @@ def nearbySearchRequest(location, radius):
         list.append(item["place_id"])
     return list
 
-
 #def getLatitudeLongitude(first_line, city, state):
 def getLatitudeLongitude(location):
     newLocation = location.replace(" ", "+")
