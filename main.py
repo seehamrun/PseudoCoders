@@ -20,6 +20,10 @@ import logging
 import api_implementation
 from google.appengine.api import users
 
+jinja_env = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions=['jinja2.ext.autoescape'],
+    autoescape=True) #creates environment variable for HTML rendering
 
 class FavoritesHandler(webapp2.RequestHandler):
     def get(self):
