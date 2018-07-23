@@ -19,6 +19,7 @@ def findPlaceRequest(query):
     logging.info(query)
     logging.info(google_url)
     urlContent = urlfetch.fetch(google_url).content
+    logging.info(urlContent)
     response = json.loads(urlContent)
     return response
 
