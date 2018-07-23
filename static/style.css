@@ -29,3 +29,29 @@ body {
 
   .active {
       background-color: grey
+}
+
+.aboutwrapper {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+
+  .aboutethan {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .aboutmaeve {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .abouttiera {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .aboutjuan {
+    grid-column: 2;
+    grid-row: 2;
+  }
