@@ -131,10 +131,10 @@ class MainHandler(webapp2.RequestHandler):
 
         user = users.get_current_user()
         logging.info('current user is %s' % (user.nickname()))
-        template = jinja_env.get_template('templates/index.html')
+        template = jinja_env.get_template('templates/main.html')
         data = {
-          'user_nickname': user.nickname(),
-          'logoutUrl': users.create_logout_url('/')
+          'user_name': user.name(),
+          'logout_url': users.create_logout_url('/')
         }
         return self.response.write(template.render(data))
 
