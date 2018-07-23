@@ -21,6 +21,18 @@ from google.appengine.api import urlfetch
 #   })
 # }
 #
+
+def fetchPlaceDetails(placeID):
+    logging.info("LOL")
+
+
+
+
+
+
+
+
+
 # #helper function similar to the one above
 # function fetchPlaceDetailsHelper(strjson) {
 #   json = JSON.parse(strjson)
