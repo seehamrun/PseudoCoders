@@ -15,11 +15,11 @@ def fetchPlaceDetails(placeID):
 
 #inputs search query and returns JSON menu with details
 def findPlaceRequest(query):
-    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/findplacefromtext/%s?key=%s&input=%s&inputtype=textquery" % ("json", api.googleKey, query)
-    logging.info(query)
+    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/findplacefromtext/%s?input=%s&inputtype=textquery&key=%s&fields=photos,formatted_address,name,rating,opening_hours,geometry" % ("json", query, api.googleKey)
+    #logging.info(query)
     logging.info(google_url)
     urlContent = urlfetch.fetch(google_url).content
-    logging.info(urlContent)
+    #logging.info("URL CONTENT:" + urlContent)
     response = json.loads(urlContent)
     return response
 
