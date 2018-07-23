@@ -1,11 +1,6 @@
 /*This is our CSS*/
 body {
-    background-image: url("gradient_bg.png");
-    background-repeat: repeat-x;
-
-
-      background-image: url(https://stmed.net/sites/default/files/turquoise-purple-wallpapers-25333-7389966.jpg);
-      background-repeat: repeat-x;
+    background-color: pink;
   }
   ul {
       list-style-type: none;

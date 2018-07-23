@@ -3,9 +3,20 @@
     <link rel="stylesheet" href="/static/style.css"></link>
   </head>
   <body>
-        <h1> Favorites Page</h1>
+    <ul>
+<li><a class="active" href="/" >Main</a></li>
+<li><a  href="/search">Search</a></li>
+<li><a  href='/favorites'>Favorites</a></li>
+<li><a href='/gallery'>Gallery</a></li>
+<li><a  href='/about'>About Us</a></li>
+
+</ul>
+
           {% for favorite in favorites %}
           <div>favorite</div>
           {% endfor %}
+          <ul>
+        <!-- <button class="button" style="vertical-align:middle"><span>Log In</span></button> -->
+      </body>
   </body>
 </html>
