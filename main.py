@@ -110,6 +110,16 @@ class SearchHandler(webapp2.RequestHandler):
         # }
         # template = jinja_env.get_template('templates/temp_screen.html')
 
+
+        # self.response.headers['Content-Type'] = 'text/html'
+        # template = jinja_env.get_template('templates/about.html')
+        # loader = "<div class='loader'></div>"
+        # dictionary = {
+        #     'loader':loader
+        # }
+        # self.response.write(template.render(dictionary))
+
+
         userItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
         if userItem == []:
             newItem = database.LastSearchQuery(userID=users.get_current_user().user_id(), budget=budgetVar, rating=ratingVar, date=dateVar, location=locationVar, radius=radiusVar)
@@ -130,13 +140,6 @@ class SearchHandler(webapp2.RequestHandler):
          #lastQuery.put()
 
         #return self.response.write(template.render(searchQuery))
-        self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('templates/search.html')
-        loader = "<div class='loader'></div>"
-        dictionary = {
-        'loader':loader
-        }
-        self.response.write(template.render(dictionary))
         return webapp2.redirect('/results')
 
 class AboutHandler(webapp2.RequestHandler):
