@@ -151,9 +151,18 @@ class TestHandler(webapp2.RequestHandler):
         return self.response.write(template.render())
 
     def post(self):
-        placeID = self.request.get("placeID")
+        # placeID = self.request.get("placeID")
+        # self.response.headers['Content-Type'] = 'text/html'
+        # json = api_implementation.fetchPlaceDetails(placeID)
+        # data = {
+        #     "results" : json
+        # }
+        # responseHTML = jinja_env.get_template('templates/test.html')
+        # self.response.write(responseHTML.render(data))
+
+        query = self.request.get("query")
         self.response.headers['Content-Type'] = 'text/html'
-        json = api_implementation.fetchPlaceDetails(placeID)
+        json = api_implementation.findPlaceRequest(query)
         data = {
             "results" : json
         }

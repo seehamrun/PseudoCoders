@@ -4,76 +4,31 @@ import logging
 from google.appengine.api import urlfetch
 
 
-# SECTION 0: All places have place ID's so this function maps them to details
-#
-# #this function inputs a place ID
-# #outputs/logs a JSON menu with place details/data
-# function fetchPlaceDetails(placeID) {
-#  var google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/details/"
-#                  + "json" + "?"
-#                  + "key=" + api_key
-#                  + "&placeid=" + placeID //assembles the proper url
-#   jQuery.get(google_url, (data) => {
-#     #runs jQuery to fetch data and waits for completion
-#     var info = fetchPlaceDetailsHelper(data)
-#     #stores results from JSON menu in info variable
-#     console.log(info)
-#     #logs info
-#   })
-# }
-#
-
+#inputs placeID and returns JSON with place details
 def fetchPlaceDetails(placeID):
     google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/details/%s?key=%s&placeid=%s" % ("json", api.googleKey, placeID)
     logging.info(placeID)
+    logging.info(google_url)
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
     return response["result"]
 
+#inputs search query and returns JSON menu with details
+def findPlaceRequest(query):
+    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/findplacefromtext/%s?key=%s&input=%s&inputtype=textquery" % ("json", api.googleKey, query)
+    logging.info(query)
+    logging.info(google_url)
+    urlContent = urlfetch.fetch(google_url).content
+    response = json.loads(urlContent)
+    return response
 
-#logging.info(fetchPlaceDetails("ChIJmdgQydAsDogRoI-FqeJiKHw"))
 
-
-# #helper function similar to the one above
-# function fetchPlaceDetailsHelper(strjson) {
-#   json = JSON.parse(strjson)
-#   #turns string JSON into real JSON
-#   return json["result"]
-#   #returns the correct element from the JSON, i.e., results
-# }
-#
-#
-# //-----------------------------------------------------------------------------//
-#
-#
-# #SECTION 1: Find Place Requests
-#
-# #this function inputs a search query
-# #using jQuery, it fetches a JSON menu (in string form) containing the placeID associated with the query
-# #it then triggers the next method fetchPlaceDetails to run
-#  function findPlaceRequest(query) {
-#   var google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/findplacefromtext/"
-#                   + "json" + "?"
-#                   + "key=" + api_key
-#                   + "&input=" + query
-#                   + "&inputtype=textquery" //assembles the proper url
-#   jQuery.get(google_url, (data) => {
-#     #runs jQuery to fetch data and waits for completion
-#     var id = findPlaceRequestHelper(data)
-#     #stores ID from JSON menu in id variable
-#             #console.log(id)
-#             #logs ID#
-#     fetchPlaceDetails(id)
-#     #triggers place detail fetch with this id
-#   })
-#  }
-#
 # #this function inputs a JSON menu in string form
 # turns into JSON menu and outputs contents
 # function findPlaceRequestHelper(strjson) {
 #   json = JSON.parse(strjson)
 #   #turns string JSON into real JSON
-#   return json["candidates"][0]["place_id"]
+#   return json
 #   #returns the correct element from the JSON, i.e., placeID
 # }
 #
