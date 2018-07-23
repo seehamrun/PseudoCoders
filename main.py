@@ -138,6 +138,12 @@ class MainHandler(webapp2.RequestHandler):
         # }
         # return self.response.write(template.render(data))
 
+class WelcomeHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        template = jinja_env.get_template('templates/welcome.html')
+        return self.response.write(template.render())
+
 class TestHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
@@ -153,5 +159,6 @@ app = webapp2.WSGIApplication([
     ('/search', SearchHandler),
     ('/about', AboutHandler),
     ('/test', TestHandler),
+    ('/welcome', WelcomeHandler),
     ('/', MainHandler)
 ], debug=True)
