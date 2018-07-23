@@ -1,6 +1,6 @@
 import api
 import json
-from google.app import urlFetch
+from google.appengine.api import urlfetch
 
 
 # //-----------------------------------------------------------------------------//
