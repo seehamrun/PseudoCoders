@@ -60,7 +60,10 @@ body {
     grid-column: 2;
     grid-row: 2;
   }
+<<<<<<< HEAD
+=======
 
+>>>>>>> e56eb3d9f90422c3d3ae983646a5c33f99881922
 
 h1 {
   text-align: center;
@@ -106,6 +109,8 @@ h1 {
 .sticky + .content {
   padding-top: 60px;
 }
+<<<<<<< HEAD
+=======
 
 
 /*Ethan's loader code*/
@@ -131,3 +136,4 @@ h1 {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+>>>>>>> e56eb3d9f90422c3d3ae983646a5c33f99881922
