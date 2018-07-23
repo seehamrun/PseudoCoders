@@ -55,31 +55,11 @@ def nearbySearchRequest(location, radius):
     response = json.loads(urlContent)
     return response
 
-#output should be like "latitude,longitude"
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 2655418467b401c03a54f19223a69a7423cf62bb
-def getLatitudeLongitude(first_line, city, state):
-    logging.info('Test')
-
-    #google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/geocode/json?address=%s,%s,%s&key=%s" % (first_line, city, state, api.googleKey)
-    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s" % (location, api.googleKey)
-
-    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/geocode/json?address=%s,+%s,+%s&key=%s" % (first_line, city, state, api.googleKey)
-
-
-=======
->>>>>>> a85fa4c048a0b7709980d686cbf747faabc03006
 #def getLatitudeLongitude(first_line, city, state):
 def getLatitudeLongitude(location):
     #google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/geocode/json?address=%s,%s,%s&key=%s" % (first_line, city, state, api.googleKey)
     google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s" % (location, api.googleKey)
-<<<<<<< HEAD
-=======
 
->>>>>>> 2655418467b401c03a54f19223a69a7423cf62bb
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
     return response['results']['geometry']['location']
