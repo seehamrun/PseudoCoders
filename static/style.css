@@ -43,6 +43,9 @@ h1 {
   padding: 20px;
 }
 
+#main-text {
+  font-size: 100px;
+}
 /* Page content */
 .content {
   padding: 16px;
