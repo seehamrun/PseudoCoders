@@ -18,7 +18,7 @@ def findPlaceRequest(query):
     id = findPlaceRequestHelper(query)
     return fetchPlaceDetails(id)
 
-#inputs search query and returns result ID
+#inputs search query and returns any amount of data, in this case only result ID
 def findPlaceRequestHelper(query):
     newQuery = query.replace(" ", "+")
     google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/findplacefromtext/%s?input=%s&inputtype=textquery&key=%s&fields=%s" % ("json", newQuery, api.googleKey, getFields())
