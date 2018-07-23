@@ -33,4 +33,9 @@ body {
   }
 
   .active {
-      background-color: grey
+      background-color: grey;
+}
+
+h1 {
+  text-align: center;
+}
