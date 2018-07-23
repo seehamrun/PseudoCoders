@@ -1,6 +1,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="/static/style.css"></link>
+<<<<<<< HEAD
     <style>
 body {
           background-image: url(https://stmed.net/sites/default/files/turquoise-purple-wallpapers-25333-7389966.jpg);
@@ -46,17 +47,60 @@ body {
   right: 0;
 }
 </style>
+=======
+    <!-- <script src="api.js"></script>
+    <meta name="google-signin-client_id" content= api.client_id + ".apps.googleusercontent.com">
+    <meta name="google-signin-scope" content="profile-email">
+    <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+>>>>>>> 912efcf7bad636882c09b792fa684547debadb4c
   </head>
   <body>
-        <h1> Welcome to the Pro Planner</h1>
+        <h1> Welcome to Pro Planner!</h1>
       <hr>
         <h2>Brought to you by team PseudoCoders</h2>
         <p> Pro Planner offers a new and imporoved way to create the outing
-          of your dreams! On this very interactive website you the user
+          of your dreams! On this interactive website you the user
           can input your desired budget for an outing and we take care of the
           rest! But first log in! </p>
+<<<<<<< HEAD
     <div></div>
     <button class="button" style="vertical-align:middle"><span>Log In!</span></button>
 
+=======
+
+    <!-- IGNORE THIS -->
+    <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+    <script>
+
+      gapi.load(‘auth2’, function() {
+        gapi.auth2.init()
+      })
+
+      function onSignIn(googleUser) {
+        // Useful data for client-side scripts:
+        var profile = googleUser.getBasicProfile()
+        console.log("ID: " + profile.getId()) // Don't send this directly to the server!
+        console.log("Name: " + profile.getName())
+        console.log("Image URL: " + profile.getImageUrl())
+        console.log("Email: " + profile.getEmail())
+
+        // The ID token we need to pass to the backend:
+        var id_token = googleUser.getAuthResponse().id_token
+        console.log("ID Token: " + id_token)
+      };
+    </script>
+
+    <a href="#" onclick="signOut();">Sign out</a>
+
+    <script>
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+      }
+    </script> -->
+>>>>>>> 912efcf7bad636882c09b792fa684547debadb4c
   </body>
 </html>
