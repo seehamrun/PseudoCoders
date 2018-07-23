@@ -156,9 +156,19 @@ class TestHandler(webapp2.RequestHandler):
         # responseHTML = jinja_env.get_template('templates/test.html')
         # self.response.write(responseHTML.render(data))
 
-        query = self.request.get("query")
+        # query = self.request.get("query")
+        # self.response.headers['Content-Type'] = 'text/html'
+        # json = api_implementation.findPlaceRequest(query)
+        # data = {
+        #     "results" : json
+        # }
+        # responseHTML = jinja_env.get_template('templates/test.html')
+        # self.response.write(responseHTML.render(data))
+
+        location = self.request.get("location")
+        radius = self.request.get("radius")
         self.response.headers['Content-Type'] = 'text/html'
-        json = api_implementation.findPlaceRequest(query)
+        json = api_implementation.nearbySearchRequest(location, radius)
         data = {
             "results" : json
         }
