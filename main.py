@@ -130,6 +130,7 @@ class SearchHandler(webapp2.RequestHandler):
          #lastQuery.put()
 
         #return self.response.write(template.render(searchQuery))
+        loader = ""
         return webapp2.redirect('/results')
 
 class AboutHandler(webapp2.RequestHandler):
