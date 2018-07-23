@@ -11,32 +11,33 @@ def fetchPlaceDetails(placeID):
     logging.info(google_url)
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
-    return response["result"]
+    return response['result']
 
-#inputs search query and returns JSON menu with details
-#WE COULD JUST TAKE PLACE ID AND PLUG IT INTO THE FUNCTION ABOVE
+#inputs search query and returns result data
 def findPlaceRequest(query):
-    newQuery = formatQuery(query)
+    id = findPlaceRequestHelper(query)
+    return fetchPlaceDetails(id)
+
+#inputs search query and returns result ID
+def findPlaceRequestHelper(query):
+    newQuery = query.replace(" ", "+")
     google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/findplacefromtext/%s?input=%s&inputtype=textquery&key=%s&fields=%s" % ("json", newQuery, api.googleKey, getFields())
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
-    return response
+    return response['candidates'][0]['place_id']
 
-#replaces query with google-friendly query (replaces spaces with +'s)
-def formatQuery(query):
-    return query.replace(" ", "+")
-
+#sets the fields returned by helper above, only necessary field is place ID
 def getFields():
     output = ""
     #output += "name,"
     #output += "formatted_address,"
     #output += "geometry,"
     #output += "icon,"
-    output += "id,"
+    #output += "id,"
     #output += "name,"
     #output += "permanently_closed,"
     #output += "photos,"
-    #output += "place_id,"
+    output += "place_id,"
     #output += "plus_code,"
     #output += "scope,"
     #output += "types,"
@@ -45,20 +46,11 @@ def getFields():
     #output += "rating,"
     return output[:-1]
 
-# #this function inputs a JSON menu in string form
-# turns into JSON menu and outputs contents
-# function findPlaceRequestHelper(strjson) {
-#   json = JSON.parse(strjson)
-#   #turns string JSON into real JSON
-#   return json
-#   #returns the correct element from the JSON, i.e., placeID
-# }
-#
-#
-# # #function call / TEST
-# # var test_query1 = "Chicago+McDonalds";
-# # findPlaceRequest(test_query1)
-#
+
+
+
+
+
 # #-----------------------------------------------------------------------------//
 #
 #
