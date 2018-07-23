@@ -10,6 +10,11 @@ body {
       background-color: black;
       border: white;
   }
+  .header {
+    background-color: #F1F1F1;
+    text-align: center;
+    padding: 20px;
+}
 
   li {
       float: left;
@@ -28,6 +33,7 @@ body {
   }
 
   .active {
+<<<<<<< HEAD
       background-color: grey
 }
 
@@ -55,3 +61,31 @@ body {
     grid-column: 2;
     grid-row: 2;
   }
+=======
+      background-color: grey;
+}
+
+h1 {
+  text-align: center;
+  border-style: groove;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Page content */
+.content {
+  padding: 16px;
+}
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 60px;
+}
+>>>>>>> 14e062f13984429aa55621ba24eed659c6f522ad
