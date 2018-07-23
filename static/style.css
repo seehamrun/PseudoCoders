@@ -82,14 +82,7 @@ h1 {
 
 .navbar li {
   float:left;
-  width:20%; 
-}
-
-.navbar a {
-  display:block;
-  text-align:center;
-  /* fixed width */
-  text-decoration:none;
+  width:20%;
 }
 
 /* Page content */
@@ -109,8 +102,6 @@ h1 {
 .sticky + .content {
   padding-top: 60px;
 }
-<<<<<<< HEAD
-=======
 
 
 /*Ethan's loader code*/
