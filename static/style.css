@@ -33,7 +33,6 @@ body {
   }
 
   .active {
-<<<<<<< HEAD
       background-color: grey
 }
 
@@ -61,7 +60,7 @@ body {
     grid-column: 2;
     grid-row: 2;
   }
-=======
+
       background-color: grey;
 }
 
@@ -78,9 +77,6 @@ h1 {
   width: 100%; /* Full width */
 }
 
-#main-text {
-  font-size: 100px;
-}
 /* Page content */
 .content {
   padding: 16px;
@@ -98,4 +94,3 @@ h1 {
 .sticky + .content {
   padding-top: 60px;
 }
->>>>>>> 14e062f13984429aa55621ba24eed659c6f522ad
