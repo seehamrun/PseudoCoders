@@ -61,9 +61,6 @@ body {
     grid-column: 2;
     grid-row: 2;
   }
-=======
-      background-color: grey;
-}
 
 h1 {
   text-align: center;
@@ -98,4 +95,3 @@ h1 {
 .sticky + .content {
   padding-top: 60px;
 }
->>>>>>> 14e062f13984429aa55621ba24eed659c6f522ad
