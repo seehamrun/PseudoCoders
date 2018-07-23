@@ -52,11 +52,12 @@ def getFields():
 #takes latitude/longitude -> can be computed from other Google API
 #also inputs a search query
 def nearbySearchRequest(location, radius):
-    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/nearbysearch/%s?key=%s&location=%s&radius=%s" % ("json", api.googleKey, location, radius)
+    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/nearbysearch/%s?key=%s&location=%s&radius=%s" % ("json", api.googleKey, getLatitudeLongitude(location), radius)
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
     return response
 
+#output should be like "latitude,longitude"
 def getLatitudeLongitude(location):
     logging.info("TEST")
 
