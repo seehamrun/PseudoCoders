@@ -58,17 +58,24 @@ class PostHandler(webapp2.RequestHandler):
 
 class ResultsHandler(webapp2.RequestHandler):
     def get(self):
+        userItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
+        location = userItem.location
+        radius = userItem.radius
         self.response.headers['Content-Type'] = 'text/html'
-        response_html = jinja_env.get_template('templates/results.html')
-
-        queryObject = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
-        results = api_implementation.nearbySearchRequest(queryObject.location, queryObject.radius)
-
+        #json = api_implementation.getLatitudeLongitude(location)
+        json = api_implementation.nearbySearchRequest(location, radius)
+        newList = []
+        for placeID in json:
+            #newList.append(api_implementation.fetchNameAddress(json))
+            newList.append("FILLER TEXT")
+        logging.info(newList)
         data = {
-            'queryObject':queryObject,
-            'results':results
+            "queryObject":userItem,
+            "results" : newList
         }
-        return self.response.write(response_html.render(data))
+        responseHTML = jinja_env.get_template('templates/results.html')
+        self.response.write(responseHTML.render(data))
+        logging.info(data)
 
     def post(self):
         logging.data("")
