@@ -23,7 +23,10 @@ from google.appengine.api import urlfetch
 #
 
 def fetchPlaceDetails(placeID):
-    logging.info("LOL")
+    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/details/"
+    #                  + "json" + "?"
+    #                  + "key=" + api_key
+    #                  + "&placeid=" + placeID
 
 
 

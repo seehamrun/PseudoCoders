@@ -138,6 +138,8 @@ class MainHandler(webapp2.RequestHandler):
         # }
         # return self.response.write(template.render(data))
 
+class TesterHandler:
+
 app = webapp2.WSGIApplication([
     ('/favorites', FavoritesHandler),
     ('/gallery', GalleryHandler),
@@ -146,5 +148,6 @@ app = webapp2.WSGIApplication([
     ('/results', ResultsHandler),
     ('/search', SearchHandler),
     ('/about', AboutHandler),
+    ('/tester', TesterHandler),
     ('/', MainHandler)
 ], debug=True)
