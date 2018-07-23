@@ -15,7 +15,11 @@ def fetchPlaceDetails(placeID):
 
 def fetchNameAddress(placeID):
     info = fetchPlaceDetails(placeID)
+<<<<<<< HEAD
     return info['name']+" ---> "+info['formatted_address']
+=======
+    return info#['candidates']
+>>>>>>> 5bdb09e4c14cdada15df1de2b764a0a0d93b14b1
 
 #inputs search query and returns result data
 def findPlaceRequest(query):
