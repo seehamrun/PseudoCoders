@@ -129,14 +129,14 @@ class MainHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/main.html')
         #return self.response.write(template.render())
 
-        user = users.get_current_user()
-        logging.info('current user is %s' % (user.nickname()))
-        template = jinja_env.get_template('templates/main.html')
-        data = {
-          'user_name': user.name(),
-          'logout_url': users.create_logout_url('/')
-        }
-        return self.response.write(template.render(data))
+        # user = users.get_current_user()
+        # logging.info('current user is %s' % (user.nickname()))
+        # template = jinja_env.get_template('templates/main.html')
+        # data = {
+        #   'user_name': user.name(),
+        #   'logout_url': users.create_logout_url('/')
+        # }
+        # return self.response.write(template.render(data))
 
 app = webapp2.WSGIApplication([
     ('/favorites', FavoritesHandler),
