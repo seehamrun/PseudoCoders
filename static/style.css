@@ -94,3 +94,10 @@ h1 {
 .sticky + .content {
   padding-top: 60px;
 }
+
+.loader {
+ border-top: 16px solid blue;
+ border-right: 16px solid green;
+ border-bottom: 16px solid red;
+ border-left: 16px solid pink;
+}
