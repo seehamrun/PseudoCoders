@@ -1,14 +1,14 @@
 /*This is our CSS*/
 body {
-    background-color: #4BB2FF;
+    background-color: pink;
   }
   ul {
       list-style-type: none;
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background-color: white;
-      border: black;
+      background-color: black;
+      border: white;
   }
 
   li {
@@ -17,15 +17,15 @@ body {
 
   li a {
       display: block;
-      color: black;
+      color: white;
       text-align: center;
       padding: 14px 16px;
       text-decoration: none;
   }
 
   li a:hover:not(.active) {
-      background-color: grey;
+      background-color: darkgrey;
   }
 
   .active {
-      background-colo
+      background-color: grey
