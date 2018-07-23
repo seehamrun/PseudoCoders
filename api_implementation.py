@@ -57,7 +57,7 @@ def nearbySearchRequest(location, radius):
 
 #output should be like "latitude,longitude"
 def getLatitudeLongitude(location):
-
+    logging.info('Test')
 
 
 #       console.log(google_url)
