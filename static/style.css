@@ -67,11 +67,13 @@ body {
 
 h1 {
   text-align: center;
-  border-style: groove;
   text-align: center;
   padding: 20px;
 }
 
+#main-text {
+  font-size: 100px;
+}
 /* Page content */
 .content {
   padding: 16px;
