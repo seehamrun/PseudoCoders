@@ -47,8 +47,6 @@ def getFields():
     return output[:-1]
 
 
-
-
 #takes latitude/longitude -> can be computed from other Google API
 #also inputs a search query
 def nearbySearchRequest(location, radius):
@@ -59,7 +57,8 @@ def nearbySearchRequest(location, radius):
 
 #output should be like "latitude,longitude"
 def getLatitudeLongitude(location):
-    logging.info("TEST")
+
+
 
 #       console.log(google_url)
 #   jQuery.get(google_url, (data) => {
