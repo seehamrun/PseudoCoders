@@ -11,33 +11,46 @@ def fetchPlaceDetails(placeID):
     logging.info(google_url)
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
-    return response["result"]
+    return response['result']
 
-#inputs search query and returns JSON menu with details
+#inputs search query and returns result data
 def findPlaceRequest(query):
-    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/findplacefromtext/%s?input=%s&inputtype=textquery&key=%s&fields=photos,formatted_address,name,rating,opening_hours,geometry" % ("json", query, api.googleKey)
-    #logging.info(query)
-    logging.info(google_url)
+    id = findPlaceRequestHelper(query)
+    return fetchPlaceDetails(id)
+
+#inputs search query and returns any amount of data, in this case only result ID
+def findPlaceRequestHelper(query):
+    newQuery = query.replace(" ", "+")
+    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/findplacefromtext/%s?input=%s&inputtype=textquery&key=%s&fields=%s" % ("json", newQuery, api.googleKey, getFields())
     urlContent = urlfetch.fetch(google_url).content
-    #logging.info("URL CONTENT:" + urlContent)
     response = json.loads(urlContent)
-    return response
+    return response['candidates'][0]['place_id']
+
+#sets the fields returned by helper above, only necessary field is place ID
+def getFields():
+    output = ""
+    #output += "name,"
+    #output += "formatted_address,"
+    #output += "geometry,"
+    #output += "icon,"
+    #output += "id,"
+    #output += "name,"
+    #output += "permanently_closed,"
+    #output += "photos,"
+    output += "place_id,"
+    #output += "plus_code,"
+    #output += "scope,"
+    #output += "types,"
+    #output += "opening_hours,"
+    #output += "price_level,"
+    #output += "rating,"
+    return output[:-1]
 
 
-# #this function inputs a JSON menu in string form
-# turns into JSON menu and outputs contents
-# function findPlaceRequestHelper(strjson) {
-#   json = JSON.parse(strjson)
-#   #turns string JSON into real JSON
-#   return json
-#   #returns the correct element from the JSON, i.e., placeID
-# }
-#
-#
-# # #function call / TEST
-# # var test_query1 = "Chicago+McDonalds";
-# # findPlaceRequest(test_query1)
-#
+
+
+
+
 # #-----------------------------------------------------------------------------//
 #
 #
