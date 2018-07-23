@@ -155,7 +155,7 @@ class TestHandler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         json = api_implementation.fetchPlaceDetails(placeID)
         data = {
-            "data" : json
+            "results" : json
         }
         responseHTML = jinja_env.get_template('templates/test.html')
         self.response.write(responseHTML.render(data))
