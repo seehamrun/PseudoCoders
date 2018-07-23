@@ -33,12 +33,40 @@ body {
   }
 
   .active {
+<<<<<<< HEAD
+      background-color: grey
+}
+
+.aboutwrapper {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+
+  .aboutethan {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .aboutmaeve {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .abouttiera {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .aboutjuan {
+    grid-column: 2;
+    grid-row: 2;
+  }
+=======
       background-color: grey;
 }
 
 h1 {
   text-align: center;
-  border-style: groove;
   text-align: center;
   padding: 20px;
 }
@@ -70,3 +98,4 @@ h1 {
 .sticky + .content {
   padding-top: 60px;
 }
+>>>>>>> 14e062f13984429aa55621ba24eed659c6f522ad
