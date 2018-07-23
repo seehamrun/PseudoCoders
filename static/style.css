@@ -79,12 +79,13 @@ h1 {
 
 .navbar li {
   float:left;
+  width:20%; 
 }
 
 .navbar a {
   display:block;
   text-align:center;
-  width:250px; /* fixed width */
+  /* fixed width */
   text-decoration:none;
 }
 
