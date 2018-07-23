@@ -13,6 +13,10 @@ def fetchPlaceDetails(placeID):
     response = json.loads(urlContent)
     return response['result']
 
+def fetchNameAddress(placeID):
+    info = fetchPlaceDetails(placeID)
+    return info['candidates']
+
 #inputs search query and returns result data
 def findPlaceRequest(query):
     id = findPlaceRequestHelper(query)
@@ -53,7 +57,12 @@ def nearbySearchRequest(location, radius):
     google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/nearbysearch/%s?key=%s&location=%s&radius=%s" % ("json", api.googleKey, getLatitudeLongitude(location), radius)
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
-    return response
+    #return response
+    list = []
+    for item in response["results"]:
+        list.append(item["place_id"])
+    return list
+
 
 #def getLatitudeLongitude(first_line, city, state):
 def getLatitudeLongitude(location):

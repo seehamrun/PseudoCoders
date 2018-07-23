@@ -174,8 +174,12 @@ class TestHandler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         #json = api_implementation.getLatitudeLongitude(location)
         json = api_implementation.nearbySearchRequest(location, radius)
+        newList = []
+        for placeID in json:
+            #newList.append(api_implementation.fetchNameAddress(json))
+            newList.append("FILLER TEXT")
         data = {
-            "results" : json
+            "results" : newList
         }
         responseHTML = jinja_env.get_template('templates/test.html')
         self.response.write(responseHTML.render(data))
