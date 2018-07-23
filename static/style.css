@@ -44,25 +44,23 @@ body {
 }
 
 
-  .aboutethan {
+  .about_ethan {
     grid-column: 1;
     grid-row: 1;
   }
-  .aboutmaeve {
+  .about_maeve {
     grid-column: 1;
     grid-row: 2;
   }
-  .abouttiera {
+  .about_tiera {
     grid-column: 2;
     grid-row: 1;
   }
-  .aboutjuan {
+  .about_juan {
     grid-column: 2;
     grid-row: 2;
   }
 
-      background-color: grey;
-}
 
 h1 {
   text-align: center;
