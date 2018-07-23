@@ -24,6 +24,8 @@
     <br>
     <p>RESULTS:</p>
     <br>
-    <p>Here is the data: {{results}}</p>
+    {% for result in results %}
+      <p>{{result}}</p>
+    {% endfor %}
   </body>
 </html>

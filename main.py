@@ -62,16 +62,17 @@ class ResultsHandler(webapp2.RequestHandler):
         location = userItem.location
         radius = userItem.radius
         self.response.headers['Content-Type'] = 'text/html'
-        #json = api_implementation.getLatitudeLongitude(location)
         json = api_implementation.nearbySearchRequest(location, radius)
-        newList = []
-        for placeID in json:
-            #newList.append(api_implementation.fetchNameAddress(json))
-            newList.append("FILLER TEXT")
-        logging.info(newList)
+        # logging.info(json)
+        # newList = []
+        # for placeID in json:
+        #     newList.append(api_implementation.fetchNameAddress(json))
+        #     #newList.append("FILLER TEXT")
+        # logging.info(newList)
         data = {
             "queryObject":userItem,
-            "results" : newList
+            # "results" : newList
+            "results":json
         }
         responseHTML = jinja_env.get_template('templates/results.html')
         self.response.write(responseHTML.render(data))
@@ -181,13 +182,14 @@ class TestHandler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         #json = api_implementation.getLatitudeLongitude(location)
         json = api_implementation.nearbySearchRequest(location, radius)
-        newList = []
-        for placeID in json:
-            #newList.append(api_implementation.fetchNameAddress(json))
-            newList.append("FILLER TEXT")
-        logging.info(newList)
+        # newList = []
+        # for placeID in json:
+        #     #newList.append(api_implementation.fetchNameAddress(json))
+        #     newList.append("FILLER TEXT")
+        # logging.info(newList)
         data = {
-            "results" : newList
+            #"results" : newList
+            "results":json
         }
         responseHTML = jinja_env.get_template('templates/test.html')
         self.response.write(responseHTML.render(data))
