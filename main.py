@@ -141,7 +141,7 @@ class MainHandler(webapp2.RequestHandler):
 class WelcomeHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('templates/main.html')
+        template = jinja_env.get_template('templates/welcome.html')
         return self.response.write(template.render())
 
 class TestHandler(webapp2.RequestHandler):
