@@ -61,12 +61,7 @@ class ResultsHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         response_html = jinja_env.get_template('templates/results.html')
-        # data = {
-        #     # 'var_budget': budgetVar,
-        #     # 'var_rating': ratingVar,
-        #     'var_ID': 0 #later a real ID will be added here
-        # }
-        return self.response.write(response_html.render(searchQuery))
+        return self.response.write(response_html.render())
 
     def post(self):
         logging.data("")
