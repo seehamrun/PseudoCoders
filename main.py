@@ -60,8 +60,13 @@ class ResultsHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         response_html = jinja_env.get_template('templates/results.html')
+
+        queryObject = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
+        results = api_implementation.nearbySearchRequest(queryObject.location, queryObject.radius)
+
         data = {
-            'queryObject': database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
+            'queryObject':queryObject,
+            'results':results
         }
         return self.response.write(response_html.render(data))
 
@@ -115,7 +120,6 @@ class SearchHandler(webapp2.RequestHandler):
 
         #return self.response.write(template.render(searchQuery))
         return webapp2.redirect('/results')
-
 
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
