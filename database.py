@@ -21,3 +21,6 @@ class GalleryPost(ndb.Model):
     rating = ndb.IntegerProperty()
     title = ndb.StringProperty()
     poster = ndb.StringProperty() #this will be their email
+
+class SearchQuery(ndb.Model):
+    #this might be useful
