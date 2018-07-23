@@ -1,1 +1,5 @@
 /*This is our CSS*/
+body {
+    background-image: url("gradient_bg.png");
+    background-repeat: repeat-x;
+}

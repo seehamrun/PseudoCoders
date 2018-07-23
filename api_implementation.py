@@ -1,5 +1,6 @@
 import api
 import json
+import logging
 from google.appengine.api import urlfetch
 
 
@@ -23,14 +24,14 @@ from google.appengine.api import urlfetch
 #
 
 def fetchPlaceDetails(placeID):
-    logging.info("LOL")
+    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/details/%s?key=%s&placeid=%s" % ("json", api.googleKey, placeID)
+    #logging.info(google_url)
+    urlContent = urlfetch.fetch(google_url).content
+    response = json.loads(urlContent)
+    return response["result"]
 
 
-
-
-
-
-
+logging.info(fetchPlaceDetails("ChIJmdgQydAsDogRoI-FqeJiKHw"))
 
 
 # #helper function similar to the one above
