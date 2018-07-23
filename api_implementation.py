@@ -14,15 +14,36 @@ def fetchPlaceDetails(placeID):
     return response["result"]
 
 #inputs search query and returns JSON menu with details
+#WE COULD JUST TAKE PLACE ID AND PLUG IT INTO THE FUNCTION ABOVE
 def findPlaceRequest(query):
-    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/findplacefromtext/%s?input=%s&inputtype=textquery&key=%s&fields=photos,formatted_address,name,rating,opening_hours,geometry" % ("json", query, api.googleKey)
-    #logging.info(query)
-    logging.info(google_url)
+    newQuery = formatQuery(query)
+    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/findplacefromtext/%s?input=%s&inputtype=textquery&key=%s&fields=%s" % ("json", newQuery, api.googleKey, getFields())
     urlContent = urlfetch.fetch(google_url).content
-    #logging.info("URL CONTENT:" + urlContent)
     response = json.loads(urlContent)
     return response
 
+#replaces query with google-friendly query (replaces spaces with +'s)
+def formatQuery(query):
+    return query.replace(" ", "+")
+
+def getFields():
+    output = ""
+    #output += "name,"
+    #output += "formatted_address,"
+    #output += "geometry,"
+    #output += "icon,"
+    output += "id,"
+    #output += "name,"
+    #output += "permanently_closed,"
+    #output += "photos,"
+    #output += "place_id,"
+    #output += "plus_code,"
+    #output += "scope,"
+    #output += "types,"
+    #output += "opening_hours,"
+    #output += "price_level,"
+    #output += "rating,"
+    return output[:-1]
 
 # #this function inputs a JSON menu in string form
 # turns into JSON menu and outputs contents
