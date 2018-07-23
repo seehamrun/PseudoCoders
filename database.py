@@ -1,5 +1,12 @@
 from google.appengine.ext import ndb
 
+class LastSearchQuery(ndb.Model):
+    budget = ndb.StringProperty()
+    rating = ndb.StringProperty()
+    userID = ndb.StringProperty()
+    # budget = ndb.IntegerProperty()
+    # rating = ndb.IntegerProperty()
+    #this will be useful later, maybe?
 
 class Event(ndb.Model):
     name = ndb.StringProperty()
@@ -21,7 +28,3 @@ class GalleryPost(ndb.Model):
     rating = ndb.IntegerProperty()
     title = ndb.StringProperty()
     poster = ndb.StringProperty() #this will be their email
-
-class SearchQuery(ndb.Model):
-    user = ndb.StringProperty()
-    #this will be useful later, maybe?

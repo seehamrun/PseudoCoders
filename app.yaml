@@ -5,10 +5,10 @@ threadsafe: true
 handlers:
 - url: /static.*
   static_dir: static
-  #login: required
+  login: required
 - url: /.*
   script: main.app
-  #login: required
+  login: required
 
 libraries:
 - name: jinja2

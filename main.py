@@ -17,8 +17,7 @@ import jinja2
 import os
 import database
 import logging
-
-searchQuery = []
+from google.appengine.api import users
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -56,12 +55,14 @@ class PostHandler(webapp2.RequestHandler):
         #not sure how exactly this will work
 
 
-#WE MIGHT NOT NEED THIS IF THE POST METHOD ABOVE RETURNS THIS
 class ResultsHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         response_html = jinja_env.get_template('templates/results.html')
-        return self.response.write(response_html.render())
+        data = {
+            'queryObject': database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
+        }
+        return self.response.write(response_html.render(data))
 
     def post(self):
         logging.data("")
@@ -82,13 +83,30 @@ class SearchHandler(webapp2.RequestHandler):
     def post(self):
         budgetVar = self.request.get('budget')
         ratingVar = self.request.get('rating')
-        searchQuery = {
-            'var_budget': budgetVar,
-            'var_rating': ratingVar,
-            'var_ID': 0 #later a real ID will be added here
-        }
-        template = jinja_env.get_template('templates/temp_screen.html')
-        return self.response.write(template.render(searchQuery))
+        # searchQuery = {
+        #     'var_budget': budgetVar,
+        #     'var_rating': ratingVar,
+        #     'var_ID': 0 #later a real ID will be added here
+        # }
+        # template = jinja_env.get_template('templates/temp_screen.html')
+
+        userItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        if userItem == []:
+            newItem = database.LastSearchQuery(userID=users.get_current_user().user_id(), budget=budgetVar, rating=ratingVar)
+            newItem.put()
+        else:
+            userItem[0].budget = budgetVar
+            userItem[0].rating = ratingVar
+            userItem[0].put()
+
+        userItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        userItem[0].put()
+        # lastQuery.budget = budgetVar
+        # lastQuery.rating = ratingVar
+         #lastQuery.put()
+
+        #return self.response.write(template.render(searchQuery))
+        return webapp2.redirect('/results')
 
 
 class AboutHandler(webapp2.RequestHandler):
