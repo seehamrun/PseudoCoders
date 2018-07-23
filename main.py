@@ -18,7 +18,7 @@ import os
 import database
 import logging
 
-searchQuery = []
+# searchQuery = []
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),

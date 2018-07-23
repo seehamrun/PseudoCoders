@@ -23,4 +23,5 @@ class GalleryPost(ndb.Model):
     poster = ndb.StringProperty() #this will be their email
 
 class SearchQuery(ndb.Model):
-    #this might be useful
+    user = ndb.StringProperty()
+    #this will be useful later, maybe?
