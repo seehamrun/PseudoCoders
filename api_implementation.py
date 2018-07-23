@@ -57,14 +57,15 @@ def nearbySearchRequest(location, radius):
 
 #def getLatitudeLongitude(first_line, city, state):
 def getLatitudeLongitude(location):
+    newLocation = location.replace(" ", "+")
     #google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/geocode/json?address=%s,%s,%s&key=%s" % (first_line, city, state, api.googleKey)
-    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s" % (location, api.googleKey)
-
+    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s" % (newLocation, api.googleKey)
     urlContent = urlfetch.fetch(google_url).content
+    #logging.info(urlContent)
     response = json.loads(urlContent)
-    return response
-    #return (response['results']['geometry']['location']['lat'], response['results']['geometry']['location']['lng'])
-
+    #return google_url
+    pair = response['results'][0]['geometry']['location']['lat'], response['results'][0]['geometry']['location']['lng']
+    return str(pair)[1:-1].replace(" ","")
 #       console.log(google_url)
 #   jQuery.get(google_url, (data) => {
 #     #runs jQuery to fetch data and waits for completion

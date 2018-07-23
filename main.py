@@ -172,8 +172,8 @@ class TestHandler(webapp2.RequestHandler):
         location = self.request.get("location")
         radius = self.request.get("radius")
         self.response.headers['Content-Type'] = 'text/html'
-        json = api_implementation.getLatitudeLongitude(location)
-        #json = api_implementation.nearbySearchRequest(location, radius)
+        #json = api_implementation.getLatitudeLongitude(location)
+        json = api_implementation.nearbySearchRequest(location, radius)
         data = {
             "results" : json
         }
