@@ -55,7 +55,6 @@ def nearbySearchRequest(location, radius):
     response = json.loads(urlContent)
     return response
 
-#output should be like "latitude,longitude"
 #def getLatitudeLongitude(first_line, city, state):
 def getLatitudeLongitude(location):
     #google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/geocode/json?address=%s,%s,%s&key=%s" % (first_line, city, state, api.googleKey)
@@ -63,7 +62,8 @@ def getLatitudeLongitude(location):
 
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
-    return response['results']['geometry']['location']
+    return response
+    #return (response['results']['geometry']['location']['lat'], response['results']['geometry']['location']['lng'])
 
 #       console.log(google_url)
 #   jQuery.get(google_url, (data) => {
