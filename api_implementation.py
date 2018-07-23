@@ -49,28 +49,17 @@ def getFields():
 
 
 
+#takes latitude/longitude -> can be computed from other Google API
+#also inputs a search query
+def nearbySearchRequest(location, radius):
+    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/nearbysearch/%s?key=%s&location=%s&radius=%s" % ("json", api.googleKey, location, radius)
+    urlContent = urlfetch.fetch(google_url).content
+    response = json.loads(urlContent)
+    return response
 
+def getLatitudeLongitude(location):
+    logging.info("TEST")
 
-# #-----------------------------------------------------------------------------//
-#
-#
-# #SECTION 2: Nearby Search requests
-#
-# #note that this requires latitude/longitude
-# #this can be computed from other parts of the Google API
-# #such as the Find Place Request above in Section 1
-# #in that a text location/address is searched as a single location
-#
-#
-# #this function inputs a search query
-# #using jQuery, it fetches a JSON menu (in string form) containing the placeID associated with the query
-# #it then triggers the next method fetchPlaceDetails to run
-#  function nearbySearchRequest(location, radius) {
-#   var google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/nearbysearch/"
-#                   + "json" + "?"
-#                   + "key=" + api_key
-#                   + "&location=" + location
-#                   + "&radius=" + radius //assembles the proper url
 #       console.log(google_url)
 #   jQuery.get(google_url, (data) => {
 #     #runs jQuery to fetch data and waits for completion

@@ -3,10 +3,10 @@ from google.appengine.ext import ndb
 class LastSearchQuery(ndb.Model):
     budget = ndb.StringProperty()
     rating = ndb.StringProperty()
-    userID = ndb.StringProperty()
     location = ndb.StringProperty()
     radius = ndb.StringProperty()
     date = ndb.StringProperty()
+    userID = ndb.StringProperty()
     # budget = ndb.IntegerProperty()
     # rating = ndb.IntegerProperty()
     #this will be useful later, maybe?
