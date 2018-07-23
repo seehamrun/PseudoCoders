@@ -69,10 +69,13 @@ class ResultsHandler(webapp2.RequestHandler):
         #     newList.append(api_implementation.fetchNameAddress(json))
         #     #newList.append("FILLER TEXT")
         # logging.info(newList)
+        newList = []
+        for placeID in json:
+            newList.append(api_implementation.fetchNameAddress(placeID))
         data = {
             "queryObject":userItem,
-            # "results" : newList
-            "results":json
+            "results" : newList
+            #"results":json
         }
         responseHTML = jinja_env.get_template('templates/results.html')
         self.response.write(responseHTML.render(data))
@@ -184,12 +187,12 @@ class TestHandler(webapp2.RequestHandler):
         json = api_implementation.nearbySearchRequest(location, radius)
         newList = []
         for placeID in json:
-            newList.append(api_implementation.fetchNameAddress(json))
+            newList.append(api_implementation.fetchNameAddress(placeID))
             #newList.append("FILLER TEXT")
         #logging.info(newList)
         data = {
             #"results" : newList
-            "results":json
+            "results":newList
         }
         responseHTML = jinja_env.get_template('templates/test.html')
         self.response.write(responseHTML.render(data))
