@@ -107,8 +107,9 @@ def nearbySearchRequestFiltered(location, radius, maxprice, type):
     response = json.loads(urlContent)
     response = response['results']
     logging.info(google_url)
-    dictionary = {}
+    newList = []
     for item in response:
+        dictionary = {}
         place_id = item['place_id']
         place_details = fetchPlaceDetails(place_id)
         results = place_details
