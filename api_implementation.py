@@ -84,8 +84,8 @@ def nearbySearchRequest(location, radius):
     return newList
 
 
-def nearbySearchRequestFiltered(location, radius, price, type):
-    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/nearbysearch/%s?key=%s&location=%s&radius=%s&type=%s&minprice=%s&maxprice=%s" % ("json", api.googleKey, getLatitudeLongitude(location), radius, type, price, price)
+def nearbySearchRequestFiltered(location, radius, maxprice, type):
+    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/nearbysearch/%s?key=%s&location=%s&radius=%s&type=%s&minprice=%s&maxprice=%s" % ("json", api.googleKey, getLatitudeLongitude(location), radius, type, 0, maxprice)
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
     response = response['results']
