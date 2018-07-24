@@ -51,10 +51,10 @@ li a:hover:not(.active) {
 
 .aboutwrapper {
   display:grid;
-  grid-template-columns: repeat(4, 2fr);
-  grid-gap: 2px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 200px;
   grid-template-rows: 2fr 2fr;
-  grid-column-gap: 20px;
+  grid-column-gap: 200px;
 }
 
 
@@ -88,7 +88,7 @@ li a:hover:not(.active) {
   float:left;
   width:20%;
 }
-.about_maeve {
+/* .about_maeve {
   grid-column: 1;
   grid-row: 2;
 }
@@ -99,7 +99,7 @@ li a:hover:not(.active) {
 .about_juan {
   grid-column: 2;
   grid-row: 2;
-}
+} */
 
 .navbar {
   overflow: hidden;
