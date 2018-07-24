@@ -1,6 +1,8 @@
 import api
 import json
 import logging
+import string
+from ast import literal_eval
 from google.appengine.api import urlfetch
 
 
@@ -83,32 +85,47 @@ def nearbySearchRequest(location, radius):
 
     return newList
 
+def get_type(input_data):
+    try:
+        return type(literal_eval(input_data))
+    except (ValueError, SyntaxError):
+        # A string, so return str
+        return str
+
+def fix(input):
+    if not get_type(input) == "<class 'str'>":
+        return input
+    printable = string.printable
+    newString = ""
+    for c in input:
+        if c in printable:
+            newString += c
 
 def nearbySearchRequestFiltered(location, radius, maxprice, type):
     google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/nearbysearch/%s?key=%s&location=%s&radius=%s&type=%s&minprice=%s&maxprice=%s" % ("json", api.googleKey, getLatitudeLongitude(location), radius, type, 0, maxprice)
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
     response = response['results']
-    #logging.info(google_url)
+    logging.info(google_url)
     newList = []
     for item in response:
         output = []
         place_id = item['place_id']
         place_details = fetchPlaceDetails(place_id)
         results = place_details
-        output.append("PLACE_ID: " + str(place_id))
+        output.append("PLACE_ID: " + str(fix(place_id)))
         if ('name' in results):
-            output.append("NAME: " + str(results['name']))
+            output.append("NAME: " + str(fix(results['name'])))
         if ('formatted_address' in results):
-            output.append("ADDRESS: " + str(results['formatted_address']))
+            output.append("ADDRESS: " + str(fix(results['formatted_address'])))
         if ('types' in results):
-            output.append("TYPE: " + str(results['types']))
+            output.append("TYPE: " + str(fix(results['types'])))
         if ('opening_hours' in results):
-            output.append("HOURS: " + str(results['opening_hours']))
+            output.append("HOURS: " + str(fix(results['opening_hours'])))
         if ('price_level' in results):
-            output.append("PRICE: " + str(results['price_level']))
+            output.append("PRICE: " + str(fix(results['price_level'])))
         if ('rating' in results):
-            output.append("RATING: " + str(results['rating']))
+            output.append("RATING: " + str(fix(results['rating'])))
         newList.append(output)
 
     return newList
