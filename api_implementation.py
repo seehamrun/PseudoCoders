@@ -13,16 +13,13 @@ def fetchPlaceDetails(placeID):
     response = json.loads(urlContent)
     return response['result']
 
-def fetchNameAddress(placeID):
-    info = fetchPlaceDetails(placeID)
-    return info['name']+" ---> "+info['formatted_address']
-
 #inputs search query and returns any amount of data
 def findPlaceRequest(query):
     newQuery = query.replace(" ", "+")
     google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/findplacefromtext/%s?input=%s&inputtype=textquery&key=%s&fields=%s" % ("json", newQuery, api.googleKey, getFields())
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
+    logging.info(response)
     response = response['candidates'][0]
     newList = []
     newList.append(response['place_id'])
@@ -64,7 +61,10 @@ def nearbySearchRequest(location, radius):
     #return response
     list = []
     for item in response["results"]:
-        list.append(item["place_id"])
+        #logging.info(item['place_id'])
+        #list.append(findPlaceRequest(item['place_id']))
+        #logging.info(item)
+        list.append(item)
     return list
 
 #def getLatitudeLongitude(first_line, city, state):

@@ -196,9 +196,10 @@ class TestHandler(webapp2.RequestHandler):
         #json = api_implementation.getLatitudeLongitude(location)
         json = api_implementation.nearbySearchRequest(location, radius)
         newList = []
-        for placeID in json:
-            newList.append(api_implementation.fetchNameAddress(placeID))
+        for text in json:
+            #newList.append(api_implementation.nearby(placeID))
             #newList.append("FILLER TEXT")
+            newList.append(text)
         #logging.info(newList)
         data = {
             #"results" : newList
