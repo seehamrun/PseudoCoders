@@ -106,10 +106,14 @@ h1 {
 
 /*Ethan's loader code*/
 
+.disappear{
+  display: none;
+}
+
 #loadingMessage{
   text-align: center;
   font-weight: bold;
-  font-size: 200%
+  font-size: 150%
 
 }
 
