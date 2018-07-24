@@ -1,6 +1,5 @@
-/*This is our CSS*/
  body {
-    background-color: #899dff;
+    background-color: #F172A1;
   }
   ul {
       list-style-type: none;
@@ -9,11 +8,10 @@
       overflow: hidden;
       background-color:#e2dac2;
       border: white;
-    }
+}
 
 h1 {
   margin-top: 50px;
-  text-align: center;
   text-align: center;
   padding: 20px;
   color: white;
@@ -22,13 +20,11 @@ h1 {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color:#e2dac2;
-  border: white;
+h2 {
+  color: white;
+  font-family: 'Pacifico';
+  font-size: 30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
 }
 
 .header {
@@ -88,15 +84,6 @@ li a:hover:not(.active) {
     grid-row: 2;
   }
 
-.navbar {
-  overflow: hidden;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  margin:0 auto;
-  list-style:none;
-}
-
 .navbar li {
   float:left;
   width:20%;
@@ -113,26 +100,6 @@ li a:hover:not(.active) {
 
 .borderimg {
   border:5px solid #d7deff;
-}
-
-/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
-.sticky + .content {
-  padding-top: 60px;
-}
-
-h1 {
-  text-align: center;
-  text-align: center;
-  padding: 20px;
-  color: white;
-  font-family: 'Pacifico', cursive;
-  font-size: 40px;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-
-.navbar li {
-  float:left;
-  width:20%;
 }
 
 /*Ethan's loader code*/
