@@ -60,25 +60,20 @@ def nearbySearchRequest(location, radius):
     response = json.loads(urlContent)
     response = response["results"]
     place_id = response[0]['place_id']
-    # newList.append(response['name'])
-    # #newList.append(response['formatted_address'])
-    # newList.append(response['types'])
-    # newList.append(response['opening_hours'])
-    # #newList.append(response['price_level'])
-    # newList.append(response['rating'])
-    return fetchPlaceDetails(place_id)
-    # place_id = response["results"]["place_id"]
-    # results = findPlaceDetails(place_id)
-    # return results
+    place_details = fetchPlaceDetails(place_id)
+    results = place_details["results"]
+    output = []
+    output.append(place_id)
+    output.append(results['name'])
+    output.append(results['formatted_address'])
+    output.append(results['types'])
+    #output.append(results['opening_hours'])
+    output.append(results['price_level'])
+    output.append(results['rating'])
 
-    # #return response
-    # list = []
-    # for item in response:
-    #     #logging.info(item['place_id'])
-    #     #list.append(findPlaceRequest(item['place_id']))
-    #     #logging.info(item)
-    #     list.append(item)
-    #return list
+    return output
+
+
 
 #def getLatitudeLongitude(first_line, city, state):
 def getLatitudeLongitude(location):
