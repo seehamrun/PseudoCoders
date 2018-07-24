@@ -227,6 +227,7 @@ class TestHandler(webapp2.RequestHandler):
         price = self.request.get("price")
         type = self.request.get("type")
         json = api_implementation.nearbySearchRequestFiltered(location, radius, price, type)
+        #json = api_implementation.nearbySearchRequest(location, radius)
         newList = json
         data = {
             "results" : newList
