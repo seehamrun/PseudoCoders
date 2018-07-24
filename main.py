@@ -168,25 +168,41 @@ class MainHandler(webapp2.RequestHandler):
 class MaterialTestHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('templates/test.html')
+        template = jinja_env.get_template('templates/material.html')
         return self.response.write(template.render())
 
 class TestHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('templates/material.html')
+        template = jinja_env.get_template('templates/test.html')
         return self.response.write(template.render())
 
     def post(self):
-        #THIS IS A TEST OF THE FETCHPLACEDETAILS FUNCTION:
+        # #THIS IS A TEST OF THE FETCHPLACEDETAILS FUNCTION:
+        # self.response.headers['Content-Type'] = 'text/html'
+        # placeID = self.request.get("placeID")
+        # json = api_implementation.fetchPlaceDetails(placeID)
+        # newList = [json]
+        # data = {
+        #     "results":newList
+        # }
+        # responseHTML = jinja_env.get_template('templates/test.html')
+        # self.response.write(responseHTML.render(data))
+
+
+
+        #THIS IS A TEST OF THE FINDPLACEREQUEST FUNCTION:
         self.response.headers['Content-Type'] = 'text/html'
-        placeID = self.request.get("placeID")
-        json = api_implementation.fetchPlaceDetails(placeID)
+        query = self.request.get("query")
+        json = api_implementation.findPlaceRequest(query)
+        newList = [json]
         data = {
-            "results":json
+            "results":newList
         }
         responseHTML = jinja_env.get_template('templates/test.html')
         self.response.write(responseHTML.render(data))
+
+
 
 
 
