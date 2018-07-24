@@ -40,12 +40,13 @@ so yeah this is a test page -->
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
           <a href="#main" class="mdl-layout__tab is-active">Main</a>
           <a href="#search" class="mdl-layout__tab">Search</a>
-          <a href="#search" class="mdl-layout__tab">Favorites</a>
-          <a href="#search" class="mdl-layout__tab">Gallery</a>
-          <a href="#search" class="mdl-layout__tab">About Us</a>
+          <a href="/favorites" class="mdl-layout__tab">Favorites</a>
+          <a href="/gallery" class="mdl-layout__tab">Gallery</a>
+          <a href="/about" class="mdl-layout__tab">About Us</a>
           <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent" id="add">
             <i class="material-icons" role="presentation">add</i>
             <span class="visuallyhidden">Add</span>
+            <a href="/about"></a>
           </button>
         </div>
       </header>
@@ -64,52 +65,74 @@ so yeah this is a test page -->
                 rest!
               </div>
               <div class="mdl-card__actions">
-                <a href="#" class="mdl-button">Get Started</a>
+                <a href="/search" class="mdl-button">Get Started</a>
               </div>
             </div>
 
-            <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn3">
+            <!-- <ul class="mdl-menu mdl-js-menu mdl-menubottom-right" for="btn3">
               <li class="mdl-menu__item">Lorem</li>
               <li class="mdl-menu__item" disabled>Ipsum</li>
               <li class="mdl-menu__item">Dolor</li>
-            </ul>
+              I have no idea what this does
+            </ul> -->
           </section>
 
           <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
             <div class="mdl-card mdl-cell mdl-cell--12-col">
               <div class="mdl-card__supporting-text">
-                <h4>Something else</h4>
-                    Like for real please work
+                <h4>Favorites</h4>
+                    Did you fall in love with your result? Safely keep in in Favorites!
                 </div>
               <div class="mdl-card__actions">
-                <a href="#" class="mdl-button">Read more</a>
+                <a href="/favorites" class="mdl-button">Visit My Favorites</a>
               </div>
             </div>
 
-            <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn3">
+            <!-- <ul class="mdl-menu mdl-js-menu mdl-menu-bottom-right" for="btn3">
               <li class="mdl-menu__item">Lorem</li>
               <li class="mdl-menu__item" disabled>Ipsum</li>
               <li class="mdl-menu__item">Dolor</li>
-            </ul>
+            </ul> -->
           </section>
 
           <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
             <div class="mdl-card mdl-cell mdl-cell--12-col">
               <div class="mdl-card__supporting-text">
-                <h4>Something else 2.0</h4>
-                    Like, really, for real. please work 🙏🏼
+                <h4>Gallery</h4>
+                    Something something something
                 </div>
               <div class="mdl-card__actions">
-                <a href="#" class="mdl-button">Read more</a>
+                <a href="/gallery" class="mdl-button">Visit the Gallery</a>
               </div>
             </div>
 
-            <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn3">
+            <!-- <ul class="mdl-menu mdl-js-menu mdl-menu-bottom-right" for="btn3">
               <li class="mdl-menu__item">Lorem</li>
               <li class="mdl-menu__item" disabled>Ipsum</li>
               <li class="mdl-menu__item">Dolor</li>
-            </ul>
+            </ul> -->
           </section>
+
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+            <div class="mdl-card mdl-cell mdl-cell--12-col">
+              <div class="mdl-card__supporting-text">
+                <h4>About Us</h4>
+                    Who made this app? Good question! Meet the people behind this app by visiting the About Us section.
+                </div>
+              <div class="mdl-card__actions">
+                <a href="/about" class="mdl-button">About Us</a>
+              </div>
+            </div>
+
+            <!-- <ul class="mdl-menu mdl-js-menu mdl-menu-bottom-right" for="btn3">
+              <li class="mdl-menu__item">Lorem</li>
+              <li class="mdl-menu__item" disabled>Ipsum</li>
+              <li class="mdl-menu__item">Dolor</li>
+            </ul> -->
+          </section>
+
+
+
 
 
 
@@ -117,6 +140,10 @@ so yeah this is a test page -->
         <div class="mdl-layout__tab-panel" id="search">
           <section class="section--center mdl-grid mdl-grid--no-spacing">
             <div class="mdl-cell mdl-cell--12-col">
+
+
+
+
               <h4>More Info</h4>
               Minim duis incididunt est cillum est ex occaecat consectetur. Qui sint ut et qui nisi cupidatat. Reprehenderit nostrud proident officia exercitation anim et pariatur ex.
               <ul class="toc">
@@ -169,6 +196,8 @@ so yeah this is a test page -->
             </div>
           </section>
         </div>
+
+        
         <footer class="mdl-mega-footer">
 
           <div class="mdl-mega-footer--bottom-section">

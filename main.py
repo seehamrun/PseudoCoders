@@ -1,17 +1,3 @@
-# Copyright 2016 Google Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import webapp2
 import jinja2
 import os
@@ -61,25 +47,20 @@ class ResultsHandler(webapp2.RequestHandler):
         userItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
         location = userItem.location
         radius = userItem.radius
-        self.response.headers['Content-Type'] = 'text/html'
+
         json = api_implementation.nearbySearchRequest(location, radius)
-        # logging.info(json)
-        # newList = []
-        # for placeID in json:
-        #     newList.append(api_implementation.fetchNameAddress(json))
-        #     #newList.append("FILLER TEXT")
-        # logging.info(newList)
-        newList = []
-        for placeID in json:
-            newList.append(api_implementation.fetchNameAddress(placeID))
+        logging.info(json)
+        newList = json
+
         data = {
             "queryObject":userItem,
             "results" : newList
-            #"results":json
         }
+
+        self.response.headers['Content-Type'] = 'text/html'
         responseHTML = jinja_env.get_template('templates/results.html')
         self.response.write(responseHTML.render(data))
-        logging.info(data)
+        #logging.info(data)
 
     def post(self):
         logging.data("")
@@ -233,9 +214,9 @@ class TestHandler(webapp2.RequestHandler):
         location = self.request.get("location")
         radius = self.request.get("radius")
         json = api_implementation.nearbySearchRequest(location, radius)
-        newList = [json]
+        newList = json
         data = {
-            "results":newList
+            "results" : newList
         }
         responseHTML = jinja_env.get_template('templates/test.html')
         self.response.write(responseHTML.render(data))

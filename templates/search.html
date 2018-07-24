@@ -5,8 +5,7 @@
     <script src="/static/script.js"></script>
   </head>
   <body>
-    <h1>Search Page</h1>
-    <ul class="navbar">    
+    <ul class="navbar">
       <li><a href="/" >Main</a></li>
       <li><a class="active" href="/search">Search</a></li>
       <li><a  href='/favorites'>Favorites</a></li>
@@ -14,36 +13,37 @@
       <li><a  href='/about'>About Us</a></li>
     </ul>
 
-
+<div class="regular">
+<h1>Search</h1>
 <form method="post">
-  <p class="regular">Date: <input type="date" id="date" name="date"></p>
-  <p class="regular">Location: <input type="text" id="location" name="location"></p>
-  <p class="regular">Radius: <input type="number" id="radius" name="radius"></p>
-  <p class="regular">Select your budget:</p>
-  <select class="regular" id="budget" name="budget">
+  <p>Date: <input type="date" id="date" name="date"></p>
+  <p>Location: <input type="text" id="location" name="location"></p>
+  <p>Radius: <input type="number" id="radius" name="radius"></p>
+  <p>Select your budget:</p>
+  <select id="budget" name="budget">
     <option value="Free">Free</option>
     <option value="Inexpensive ($)">Inexpensive($)</option>
     <option value="Intermediate ($$)">Intermediate($$)</option>
     <option value="Expensive ($$$)">Expensive ($$$)</option>
     <option value="Bank ($$$$)">Bank🤑💸 ($$$$)</option>
   </select>
-  <p class="regular">Select the minimum user rating:</p>
-  <select class="regular" id="rating" name="rating">
+  <p>Select the minimum user rating:</p>
+  <select id="rating" name="rating">
     <option value="One star">One star</option>
     <option value="Two stars">Two stars</option>
     <option value="Three stars">Three stars</option>
     <option value="Four stars">Four stars</option>
     <option value="Five stars">Five stars</option>
   </select>
-  <input class="regular" id="submit" type="submit">
+  <!-- <p>Select the type of location:</p>
+  <select id="type" name="type">
+    <option value="accounting">Accounting</option>
+  </select> -->
+  <input id="submit" type="submit">
 </form>
-<<<<<<< HEAD
+</div>
+<div id="loadingMessage"></div>
 <br>
-<center><p id="loadingMessage"></p></center>
-=======
-<p id="loadingMessage"></p>
-<br>
->>>>>>> 00b8b52c72f9e77222c14723c1f9fb9aaad768ce
 <div id="futureLoader"></div>
   </body>
 </html>
