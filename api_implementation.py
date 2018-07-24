@@ -9,8 +9,8 @@ from google.appengine.api import urlfetch
 #inputs placeID and returns JSON with place details
 def fetchPlaceDetails(placeID):
     google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/details/%s?key=%s&placeid=%s" % ("json", api.googleKey, placeID)
-    logging.info(placeID)
-    logging.info(google_url)
+    # logging.info(placeID)
+    # logging.info(google_url)
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
     return response['result']
@@ -61,7 +61,7 @@ def nearbySearchRequest(location, radius):
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
     response = response['results']
-    #logging.info(google_url)
+    logging.info(google_url)
     newList = []
     for item in response:
         dictionary = {}
