@@ -1,8 +1,9 @@
 import api
 import json
 import logging
-import string
-from ast import literal_eval
+#import string
+import random
+#from ast import literal_eval
 from google.appengine.api import urlfetch
 
 
@@ -143,3 +144,20 @@ def getLatitudeLongitude(location):
     #return google_url
     pair = response['results'][0]['geometry']['location']['lat'], response['results'][0]['geometry']['location']['lng']
     return str(pair)[1:-1].replace(" ","")
+
+
+def makeSchedules(location, radius, maxprice):
+    types = ['amusement_park', 'aquarium', 'art_gallery', 'bakery', 'bar', 'beauty_salon', 'bowling_alley', 'cafe', 'casino', 'gym', 'library', 'movie_theater', 'museum', 'night_club', 'park', 'restaurant', 'shopping_mall', 'stadium', 'store', 'zoo']
+    dictionary = {}
+    for i in range(0, len(types)):
+        locations = nearbySearchRequestFiltered(location, radius, maxprice, types[i])
+        dictionary[i] = locations
+
+    schedule = []
+    numEvents = 5
+    for event in range(numEvents):
+        type = random.choice(dictionary)
+        data = dictionary[type]
+        schedule.append(random.choice(data))
+
+    return schedule
