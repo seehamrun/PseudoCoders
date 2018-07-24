@@ -59,6 +59,7 @@ def nearbySearchRequest(location, radius):
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
     response = response['results']
+    #logging.info(google_url)
     newList = []
     for item in response:
         output = []
@@ -95,31 +96,3 @@ def getLatitudeLongitude(location):
     #return google_url
     pair = response['results'][0]['geometry']['location']['lat'], response['results'][0]['geometry']['location']['lng']
     return str(pair)[1:-1].replace(" ","")
-#       console.log(google_url)
-#   jQuery.get(google_url, (data) => {
-#     #runs jQuery to fetch data and waits for completion
-#     console.log(data)
-#     #triggers place detail fetch with this id
-#   })
-#  }
-#
-# # #this function inputs a JSON menu in string form
-# turns into JSON menu and outputs placeID value
-# # function placeIDhelper(strjson) {
-# #   json = JSON.parse(strjson)
-# #   #returns string JSON into real JSON
-# #   return json["candidates"][0]["place_id"]
-# #  #returns the correct element from the JSON, i.e., placeID
-# # }
-#
-# #function call / TEST
-# var latitude = 41.887246
-# var longitude = -87.652645
-# var queryLocation = latitude + "," + longitude;
-# var queryRadius = 2000
-# nearbySearchRequest(queryLocation, queryRadius)
-#
-# #-----------------------------------------------------------------------------//
-#
-# #SECTION 3: Text Search requests
-# #not sure if this is that important, but worth checking out for sure!
