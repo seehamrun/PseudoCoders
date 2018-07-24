@@ -22,7 +22,7 @@
       <p> RATING: {{queryObject.rating}} </p>
       <h2> Here are your results:</h2>
       {% for result in results %}
-        <p>{{result}}</p>
+        <p>{{result}} : {{results[result]}}</p>
       {% endfor %}
       <button id="addFavorite" value={{var_ID}}>Add To Favorites!</button>
       <button id="getAnother">Get Another Schedule!</button>
