@@ -12,19 +12,19 @@
       <li><a href='/gallery'>Gallery</a></li>
       <li><a href='/about'>About Us</a></li>
     </ul>
-        <h1> Results!</h1>
-        <h2>Here is a summary of your search query:</h2>
-        <p> DATE: {{queryObject.date}} </p>
-        <p> LOCATION: {{queryObject.location}} </p>
-        <p> RADIUS: {{queryObject.radius}} </p>
-        <p> BUDGET: {{queryObject.budget}} </p>
-        <p> RATING: {{queryObject.rating}} </p>
-        <h2> Here are your results:</h2>
-        {% for result in results %}
-          <p>{{result}}</p>
-        {% endfor %}
-        <button id="addFavorite" value={{var_ID}}>Add To Favorites!</button>
-        <button id="getAnother">Get Another Schedule!</button>
-        <a href="/search">NEW SEARCH</a>
+    <h1> Results!</h1>
+      <h2>Here is a summary of your search query:</h2>
+      <p> DATE: {{queryObject.date}} </p>
+      <p> LOCATION: {{queryObject.location}} </p>
+      <p> RADIUS: {{queryObject.radius}} </p>
+      <p> BUDGET: {{queryObject.budget}} </p>
+      <p> RATING: {{queryObject.rating}} </p>
+      <h2> Here are your results:</h2>
+      {% for result in results %}
+        <p>{{result}}</p>
+      {% endfor %}
+      <button id="addFavorite" value={{var_ID}}>Add To Favorites!</button>
+      <button id="getAnother">Get Another Schedule!</button>
+      <a href="/search">NEW SEARCH</a>
   </body>
 </html>

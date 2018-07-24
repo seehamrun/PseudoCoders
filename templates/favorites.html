@@ -3,7 +3,6 @@
     <link rel="stylesheet" href="/static/style.css"></link>
   </head>
   <body>
-    <h1>Favorites</h1>
     <ul class="navbar">
       <li><a href="/" >Main</a></li>
       <li><a  href="/search">Search</a></li>
@@ -11,12 +10,10 @@
       <li><a href='/gallery'>Gallery</a></li>
       <li><a  href='/about'>About Us</a></li>
     </ul>
-
-          {% for favorite in favorites %}
-          <div>favorite</div>
-          {% endfor %}
-          <ul>
-        <!-- <button class="button" style="vertical-align:middle"><span>Log In</span></button> -->
-      </body>
+    <h1>Favorites</h1>
+    {% for favorite in favorites %}
+      <div>favorite</div>
+    {% endfor %}
+    <!-- <button class="button" style="vertical-align:middle"><span>Log In</span></button> -->
   </body>
 </html>
