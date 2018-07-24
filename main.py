@@ -171,6 +171,13 @@ class TestHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/test.html')
         return self.response.write(template.render())
 
+class MaterialTestHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        template = jinja_env.get_template('templates/material.html')
+        return self.response.write(template.render())
+
+
     def post(self):
         # placeID = self.request.get("placeID")
         # self.response.headers['Content-Type'] = 'text/html'
@@ -218,5 +225,6 @@ app = webapp2.WSGIApplication([
     ('/search', SearchHandler),
     ('/about', AboutHandler),
     ('/test', TestHandler),
+    ('/material', MaterialTestHandler),
     ('/', MainHandler)
 ], debug=True)
