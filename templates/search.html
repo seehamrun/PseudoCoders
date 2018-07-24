@@ -19,7 +19,13 @@
 <form method="post">
   <p>Date: <br> <input type="date" id="date" name="date"></p>
   <p>Location: <br> <input type="text" id="location" name="location"></p>
-  <p>Radius: <br> <input type="number" id="radius" name="radius"></p>
+  <p>Radius: </p>
+  <select id="radius" name="radius">
+    <option value=1610>Within one mile</option>
+    <option value=3219>Within two miles</option>
+    <option value=8047>Within five miles</option>
+    <option value=16093>Within ten miles</option>
+  </select>
   <p>Select your budget:</p>
   <select id="budget" name="budget">
     <option value="0">Free</option>
