@@ -68,7 +68,7 @@ body {
   /* width: 100%; Full width */
   /* margin:0 auto;
   list-style:none;
-} */ 
+} */
 
 .navbar li {
   float:left;
@@ -100,8 +100,7 @@ h1 {
   color: white;
   font-family: 'Pacifico', cursive;
   font-size: 40px;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
 }
 
 /*Ethan's loader code*/
