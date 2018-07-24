@@ -65,19 +65,19 @@ def nearbySearchRequest(location, radius):
         place_id = item['place_id']
         place_details = fetchPlaceDetails(place_id)
         results = place_details
-        output.append(place_id)
+        output.append("PLACE_ID: " + str(place_id))
         if ('name' in results):
-            output.append(results['name'])
+            output.append("NAME: " + str(results['name']))
         if ('formatted_address' in results):
-            output.append(results['formatted_address'])
+            output.append("ADDRESS: " + str(results['formatted_address']))
         if ('types' in results):
-            output.append(results['types'])
+            output.append("TYPE: " + str(results['types']))
         if ('opening_hours' in results):
-            output.append(results['opening_hours'])
+            output.append("HOURS: " + str(results['opening_hours']))
         if ('price_level' in results):
-            output.append(results['price_level'])
+            output.append("PRICE: " + str(results['price_level']))
         if ('rating' in results):
-            output.append(results['rating'])
+            output.append("RATING: " + str(results['rating']))
         newList.append(output)
 
     return newList
