@@ -157,7 +157,7 @@ def makeSchedules(location, radius, maxprice):
     schedule = []
     numEvents = 5
     for event in range(numEvents):
-        type = random.choice(dictionary)
+        type = random.choice(range(len(dictionary)))
         data = dictionary[type]
         schedule.append(random.choice(data))
 
