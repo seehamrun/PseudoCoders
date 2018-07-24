@@ -84,6 +84,36 @@ def nearbySearchRequest(location, radius):
     return newList
 
 
+def nearbySearchRequestFiltered(location, radius, price, type):
+    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/nearbysearch/%s?key=%s&location=%s&radius=%s&type=%s&minprice=%s&maxprice=%s" % ("json", api.googleKey, getLatitudeLongitude(location), radius, type, price, price)
+    urlContent = urlfetch.fetch(google_url).content
+    response = json.loads(urlContent)
+    response = response['results']
+    #logging.info(google_url)
+    newList = []
+    for item in response:
+        output = []
+        place_id = item['place_id']
+        place_details = fetchPlaceDetails(place_id)
+        results = place_details
+        output.append("PLACE_ID: " + str(place_id))
+        if ('name' in results):
+            output.append("NAME: " + str(results['name']))
+        if ('formatted_address' in results):
+            output.append("ADDRESS: " + str(results['formatted_address']))
+        if ('types' in results):
+            output.append("TYPE: " + str(results['types']))
+        if ('opening_hours' in results):
+            output.append("HOURS: " + str(results['opening_hours']))
+        if ('price_level' in results):
+            output.append("PRICE: " + str(results['price_level']))
+        if ('rating' in results):
+            output.append("RATING: " + str(results['rating']))
+        newList.append(output)
+
+    return newList
+
+
 
 #def getLatitudeLongitude(first_line, city, state):
 def getLatitudeLongitude(location):
