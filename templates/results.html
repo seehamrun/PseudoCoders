@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="/static/style.css"></link>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- <script src="/static/results_script.js"></script> -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
   </head>
   <body>
     <ul class="navbar">
@@ -17,7 +18,7 @@
       <p> DATE: {{queryObject.date}} </p>
       <p> LOCATION: {{queryObject.location}} </p>
       <p> RADIUS: {{queryObject.radius}} </p>
-      <p> BUDGET: {{queryObject.budget}} </p>
+      <p> PRICE: {{queryObject.price}} </p>
       <p> RATING: {{queryObject.rating}} </p>
       <h2> Here are your results:</h2>
       {% for result in results %}

@@ -47,8 +47,13 @@ class ResultsHandler(webapp2.RequestHandler):
         userItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
         location = userItem.location
         radius = userItem.radius
+        type = userItem.type
+        rating = userItem.rating
+        price = userItem.price
+        userID = userItem.userID
+        date = userItem.date
 
-        json = api_implementation.nearbySearchRequest(location, radius)
+        json = api_implementation.nearbySearchRequestFiltered(location, radius, price, type)
         logging.info(json)
         newList = json
 
@@ -79,38 +84,24 @@ class SearchHandler(webapp2.RequestHandler):
         # self.response.write(response_html.render(data))
 
     def post(self):
-        budgetVar = self.request.get('budget')
+        priceVar = self.request.get('price')
         ratingVar = self.request.get('rating')
         dateVar = self.request.get('date')
         locationVar = self.request.get('location')
         radiusVar = self.request.get('radius')
-        # searchQuery = {
-        #     'var_budget': budgetVar,
-        #     'var_rating': ratingVar,
-        #     'var_ID': 0 #later a real ID will be added here
-        # }
-        # template = jinja_env.get_template('templates/temp_screen.html')
-
-
-        # self.response.headers['Content-Type'] = 'text/html'
-        # template = jinja_env.get_template('templates/about.html')
-        # loader = "<div class='loader'></div>"
-        # dictionary = {
-        #     'loader':loader
-        # }
-        # self.response.write(template.render(dictionary))
-
+        typeVar = self.request.get('type')
 
         userItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
         if userItem == []:
-            newItem = database.LastSearchQuery(userID=users.get_current_user().user_id(), budget=budgetVar, rating=ratingVar, date=dateVar, location=locationVar, radius=radiusVar)
+            newItem = database.LastSearchQuery(userID=users.get_current_user().user_id(), price=priceVar, rating=ratingVar, date=dateVar, location=locationVar, radius=radiusVar, type=typeVar)
             newItem.put()
         else:
-            userItem[0].budget = budgetVar
+            userItem[0].price = priceVar
             userItem[0].rating = ratingVar
             userItem[0].date = dateVar
             userItem[0].location = locationVar
             userItem[0].radius = radiusVar
+            userItem[0].type = typeVar
             userItem[0].put()
 
         logging.info(userItem)
@@ -227,6 +218,7 @@ class TestHandler(webapp2.RequestHandler):
         price = self.request.get("price")
         type = self.request.get("type")
         json = api_implementation.nearbySearchRequestFiltered(location, radius, price, type)
+        #json = api_implementation.nearbySearchRequest(location, radius)
         newList = json
         data = {
             "results" : newList

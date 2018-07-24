@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="/static/style.css"></link>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="/static/script.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
   </head>
   <body>
     <ul class="navbar">
@@ -16,11 +17,18 @@
 <div class="regular">
 <h1>Search</h1>
 <form method="post">
-  <p>Date: <input type="date" id="date" name="date"></p>
-  <p>Location: <input type="text" id="location" name="location"></p>
-  <p>Radius: <input type="number" id="radius" name="radius"></p>
-  <p>Select your budget:</p>
-  <select id="budget" name="budget">
+  <p>Date: <br> <input type="date" id="date" name="date"></p>
+  <p>Location: <br> <input type="text" id="location" name="location"></p>
+  <p>Radius: </p>
+  <select id="radius" name="radius">
+    <option value=1610>Within one mile</option>
+    <option value=3219>Within two miles</option>
+    <option value=8047>Within five miles</option>
+    <option value=16093>Within ten miles</option>
+    <option value=32186>Within twenty miles</option>
+  </select>
+  <p>Select your budget/price level:</p>
+  <select id="price" name="price">
     <option value="0">Free</option>
     <option value="1">Inexpensive($)</option>
     <option value="2">Intermediate($$)</option>

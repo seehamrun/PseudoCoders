@@ -22,6 +22,7 @@ h1 {
   text-align: center;
   padding: 20px;
   color: white;
+<<<<<<< HEAD
   font-family: 'Pacifico', cursive;
   font-size: 40px;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
@@ -34,6 +35,19 @@ ul {
   overflow: hidden;
   background-color:#e2dac2;
   border: white;
+=======
+  font-family: 'Roboto';
+  font-size: 50px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
+}
+
+h2 {
+  text-align: center;
+  color: white;
+  font-family: 'Roboto';
+  font-size: 30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
+>>>>>>> dfd0f1ae2003513aafd72d3fcca87239fed40fe9
 }
 
 .header {
