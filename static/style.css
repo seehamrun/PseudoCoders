@@ -1,19 +1,18 @@
-/*This is our CSS*/
- body {
+body {
     background-color: #899dff;
-  }
-  ul {
+}
+
+ul {
       list-style-type: none;
       margin: 0;
       padding: 0;
       overflow: hidden;
       background-color:#e2dac2;
       border: white;
-    }
+}
 
 h1 {
   margin-top: 50px;
-  text-align: center;
   text-align: center;
   padding: 20px;
   color: white;
@@ -22,13 +21,11 @@ h1 {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color:#e2dac2;
-  border: white;
+h2 {
+  color: white;
+  font-family: 'Pacifico';
+  font-size: 30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
 }
 
 .header {
@@ -88,15 +85,6 @@ li a:hover:not(.active) {
     grid-row: 2;
   }
 
-.navbar {
-  overflow: hidden;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  margin:0 auto;
-  list-style:none;
-}
-
 .navbar li {
   float:left;
   width:20%;
@@ -120,20 +108,6 @@ li a:hover:not(.active) {
   padding-top: 60px;
 }
 
-h1 {
-  text-align: center;
-  text-align: center;
-  padding: 20px;
-  color: white;
-  font-family: 'Pacifico', cursive;
-  font-size: 40px;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-
-.navbar li {
-  float:left;
-  width:20%;
-}
 
 /*Ethan's loader code*/
 
