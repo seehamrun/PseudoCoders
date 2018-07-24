@@ -64,24 +64,24 @@ def nearbySearchRequest(location, radius):
     #logging.info(google_url)
     newList = []
     for item in response:
-        output = []
+        dictionary = {}
         place_id = item['place_id']
         place_details = fetchPlaceDetails(place_id)
         results = place_details
-        output.append("PLACE_ID: " + str(place_id))
+        dictionary["PLACEID"] = place_id
         if ('name' in results):
-            output.append("NAME: " + str(results['name']))
+            dictionary["NAME"] = results['name']
         if ('formatted_address' in results):
-            output.append("ADDRESS: " + str(results['formatted_address']))
+            dictionary["ADDRESS"] = results['formatted_address']
         if ('types' in results):
-            output.append("TYPE: " + str(results['types']))
+            dictionary["TYPE"] = results['types']
         if ('opening_hours' in results):
-            output.append("HOURS: " + str(results['opening_hours']))
+            dictionary["HOURS"] = results['opening_hours']
         if ('price_level' in results):
-            output.append("PRICE: " + str(results['price_level']))
+            dictionary["PRICE"] = results['price_level']
         if ('rating' in results):
-            output.append("RATING: " + str(results['rating']))
-        newList.append(output)
+            dictionary["RATING"] = results['rating']
+        newList.append(dictionary)
 
     return newList
 
