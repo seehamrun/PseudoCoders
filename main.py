@@ -233,7 +233,7 @@ class TestHandler(webapp2.RequestHandler):
         location = self.request.get("location")
         radius = self.request.get("radius")
         json = api_implementation.nearbySearchRequest(location, radius)
-        newList = [json]
+        newList = json
         data = {
             "results":newList
         }
