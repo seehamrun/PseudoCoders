@@ -59,7 +59,7 @@ def nearbySearchRequest(location, radius):
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
     response = response["results"]
-    place_id = response['place_id']
+    place_id = response[0]['place_id']
     # newList.append(response['name'])
     # #newList.append(response['formatted_address'])
     # newList.append(response['types'])
