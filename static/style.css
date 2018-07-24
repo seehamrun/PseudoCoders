@@ -1,6 +1,24 @@
 /*This is our CSS*/
+<<<<<<< HEAD
+ body {
+    background-color: #899dff;
+  }
+  ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color:#e2dac2;
+      border: white;
+  }
+  .header {
+    background-color: #F1F1F1;
+    text-align: center;
+    padding: 20px;
+=======
 body {
   background-color: #899dff;
+>>>>>>> 1b47f47c340c5f642278c711d154ca479fca8e3c
 }
 
 h1 {
@@ -50,10 +68,11 @@ li a:hover:not(.active) {
 }
 
 .aboutwrapper {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  grid-gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 200px;
+  grid-template-rows: 2fr 2fr;
+  grid-column-gap: 200px;
 }
 
 
@@ -87,7 +106,7 @@ li a:hover:not(.active) {
   float:left;
   width:20%;
 }
-.about_maeve {
+/* .about_maeve {
   grid-column: 1;
   grid-row: 2;
 }
@@ -98,7 +117,7 @@ li a:hover:not(.active) {
 .about_juan {
   grid-column: 2;
   grid-row: 2;
-}
+} */
 
 .navbar {
   overflow: hidden;
@@ -109,10 +128,33 @@ li a:hover:not(.active) {
   list-style:none;
 }
 
+<<<<<<< HEAD
+.borderimg {
+  border:5px solid #d7deff;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 60px;
+}
+
+h1 {
+  text-align: center;
+  text-align: center;
+  padding: 20px;
+  color: white;
+  font-family: 'Pacifico', cursive;
+  font-size: 40px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+
+=======
 .navbar li {
   float:left;
   width:20%;
 }
+>>>>>>> 1b47f47c340c5f642278c711d154ca479fca8e3c
 
 /*Ethan's loader code*/
 
@@ -121,6 +163,7 @@ li a:hover:not(.active) {
 } */
 
 #loadingMessage{
+  margin-top: 100px
   text-align: center;
   font-weight: bold;
   font-size: 150%
