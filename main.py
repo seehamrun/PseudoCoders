@@ -207,20 +207,32 @@ class TestHandler(webapp2.RequestHandler):
         # self.response.write(responseHTML.render(data))
 
 
+        # #THIS IS A TEST OF THE nearbySearchRequest FUNCTION:
+        # self.response.headers['Content-Type'] = 'text/html'
+        # location = self.request.get("location")
+        # radius = self.request.get("radius")
+        # json = api_implementation.nearbySearchRequest(location, radius)
+        # newList = json
+        # data = {
+        #     "results" : newList
+        # }
+        # responseHTML = jinja_env.get_template('templates/test.html')
+        # self.response.write(responseHTML.render(data))
 
 
-        #THIS IS A TEST OF THE nearbySearchRequest FUNCTION:
+        #THIS IS A TEST OF THE nearbySearchRequestFiltered FUNCTION:
         self.response.headers['Content-Type'] = 'text/html'
         location = self.request.get("location")
         radius = self.request.get("radius")
-        json = api_implementation.nearbySearchRequest(location, radius)
+        price = self.request.get("price")
+        type = self.request.get("type")
+        json = api_implementation.nearbySearchRequest(location, radius, price, type)
         newList = json
         data = {
             "results" : newList
         }
         responseHTML = jinja_env.get_template('templates/test.html')
         self.response.write(responseHTML.render(data))
-
 
 
 
