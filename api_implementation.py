@@ -147,11 +147,12 @@ def getLatitudeLongitude(location):
 
 
 def makeSchedules(location, radius, maxprice):
-    types = ['amusement_park', 'aquarium', 'art_gallery', 'bakery', 'bar', 'beauty_salon', 'bowling_alley', 'cafe', 'casino', 'gym', 'library', 'movie_theater', 'museum', 'night_club', 'park', 'restaurant', 'shopping_mall', 'stadium', 'store', 'zoo']
-    dictionary = {}
+    #types = ['amusement_park', 'aquarium', 'art_gallery', 'bakery', 'bar', 'beauty_salon', 'bowling_alley', 'cafe', 'casino', 'gym', 'library', 'movie_theater', 'museum', 'night_club', 'park', 'restaurant', 'shopping_mall', 'stadium', 'store', 'zoo']
+    types = ['restaurant']
+    dictionary = []
     for i in range(0, len(types)):
         locations = nearbySearchRequestFiltered(location, radius, maxprice, types[i])
-        dictionary[i] = locations
+        dictionary.append(locations)
 
     schedule = []
     numEvents = 5
