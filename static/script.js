@@ -9,7 +9,15 @@ function submitClick() {
 
   var loader2 = document.querySelector('#loadingMessage')
   loader2.innerHTML = "Your results are loading...!"
+
+  var everythingElse = document.querySelectorAll(".regular")
+  for (var i=0; i<everythingElse.length; i++)
+  {
+    everythingElse[i].classList.add("disappear")
+  }
 }
+
+
 
 window.addEventListener('load', () => {
   document.querySelector('#submit').addEventListener("click", submitClick)

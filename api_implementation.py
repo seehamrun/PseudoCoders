@@ -13,28 +13,29 @@ def fetchPlaceDetails(placeID):
     response = json.loads(urlContent)
     return response['result']
 
-def fetchNameAddress(placeID):
-    info = fetchPlaceDetails(placeID)
-    return info['name']+" ---> "+info['formatted_address']
-
-#inputs search query and returns result data
+#inputs search query and returns any amount of data
 def findPlaceRequest(query):
-    id = findPlaceRequestHelper(query)
-    return fetchPlaceDetails(id)
-
-#inputs search query and returns any amount of data, in this case only result ID
-def findPlaceRequestHelper(query):
     newQuery = query.replace(" ", "+")
     google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/findplacefromtext/%s?input=%s&inputtype=textquery&key=%s&fields=%s" % ("json", newQuery, api.googleKey, getFields())
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
-    return response['candidates'][0]['place_id']
+    logging.info(response)
+    response = response['candidates'][0]
+    newList = []
+    newList.append(response['place_id'])
+    newList.append(response['name'])
+    newList.append(response['formatted_address'])
+    newList.append(response['types'])
+    newList.append(response['opening_hours'])
+    newList.append(response['price_level'])
+    newList.append(response['rating'])
+    return newList
 
 #sets the fields returned by helper above, only necessary field is place ID
 def getFields():
     output = ""
-    #output += "name,"
-    #output += "formatted_address,"
+    output += "name,"
+    output += "formatted_address,"
     #output += "geometry,"
     #output += "icon,"
     #output += "id,"
@@ -44,10 +45,10 @@ def getFields():
     output += "place_id,"
     #output += "plus_code,"
     #output += "scope,"
-    #output += "types,"
-    #output += "opening_hours,"
-    #output += "price_level,"
-    #output += "rating,"
+    output += "types,"
+    output += "opening_hours,"
+    output += "price_level,"
+    output += "rating,"
     return output[:-1]
 
 
@@ -60,7 +61,10 @@ def nearbySearchRequest(location, radius):
     #return response
     list = []
     for item in response["results"]:
-        list.append(item["place_id"])
+        #logging.info(item['place_id'])
+        #list.append(findPlaceRequest(item['place_id']))
+        #logging.info(item)
+        list.append(item)
     return list
 
 #def getLatitudeLongitude(first_line, city, state):
