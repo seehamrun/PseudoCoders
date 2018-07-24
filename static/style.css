@@ -9,11 +9,12 @@
       overflow: hidden;
       background-color:#e2dac2;
       border: white;
-  }
+    }
   .header {
     background-color: #F1F1F1;
     text-align: center;
     padding: 20px;
+  }
 
 h1 {
   margin-top: 50px;
@@ -87,14 +88,14 @@ li a:hover:not(.active) {
     grid-row: 2;
   }
 
-/* .navbar {
+.navbar {
   overflow: hidden;
-  position: fixed; /* Set the navbar to fixed position */
-  /* top: 0; Position the navbar at the top of the page */
-  /* width: 100%; Full width */
-  /* margin:0 auto;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  margin:0 auto;
   list-style:none;
-} */
+}
 
 .navbar li {
   float:left;
