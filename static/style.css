@@ -106,9 +106,12 @@ h1 {
 
 /*Ethan's loader code*/
 
-/* .loadingMessage{
+#loadingMessage{
   text-align: center;
-} */
+  font-weight: bold;
+  font-size: 200%
+
+}
 
 /* .loader {
   border: 16px solid #f3f3f3;
