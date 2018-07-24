@@ -178,7 +178,7 @@ class TestHandler(webapp2.RequestHandler):
         return self.response.write(template.render())
 
     def post(self):
-        # #THIS IS A TEST OF THE FETCHPLACEDETAILS FUNCTION:
+        # #THIS IS A TEST OF THE fetchPlaceDetails FUNCTION:
         # self.response.headers['Content-Type'] = 'text/html'
         # placeID = self.request.get("placeID")
         # json = api_implementation.fetchPlaceDetails(placeID)
@@ -191,11 +191,49 @@ class TestHandler(webapp2.RequestHandler):
 
 
 
-        #THIS IS A TEST OF THE FINDPLACEREQUEST FUNCTION:
+        # #THIS IS A TEST OF THE findPlaceRequest FUNCTION:
+        # self.response.headers['Content-Type'] = 'text/html'
+        # query = self.request.get("query")
+        # json = api_implementation.findPlaceRequest(query)
+        # newList = json
+        # data = {
+        #     "results":newList
+        # }
+        # responseHTML = jinja_env.get_template('templates/test.html')
+        # self.response.write(responseHTML.render(data))
+
+
+        # #THIS IS A TEST OF THE getFields FUNCTION:
+        # self.response.headers['Content-Type'] = 'text/html'
+        # output = api_implementation.getFields()
+        # newList = [output]
+        # data = {
+        #     "results":newList
+        # }
+        # responseHTML = jinja_env.get_template('templates/test.html')
+        # self.response.write(responseHTML.render(data))
+
+
+        # #THIS IS A TEST OF THE getLatitudeLongitude FUNCTION:
+        # self.response.headers['Content-Type'] = 'text/html'
+        # location = self.request.get("location")
+        # output = api_implementation.getLatitudeLongitude(location)
+        # newList = [output]
+        # data = {
+        #     "results":newList
+        # }
+        # responseHTML = jinja_env.get_template('templates/test.html')
+        # self.response.write(responseHTML.render(data))
+
+
+
+
+        #THIS IS A TEST OF THE nearbySearchRequest FUNCTION:
         self.response.headers['Content-Type'] = 'text/html'
-        query = self.request.get("query")
-        json = api_implementation.findPlaceRequest(query)
-        newList = [json]
+        location = self.request.get("location")
+        radius = self.request.get("radius")
+        json = api_implementation.nearbySearchRequest(location, radius)
+        newList = json
         data = {
             "results":newList
         }
@@ -204,47 +242,6 @@ class TestHandler(webapp2.RequestHandler):
 
 
 
-
-
-
-
-        # placeID = self.request.get("placeID")
-        # self.response.headers['Content-Type'] = 'text/html'
-        # json = api_implementation.fetchPlaceDetails(placeID)
-        # data = {
-        #     "results" : json
-        # }
-        # responseHTML = jinja_env.get_template('templates/test.html')
-        # self.response.write(responseHTML.render(data))
-
-        # query = self.request.get("query")
-        # self.response.headers['Content-Type'] = 'text/html'
-        # json = api_implementation.findPlaceRequest(query)
-        # data = {
-        #     "results" : json
-        # }
-        # responseHTML = jinja_env.get_template('templates/test.html')
-        # self.response.write(responseHTML.render(data))
-
-        # location = self.request.get("location")
-        # radius = self.request.get("radius")
-        # self.response.headers['Content-Type'] = 'text/html'
-        # json = api_implementation.fetchPlaceDetails(location)
-        # #json = api_implementation.getLatitudeLongitude(location)
-        # #json = api_implementation.nearbySearchRequest(location, radius)
-        # newList = []
-        # for text in json:
-        #     #newList.append(api_implementation.nearby(placeID))
-        #     #newList.append("FILLER TEXT")
-        #     newList.append(text)
-        # #logging.info(newList)
-        # data = {
-        #     #"results" : newList
-        #     "results":newList
-        # }
-        # responseHTML = jinja_env.get_template('templates/test.html')
-        # self.response.write(responseHTML.render(data))
-        # logging.info(data)
 
 app = webapp2.WSGIApplication([
     ('/favorites', FavoritesHandler),
