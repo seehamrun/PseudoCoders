@@ -7,7 +7,7 @@ function submitClick() {
   loader1.innerHTML = "<div class='cssload-face cssload-x'></div><div class='cssload-face cssload-y'></div><div class='cssload-face cssload-z'></div>"
 
   var loader2 = document.querySelector('#loadingMessage')
-  loader2.innerHTML = "Your results are loading...!"
+  loader2.style.display = "Block"
 
   var everythingElse = document.querySelector(".regular")
   everythingElse.style.display = "None"
