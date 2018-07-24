@@ -57,7 +57,6 @@ li a:hover:not(.active) {
 }
 
 
-<<<<<<< HEAD
   .about_ethan {
     grid-column: 1;
     grid-row: 1;
@@ -87,11 +86,6 @@ li a:hover:not(.active) {
 .navbar li {
   float:left;
   width:20%;
-=======
-.about_ethan {
-  grid-column: 1;
-  grid-row: 1;
->>>>>>> db9ee96b8c0c3ae7fc9b9e42ad57d4e4113aee04
 }
 .about_maeve {
   grid-column: 1;
@@ -122,7 +116,11 @@ li a:hover:not(.active) {
 
 /*Ethan's loader code*/
 
-#loadingMessage {
+/* .disappear{
+  display: none;
+} */
+
+#loadingMessage{
   text-align: center;
   font-weight: bold;
   font-size: 150%
