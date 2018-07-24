@@ -22,7 +22,6 @@ h1 {
   text-align: center;
   padding: 20px;
   color: white;
-<<<<<<< HEAD
   font-family: 'Pacifico', cursive;
   font-size: 40px;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
@@ -35,7 +34,6 @@ ul {
   overflow: hidden;
   background-color:#e2dac2;
   border: white;
-=======
   font-family: 'Roboto';
   font-size: 50px;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
@@ -47,7 +45,6 @@ h2 {
   font-family: 'Roboto';
   font-size: 30px;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
->>>>>>> dfd0f1ae2003513aafd72d3fcca87239fed40fe9
 }
 
 .header {
@@ -128,41 +125,12 @@ li a:hover:not(.active) {
   grid-row: 2;
 } */
 
-.navbar {
-  overflow: hidden;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  margin:0 auto;
-  list-style:none;
-}
-
 .borderimg {
   border:3px solid #d7deff;
   height: 60%;
   width: 60%;
 }
-}
 
-/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
-.sticky + .content {
-  padding-top: 60px;
-}
-
-h1 {
-  text-align: center;
-  text-align: center;
-  padding: 20px;
-  color: white;
-  font-family: 'Pacifico', cursive;
-  font-size: 40px;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-
-.navbar li {
-  float:left;
-  width:20%;
-}
 
 /*Ethan's loader code*/
 
