@@ -60,11 +60,16 @@ li a:hover:not(.active) {
 .aboutwrapper {
   display:grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 200px;
+  grid-gap: 75px;
   grid-template-rows: 2fr 2fr;
   grid-column-gap: 200px;
 }
 
+.profileimage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
   .about_ethan {
     grid-column: 1;
