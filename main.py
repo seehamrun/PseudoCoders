@@ -177,8 +177,21 @@ class TestHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/material.html')
         return self.response.write(template.render())
 
-
     def post(self):
+        #THIS IS A TEST OF THE FETCHPLACEDETAILS FUNCTION:
+        self.response.headers['Content-Type'] = 'text/html'
+        placeID = self.request.get("placeID")
+        json = api_implementation.fetchPlaceDetails(placeID)
+        data = {
+            "results":json
+        }
+        responseHTML = jinja_env.get_template('templates/test.html')
+        self.response.write(responseHTML.render(data))
+
+
+
+
+
         # placeID = self.request.get("placeID")
         # self.response.headers['Content-Type'] = 'text/html'
         # json = api_implementation.fetchPlaceDetails(placeID)
@@ -199,23 +212,23 @@ class TestHandler(webapp2.RequestHandler):
 
         # location = self.request.get("location")
         # radius = self.request.get("radius")
-        self.response.headers['Content-Type'] = 'text/html'
-        json = api_implementation.fetchPlaceDetails(location)
-        #json = api_implementation.getLatitudeLongitude(location)
-        #json = api_implementation.nearbySearchRequest(location, radius)
-        newList = []
-        for text in json:
-            #newList.append(api_implementation.nearby(placeID))
-            #newList.append("FILLER TEXT")
-            newList.append(text)
-        #logging.info(newList)
-        data = {
-            #"results" : newList
-            "results":newList
-        }
-        responseHTML = jinja_env.get_template('templates/test.html')
-        self.response.write(responseHTML.render(data))
-        logging.info(data)
+        # self.response.headers['Content-Type'] = 'text/html'
+        # json = api_implementation.fetchPlaceDetails(location)
+        # #json = api_implementation.getLatitudeLongitude(location)
+        # #json = api_implementation.nearbySearchRequest(location, radius)
+        # newList = []
+        # for text in json:
+        #     #newList.append(api_implementation.nearby(placeID))
+        #     #newList.append("FILLER TEXT")
+        #     newList.append(text)
+        # #logging.info(newList)
+        # data = {
+        #     #"results" : newList
+        #     "results":newList
+        # }
+        # responseHTML = jinja_env.get_template('templates/test.html')
+        # self.response.write(responseHTML.render(data))
+        # logging.info(data)
 
 app = webapp2.WSGIApplication([
     ('/favorites', FavoritesHandler),
