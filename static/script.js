@@ -15,7 +15,6 @@ function submitClick() {
 }
 
 
-
 window.addEventListener('load', () => {
   document.querySelector('#submit').addEventListener("click", submitClick)
 });
