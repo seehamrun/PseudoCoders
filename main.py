@@ -53,7 +53,7 @@ class ResultsHandler(webapp2.RequestHandler):
         userID = userItem.userID
         date = userItem.date
 
-        json = api_implementation.nearbySearchRequestFiltered(location, radius, price, type)
+        json = api_implementation.makeSchedules(location, radius, price)
         logging.info(json)
         newList = json
 
