@@ -61,39 +61,34 @@ body {
     grid-row: 2;
   }
 
-/* .navbar {
+.navbar {
   overflow: hidden;
-  position: fixed; /* Set the navbar to fixed position */
-  /* top: 0; Position the navbar at the top of the page */
-  /* width: 100%; Full width */
-  /* margin:0 auto;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  margin:0 auto;
   list-style:none;
-} */
+}
 
 .navbar li {
   float:left;
   width:20%;
 }
 
-/* Page content */
-.content {
-  padding: 16px;
-  margin-top: 40px;
-}
-
 /* The sticky class is added to the navbar with JS when it reaches its scroll position */
-.sticky {
+/* .sticky {
   position: fixed;
   top: 0;
   width: 100%;
-}
+} */
 
 /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
-.sticky + .content {
+/* .sticky + .content {
   padding-top: 60px;
-}
+} */
 
 h1 {
+  margin-top: 50px;
   text-align: center;
   text-align: center;
   padding: 20px;
