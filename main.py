@@ -49,6 +49,7 @@ class ResultsHandler(webapp2.RequestHandler):
         radius = userItem.radius
 
         json = api_implementation.nearbySearchRequest(location, radius)
+        logging.info(json)
         newList = json
 
         data = {
@@ -59,7 +60,7 @@ class ResultsHandler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         responseHTML = jinja_env.get_template('templates/results.html')
         self.response.write(responseHTML.render(data))
-        logging.info(data)
+        #logging.info(data)
 
     def post(self):
         logging.data("")
@@ -215,7 +216,7 @@ class TestHandler(webapp2.RequestHandler):
         json = api_implementation.nearbySearchRequest(location, radius)
         newList = json
         data = {
-            "results":newList
+            "results" : newList
         }
         responseHTML = jinja_env.get_template('templates/test.html')
         self.response.write(responseHTML.render(data))
