@@ -165,13 +165,13 @@ class MainHandler(webapp2.RequestHandler):
         self.response.write('<html><body>{}</body></html>'.format(greeting))
 
 
-class TestHandler(webapp2.RequestHandler):
+class MaterialTestHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/test.html')
         return self.response.write(template.render())
 
-class MaterialTestHandler(webapp2.RequestHandler):
+class TestHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/material.html')
@@ -197,11 +197,12 @@ class MaterialTestHandler(webapp2.RequestHandler):
         # responseHTML = jinja_env.get_template('templates/test.html')
         # self.response.write(responseHTML.render(data))
 
-        location = self.request.get("location")
-        radius = self.request.get("radius")
+        # location = self.request.get("location")
+        # radius = self.request.get("radius")
         self.response.headers['Content-Type'] = 'text/html'
+        json = api_implementation.fetchPlaceDetails(location)
         #json = api_implementation.getLatitudeLongitude(location)
-        json = api_implementation.nearbySearchRequest(location, radius)
+        #json = api_implementation.nearbySearchRequest(location, radius)
         newList = []
         for text in json:
             #newList.append(api_implementation.nearby(placeID))
