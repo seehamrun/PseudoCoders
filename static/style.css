@@ -122,16 +122,6 @@ li a:hover:not(.active) {
 
 /*Ethan's loader code*/
 
-<<<<<<< HEAD
-.disappear{
-  /* display: none; */
-  background-color: red;
-=======
-.disappear {
-  display: none;
->>>>>>> db9ee96b8c0c3ae7fc9b9e42ad57d4e4113aee04
-}
-
 #loadingMessage {
   text-align: center;
   font-weight: bold;
