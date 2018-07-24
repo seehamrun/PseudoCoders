@@ -83,6 +83,36 @@ def nearbySearchRequest(location, radius):
     return newList
 
 
+def nearbySearchRequestFiltered(location, radius, priceLevel, type):
+    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/nearbysearch/%s?key=%s&location=%s&radius=%s&minprice=%s&maxprice=%s&type=%s" % ("json", api.googleKey, getLatitudeLongitude(location), radius, priceLevel, priceLevel, type)
+    urlContent = urlfetch.fetch(google_url).content
+    response = json.loads(urlContent)
+    response = response['results']
+    newList = []
+    for item in response:
+        output = []
+        place_id = item['place_id']
+        place_details = fetchPlaceDetails(place_id)
+        results = place_details
+        output.append("PLACE_ID: " + str(place_id))
+        if ('name' in results):
+            output.append("NAME: " + str(results['name']))
+        if ('formatted_address' in results):
+            output.append("ADDRESS: " + str(results['formatted_address']))
+        if ('types' in results):
+            output.append("TYPE: " + str(results['types']))
+        if ('opening_hours' in results):
+            output.append("HOURS: " + str(results['opening_hours']))
+        if ('price_level' in results):
+            output.append("PRICE: " + str(results['price_level']))
+        if ('rating' in results):
+            output.append("RATING: " + str(results['rating']))
+        newList.append(output)
+
+    return newList
+
+
+
 
 #def getLatitudeLongitude(first_line, city, state):
 def getLatitudeLongitude(location):
@@ -95,31 +125,3 @@ def getLatitudeLongitude(location):
     #return google_url
     pair = response['results'][0]['geometry']['location']['lat'], response['results'][0]['geometry']['location']['lng']
     return str(pair)[1:-1].replace(" ","")
-#       console.log(google_url)
-#   jQuery.get(google_url, (data) => {
-#     #runs jQuery to fetch data and waits for completion
-#     console.log(data)
-#     #triggers place detail fetch with this id
-#   })
-#  }
-#
-# # #this function inputs a JSON menu in string form
-# turns into JSON menu and outputs placeID value
-# # function placeIDhelper(strjson) {
-# #   json = JSON.parse(strjson)
-# #   #returns string JSON into real JSON
-# #   return json["candidates"][0]["place_id"]
-# #  #returns the correct element from the JSON, i.e., placeID
-# # }
-#
-# #function call / TEST
-# var latitude = 41.887246
-# var longitude = -87.652645
-# var queryLocation = latitude + "," + longitude;
-# var queryRadius = 2000
-# nearbySearchRequest(queryLocation, queryRadius)
-#
-# #-----------------------------------------------------------------------------//
-#
-# #SECTION 3: Text Search requests
-# #not sure if this is that important, but worth checking out for sure!

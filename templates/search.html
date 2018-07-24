@@ -14,29 +14,30 @@
       <li><a  href='/about'>About Us</a></li>
     </ul>
 
-
-<form method="post" class="regular">
-  <p class="regular">Date: <input type="date" id="date" name="date"></p>
-  <p class="regular">Location: <input type="text" id="location" name="location"></p>
-  <p class="regular">Radius: <input type="number" id="radius" name="radius"></p>
-  <p class="regular">Select your budget:</p>
-  <select class="regular" id="budget" name="budget">
-    <option value="Free">Free</option>
+<div class="regular">
+<form method="post">
+  <p >Date: <input type="date" id="date" name="date"></p>
+  <p >Location: <input type="text" id="location" name="location"></p>
+  <p>Radius: <input type="number" id="radius" name="radius"></p>
+  <p>Select your budget:</p>
+  <select id="budget" name="budget">
+    <option value="Free/Almost Free ()">Free/Almost Free ()</option>
     <option value="Inexpensive ($)">Inexpensive($)</option>
     <option value="Intermediate ($$)">Intermediate($$)</option>
     <option value="Expensive ($$$)">Expensive ($$$)</option>
     <option value="Bank ($$$$)">Bank🤑💸 ($$$$)</option>
   </select>
-  <p class="regular">Select the minimum user rating:</p>
-  <select class="regular" id="rating" name="rating">
+  <p>Select the minimum user rating:</p>
+  <select id="rating" name="rating">
     <option value="One star">One star</option>
     <option value="Two stars">Two stars</option>
     <option value="Three stars">Three stars</option>
     <option value="Four stars">Four stars</option>
     <option value="Five stars">Five stars</option>
   </select>
-  <input class="regular" id="submit" type="submit">
+  <input id="submit" type="submit">
 </form>
+</div>
 
 <p id="loadingMessage"></p>
 <br>

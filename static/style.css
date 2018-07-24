@@ -68,7 +68,7 @@ body {
   /* width: 100%; Full width */
   /* margin:0 auto;
   list-style:none;
-} */ 
+} */
 
 .navbar li {
   float:left;
@@ -107,7 +107,8 @@ h1 {
 /*Ethan's loader code*/
 
 .disappear{
-  display: none;
+  /* display: none; */
+  background-color: red;
 }
 
 #loadingMessage{
