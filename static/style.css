@@ -22,7 +22,7 @@ h1 {
   text-align: center;
   padding: 20px;
   color: white;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Roboto', cursive;
   font-size: 40px;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
 }
@@ -35,7 +35,7 @@ ul {
   background-color:#e2dac2;
   border: white;
   font-family: 'Roboto';
-  font-size: 50px;
+  font-size: 27px;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
 }
 
