@@ -6,11 +6,11 @@ function submitClick() {
   loader1.classList.add("cssload-cube")
   loader1.innerHTML = "<div class='cssload-face cssload-x'></div><div class='cssload-face cssload-y'></div><div class='cssload-face cssload-z'></div>"
 
-  var everythingElse = document.querySelector(".regular")
-  everythingElse.style.display = "None"
-
   var loader2 = document.querySelector('#loadingMessage')
   loader2.innerHTML = "Your results are loading...!"
+
+  var everythingElse = document.querySelector(".regular")
+  everythingElse.style.display = "None"
 }
 
 
