@@ -1,16 +1,7 @@
-<<<<<<< HEAD
-/*This is our CSS*/
  body {
     background-color: #F172A1;
   }
   ul {
-=======
-body {
-    background-color: #899dff;
-}
-
-ul {
->>>>>>> b400f255e33e91b1570764d35fa0bb68659bce23
       list-style-type: none;
       margin: 0;
       padding: 0;
