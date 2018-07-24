@@ -211,13 +211,28 @@ class TestHandler(webapp2.RequestHandler):
         # self.response.write(responseHTML.render(data))
 
 
-        #THIS IS A TEST OF THE nearbySearchRequestFiltered FUNCTION:
+        # #THIS IS A TEST OF THE nearbySearchRequestFiltered FUNCTION:
+        # self.response.headers['Content-Type'] = 'text/html'
+        # location = self.request.get("location")
+        # radius = self.request.get("radius")
+        # price = self.request.get("price")
+        # type = self.request.get("type")
+        # json = api_implementation.nearbySearchRequestFiltered(location, radius, price, type)
+        # #json = api_implementation.nearbySearchRequest(location, radius)
+        # newList = json
+        # data = {
+        #     "results" : newList
+        # }
+        # responseHTML = jinja_env.get_template('templates/test.html')
+        # self.response.write(responseHTML.render(data))
+
+
+        #THIS IS A TEST OF THE makeSchedules FUNCTION:
         self.response.headers['Content-Type'] = 'text/html'
         location = self.request.get("location")
         radius = self.request.get("radius")
         price = self.request.get("price")
-        type = self.request.get("type")
-        json = api_implementation.nearbySearchRequestFiltered(location, radius, price, type)
+        json = api_implementation.makeSchedules(location, radius, price)
         #json = api_implementation.nearbySearchRequest(location, radius)
         newList = json
         data = {
@@ -225,23 +240,6 @@ class TestHandler(webapp2.RequestHandler):
         }
         responseHTML = jinja_env.get_template('templates/test.html')
         self.response.write(responseHTML.render(data))
-
-
-        #THIS IS A TEST OF THE nearbySearchRequestFiltered FUNCTION:
-        self.response.headers['Content-Type'] = 'text/html'
-        location = self.request.get("location")
-        radius = self.request.get("radius")
-        price = self.request.get("price")
-        type = self.request.get("type")
-        json = api_implementation.nearbySearchRequestFiltered(location, radius, price, type)
-        #json = api_implementation.nearbySearchRequest(location, radius)
-        newList = json
-        data = {
-        "results" : newList
-        }
-        responseHTML = jinja_env.get_template('templates/test.html')
-        self.response.write(responseHTML.render(data))
-
 
 
 app = webapp2.WSGIApplication([
