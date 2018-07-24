@@ -118,14 +118,14 @@ def nearbySearchRequestFiltered(location, radius, maxprice, type):
         if ('formatted_address' in results):
             dictionary["ADDRESS"] = results['formatted_address']
         if ('types' in results):
-            dictionary["TYPE"] + results['types']
+            dictionary["TYPE"] = results['types']
         if ('opening_hours' in results):
-            dictionary["HOURS"] + results['opening_hours']
+            dictionary["HOURS"] = results['opening_hours']
         if ('price_level' in results):
-            dictionary["PRICE"] + results['price_level']
+            dictionary["PRICE"] = results['price_level']
         if ('rating' in results):
-            dictionary["RATING"] + results['rating']
-        newList.append(output)
+            dictionary["RATING"] = results['rating']
+        newList.append(dictionary)
 
     return newList
 
