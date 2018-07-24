@@ -61,7 +61,7 @@ def nearbySearchRequest(location, radius):
     response = response["results"]
     place_id = response[0]['place_id']
     place_details = fetchPlaceDetails(place_id)
-    results = place_details["results"]
+    results = place_details["result"]
     output = []
     output.append(place_id)
     output.append(results['name'])
