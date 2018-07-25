@@ -225,7 +225,7 @@ class MainHandler(webapp2.RequestHandler):
             login_url = users.create_login_url('/')
             greeting = '<a href="{}">Sign in</a>'.format(login_url)
 
-        self.response.write('<html><body>{}</body></html>'.format(greeting))
+        self.response.write('<html><body><div id="login_text">{}</div></body></html>'.format(greeting))
 
 
 class MaterialTestHandler(webapp2.RequestHandler):
