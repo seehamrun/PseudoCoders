@@ -215,8 +215,8 @@
 
 
 .about_ethan {
-  grid-column: 1;
-  grid-row: 1;
+  grid-column: 2;
+  grid-row: 2
   }
 .about_maeve {
   grid-column: 1;
@@ -227,6 +227,6 @@
   grid-row: 1;
 }
 .about_juan {
-  grid-column: 2;
-  grid-row: 2;
+  grid-column: 1;
+  grid-row: 1;
 }
