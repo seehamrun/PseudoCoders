@@ -10,8 +10,16 @@ function refresh() {
 //   refresh()
 // }
 
+function deleteCall() {
+  var result = confirm("Want to delete?");
+  if (result) {
+    console.log("CALL TO DELETE")
+}
+}
+
 
 window.addEventListener('load', () => {
   document.querySelector('#seeNext').addEventListener("click", refresh)
+  document.querySelector('#delete').addEventListener("click", deleteCall)
   //document.querySelector('#addFavorite').addEventListener("click", addFavorite)
 });

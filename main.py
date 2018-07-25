@@ -49,6 +49,9 @@ class FavoritesHandler(webapp2.RequestHandler):
     def post(self):
         return webapp2.redirect('/post')
 
+    def delete(self):
+        logging.info("DELETED")
+
 
 class GalleryHandler(webapp2.RequestHandler):
     def get(self):
