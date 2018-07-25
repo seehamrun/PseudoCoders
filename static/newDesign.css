@@ -18,6 +18,10 @@ h1 {
     top: 0;
 }
 
+#main_page_info {
+  margin-top: 250px;
+}
+
 body {
     background: #e6e6e6;
     color: #333;
