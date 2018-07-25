@@ -292,7 +292,7 @@ class ResultsHandler(webapp2.RequestHandler):
         # else:
         #     userResultsItem.current += 1
 
-        return webapp2.redirect('/results')
+        return webapp2.redirect('/favorites')
 
 
 class AboutHandler(webapp2.RequestHandler):
