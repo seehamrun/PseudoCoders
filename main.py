@@ -46,6 +46,9 @@ class FavoritesHandler(webapp2.RequestHandler):
             userFavorites.current = 0
         userFavorites.put()
 
+    def post(self):
+        return webapp2.redirect('/post')
+
 
 class GalleryHandler(webapp2.RequestHandler):
     def get(self):
