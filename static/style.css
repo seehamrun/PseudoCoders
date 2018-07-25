@@ -196,10 +196,12 @@
 	83% {
 		-moz-transform: rotateX(45deg) rotate(45deg) scaleY(3);
 	}
+}
 
 /* About Us page formatting */
 
 .aboutwrapper {
+  color:purple;
   display:grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 200px;
