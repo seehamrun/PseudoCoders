@@ -21,13 +21,18 @@ class FavoritesHandler(webapp2.RequestHandler):
         userFavorites = None
 
         if userFavoritesList == []:
-            userFavorites = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[], current=0)
+            userFavorites = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[], current = 0)
             userFavorites.put()
         else:
             userFavorites = userFavoritesList[0]
 
         favoriteSchedules = userFavorites.favorites #holds list of favoriteSchedules in Schedule forms
         current = userFavorites.current #current one to display
+
+        if current is None:
+            current = 0
+            userFavorites.current = 0
+            userFavorites.put()
 
         data = {'numEntries' : len(favoriteSchedules)}
         if len(favoriteSchedules) > 0:
