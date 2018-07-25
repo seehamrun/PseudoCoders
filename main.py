@@ -7,6 +7,7 @@ import api_implementation
 import maps_api_implementation as maps
 import api
 from google.appengine.api import users
+import time
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
