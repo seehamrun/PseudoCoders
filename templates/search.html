@@ -21,12 +21,13 @@
         </div>
         <img src="http://www.jmkxyy.com/planner-icon-png/planner-icon-png-17.jpg" alt="Logo">
     </header>
-<div class="regular">
-<!-- <div class="plain-text" class="regular"> -->
+<div class="regular" class="plain-text">
 <h1>Search</h1>
 <form method="post">
   <p>Date: <br> <input type="date" id="date" name="date" value="2015-12-01"></p>
+  <br>
   <p>Location: <br> <input type="text" id="location" name="location" value="320 N Morgan Street, Chicago, IL" size="40"></p>
+  <br>
   <p>Radius: </p>
   <select id="radius" name="radius" value=8047>
     <option value=32186>Within twenty miles</option>
@@ -35,6 +36,7 @@
     <option value=3219>Within two miles</option>
     <option value=1610>Within one mile</option>
   </select>
+  <br><br>
   <p>Select your budget/price level:</p>
   <select id="price" name="price">
     <option value="4">Very expensive ($$$$)</option>
@@ -43,6 +45,7 @@
     <option value="1">Inexpensive ($)</option>
     <option value="0">Free</option>
   </select>
+  <br><br>
   <p>Select the minimum user rating:</p>
   <select id="rating" name="rating">
     <option value="1">One star</option>
@@ -51,6 +54,7 @@
     <option value="4">Four stars</option>
     <option value="5">Five stars</option>
   </select>
+  <br><br>
   <p>Select the types of locations you want in your schedule:</p>
   <select id="type" name="type">
     <option value="food">Food</option>
@@ -80,8 +84,8 @@
 <!-- types = ['amusement_park', 'aquarium', 'art_gallery', 'bakery', 'bar', 'beauty_salon',
 'bowling_alley', 'cafe', 'casino', 'gym', 'library', 'movie_theater', 'museum', 'night_club',
 'park', 'restaurant', 'shopping_mall', 'stadium', 'store', 'zoo'] -->
-
-  <input id="submit" type="submit">
+  <br><br>
+  <input id="submit" class="button" type="submit">
 </form>
 </div>
 <br><br>
@@ -94,7 +98,6 @@
 <br>
 <br>
 <div id="wrapper">
-  <iframe id="loaderVideo" width="1188" height="567" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div> -->
+  <iframe id="loaderVideo" width="1188" height="567" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
   </body>
 </html>

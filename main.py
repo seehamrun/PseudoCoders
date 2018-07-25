@@ -34,13 +34,18 @@ class FavoritesHandler(webapp2.RequestHandler):
             userFavorites.current = 0
             userFavorites.put()
 
+        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
+        userFavorites = userFavoritesList[0]
+        favoriteSchedules = userFavorites.favorites
+
         data = {'numEntries' : len(favoriteSchedules)}
         if len(favoriteSchedules) > 0:
             currentFavorite = favoriteSchedules[current] #this is a Schedule item
-            events = []
+            eventsList = []
+            logging.info(currentFavorite) # BASE VALUE ISSUE HERE
             for event in currentFavorite.events.split("||"):
-                events.append(api_implementation.getDictionary(event))
-            data['favorites'] = events
+                eventsList.append(api_implementation.getDictionary(event))
+            data['favorites'] = eventsList
 
         self.response.headers['Content-Type'] = 'text/html'
         responseHTML = jinja_env.get_template('templates/favorites.html')
@@ -271,22 +276,33 @@ class ResultsHandler(webapp2.RequestHandler):
     def post(self):
         #logging.info("")
         userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()[0]
-        userProfile = database.UserFavorites.query(database.UserFavorites.userID==users.get_current_user().user_id()).fetch()
+        userProfileList = database.UserFavorites.query(database.UserFavorites.userID==users.get_current_user().user_id()).fetch()
 
-        if userProfile == [] or userProfile == None:
+        createdForFirstTime = False
+        if userProfileList == [] or userProfileList == None:
             userTemp = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
             userTemp.put()
+            createdForFirstTime = True
             time.sleep(2)
 
-        userProfile = database.UserFavorites.query(database.UserFavorites.userID==users.get_current_user().user_id()).fetch()[0]
+        userProfileList = database.UserFavorites.query(database.UserFavorites.userID==users.get_current_user().user_id()).fetch()
+        userProfile = userProfileList[0]
 
-        if len(userResultsItem.schedules) == 0:
+        #logging.info(createdForFirstTime)
+        #logging.info(userResultsItem.schedules)
+
+        if len(userResultsItem.schedules) == 0: #if the results are empty nothing happens
             logging.info("NOTHING CAN BE DONE")
         elif userResultsItem.current == 0:
             userProfile.favorites.append(userResultsItem.schedules[len(userResultsItem.schedules)-1])
+            userProfile.put()
         else:
             userProfile.favorites.append(userResultsItem.schedules[userResultsItem.current-1])
+            userProfile.put()
         userProfile.put()
+
+        logging.info(userProfile)
+
 
         # if userResultsItem.current == len(userResultsItem.schedules)-1:
         #     userResultsItem.current = 0

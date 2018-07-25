@@ -25,7 +25,13 @@
     </header>
     <div class="plain-text">
     <h2>You have saved {{numEntries}} schedules!</h2>
+<<<<<<< HEAD
     <div class="favs">
+=======
+
+    <h2>Here is a schedule you have saved:</h2>
+    <br>
+>>>>>>> 4bfa6dcfe056753b12fc2960357198e638a41bad
     {% for favorite in favorites %}
       <p>Name: {{favorite["NAME"]}}</p>
       <p>Address: {{favorite["ADDRESS"]}}</p>
@@ -51,12 +57,12 @@
       </main>
   </div>
     <br>
-    <br>
-    <button id="seeNext">See Next Favorite!</button>
+    <button id="seeNext" class="button">See next favorite!</button>
     <!-- <form method="delete"> -->
-    <button id="delete">Remove This From favorites!</button>
+    <button id="delete" class="button">Remove this from favorites!</button>
+    <br><br>
     <form method="post">
-      <input type="submit" value="postToGallery">
+      <input type="submit" class="button" value="postToGallery">
     </form>
     </div>
   </body>

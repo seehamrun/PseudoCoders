@@ -39,6 +39,17 @@ a {
   font-family: roboto;
 }
 
+.button {
+    background-color: purple;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
 header {
     background: purple;
     color: white;

@@ -29,6 +29,7 @@
       <p> PRICE: {{queryObject.price}} </p>
       <p> RATING: {{queryObject.rating}} stars</p>
       <p> TYPE: {{queryObject.type}} </p>
+      <br>
       <h2> Here are your results:</h2>
       {% for result in results %}
         <p>Name: {{result["NAME"]}}</p>
@@ -38,12 +39,13 @@
         <p>Rating: {{result["RATING"]}} stars</p>
         <br>
       {% endfor %}
-      <button id="getAnother">Get Another Schedule!</button>
+      <button id="getAnother" class="button">Get Another Schedule!</button>
+      <br><br>
       <!-- <button id="addFavorite" method="post">Add To Favorites!</button> -->
       <!-- <input type="submit" value="Submit"> -->
       <!-- <button id="addFavorite">Add Favorite!</button> -->
       <form method="post">
-        <input type="submit" value="addFavorite">
+        <input type="submit" class="button" value="addFavorite">
       </form>
       <a href="/search">NEW SEARCH</a>
     </div>
