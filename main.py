@@ -6,6 +6,7 @@ import logging
 import api_implementation
 import maps_api_implementation as maps
 import api
+import time
 from google.appengine.api import users
 
 jinja_env = jinja2.Environment(
@@ -85,6 +86,9 @@ class SearchHandler(webapp2.RequestHandler):
         # self.response.write(response_html.render(data))
 
     def post(self):
+
+        start = time.time()
+
         priceVar = self.request.get('price')
         ratingVar = self.request.get('rating')
         dateVar = self.request.get('date')
@@ -142,6 +146,9 @@ class SearchHandler(webapp2.RequestHandler):
 
         #logging.info(output)
         #logging.info(len(userResultsItem.schedules))
+
+        end = time.time()
+        logging.info("Runtime of the Search Handler POST method is " + str(end - start) + " seconds")
 
         return webapp2.redirect('/results')
 

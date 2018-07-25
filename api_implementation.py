@@ -84,7 +84,6 @@ def nearbySearchRequest(location, radius):
         if ('rating' in results):
             dictionary["RATING"] = results['rating']
         newList.append(dictionary)
-
     return newList
 
 # def get_type(input_data):
@@ -104,6 +103,7 @@ def nearbySearchRequest(location, radius):
 #             newString += c
 
 def nearbySearchRequestFiltered(location, radius, maxprice, type):
+    #time1 = time.clock()
     google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/nearbysearch/%s?key=%s&location=%s&radius=%s&type=%s&minprice=%s&maxprice=%s" % ("json", api.googleKey, getLatitudeLongitude(location), radius, type, 0, maxprice)
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
@@ -132,7 +132,8 @@ def nearbySearchRequestFiltered(location, radius, maxprice, type):
 
         if not len(dictionary["NAME"]) == 0:
             newList.append(dictionary)
-
+    #time2 = time.clock()
+    #logging.info(time2-time1)
     return newList
 
 def fixFormat(stringText):
