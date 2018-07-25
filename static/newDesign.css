@@ -8,9 +8,14 @@ html, body {
     font-size: 20px;
 }
 
+h1 {
+  margin-top: 150px;
+}
+
 .navbar {
     position: fixed;
     width: 100%;
+    top: 0;
 }
 
 body {
