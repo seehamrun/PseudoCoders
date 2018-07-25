@@ -1,9 +1,8 @@
 import api
 import json
 import logging
-#import string
+import ast
 import random
-#from ast import literal_eval
 from google.appengine.api import urlfetch
 
 
@@ -167,6 +166,9 @@ def makeSchedules(location, radius, maxprice, numEventsPerSchedule, numSchedules
 
     return schedules
 
-def formatJSON(inputJSON):
-    menu = json.loads(inputJSON)
-    return menu
+def getJSONDictionary(inputString):
+    betterString = str(inputString).replace("'", "\"")
+    logging.info(betterString)
+    #dictionary = json.loads(betterString)
+    dictionary = []
+    return dictionary

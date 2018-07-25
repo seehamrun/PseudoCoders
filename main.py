@@ -97,8 +97,6 @@ class SearchHandler(webapp2.RequestHandler):
             userResultsItem.put()
 
 
-        #MAJOR TODO - FIX THE 0 INDEX ISSUE ABOVE
-
         return webapp2.redirect('/results')
 
 class ResultsHandler(webapp2.RequestHandler):
@@ -113,15 +111,20 @@ class ResultsHandler(webapp2.RequestHandler):
         date = userQueryItem.date
 
         userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()[0]
-        newList = (userResultsItem.schedules[userResultsItem.current].events).split("||")
+        newList = userResultsItem.schedules[userResultsItem.current].events.split("||")
         userResultsItem.current += 1
         if userResultsItem.current == len(userResultsItem.schedules):
             userResultsItem.current = 0
         userResultsItem.put()
 
+        newList2 = []
+        for item in newList:
+            #logging.info(item)
+            newList2.append(api_implementation.getJSONDictionary(item))
+
         data = {
             "queryObject" : userQueryItem,
-            "results" : formatJSON(newList)
+            "results" : newList2
         }
 
         self.response.headers['Content-Type'] = 'text/html'
