@@ -30,7 +30,8 @@ class FavoritesHandler(webapp2.RequestHandler):
                 list.append(list2)
 
             data = {
-                "favorites":list
+                "favorites":list,
+                "numEntries":len(newList)
             }
         else:
             data = {}
@@ -163,9 +164,6 @@ class ResultsHandler(webapp2.RequestHandler):
         #     return
 
         newList = userResultsItem[0].schedules[userResultsItem[0].current].events.split("||")
-        userResultsItem[0].current += 1
-        if userResultsItem[0].current == len(userResultsItem[0].schedules):
-            userResultsItem[0].current = 0
         userResultsItem[0].put()
 
         # logging.info(userResultsItem[0].current)
@@ -186,28 +184,29 @@ class ResultsHandler(webapp2.RequestHandler):
         self.response.write(responseHTML.render(data))
         #logging.info(data)
 
+        userResultsItem[0].current += 1
+        if userResultsItem[0].current == len(userResultsItem[0].schedules):
+            userResultsItem[0].current = 0
+        userResultsItem[0].put()
+
     def post(self):
         #logging.info("")
         userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()[0]
-        if userResultsItem.current == 0:
-            currentSchedule = userResults.Item.schedules[len(userResults.Item.schedules)-1]
-        else:
-            currentSchedule = userResultsItem.schedules[userResultsItem.current-1]
-
         userProfile = database.UserFavorites.query(database.UserFavorites.userID==users.get_current_user().user_id()).fetch()
-        # if userProfile == [] or userProfile == None:
-        #     userProfile = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
-        try:
-            userProfile[0]
-        except (TypeError, IndexError):
+
+        if userProfile == [] or userProfile == None:
             userProfile = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
-            userProfile.put()
-            logging.info("CAUGHT ERROR")
 
-        #logging.info(currentSchedule)
-        userProfile = database.UserFavorites.query(database.UserFavorites.userID==users.get_current_user().user_id()).fetch()
-        userProfile[0].favorites.append(currentSchedule)
+        if userResultsItem.current == 0:
+            userProfile[0].favorites.append(userResultsItem.schedules[len(userResultsItem.schedules)-1])
+        else:
+            userProfile[0].favorites.append(userResultsItem.schedules[userResultsItem.current-1])
         userProfile[0].put()
+
+        # if userResultsItem.current == len(userResultsItem.schedules)-1:
+        #     userResultsItem.current = 0
+        # else:
+        #     userResultsItem.current += 1
 
         return webapp2.redirect('/results')
 
