@@ -138,12 +138,17 @@ li a:hover:not(.active) {
   margin-top: 100px;
   text-align: center;
   font-weight: bold;
-  font-size: 150%;
+  font-size: 200%;
   display: None;
 }
 
-#loaderVideo{
+/* #loaderVideo{
   display: None;
+} */
+
+#wrapper{
+  display: None;
+  text-align: center;
 }
 
 /* #loadingMessage{
