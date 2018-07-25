@@ -19,7 +19,9 @@ class FavoritesHandler(webapp2.RequestHandler):
         if userFavorites == []:
             userFavorites = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
             userFavorites.put()
+            logging.info("EMPTY LIST REACTION")
 
+        logging.info(userFavorites)
         newList = userFavorites[0].favorites #newList holds list of favoriteSchedules in Schedule forms
         list = []
         for schedule in newList: #for each Schedule object "schedule" in ^^^^
