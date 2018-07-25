@@ -84,18 +84,19 @@ class SearchHandler(webapp2.RequestHandler):
         #assume this is a list of lists of strings
 
         userResultsItem = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        logging.info(userResultsItem)
         if userResultsItem == []:
             generatedSchedules = []
             userResultsItem = database.LastResultSchedules(userID=users.get_current_user().user_id(), schedules=[])
             userResultsItem.put()
         else:
-            userResultsItem[0].schedules = []
-            userResultsItem[0].put()
+            userResultsItem.schedules = []
+            userResultsItem.put()
         for schedule in output:
-            newSchedule = database.Schedule(events=schedule, usersWhoSaved=[])
+            newSchedule = database.Schedule(events=schedule, usersWhoSaved="")
             newSchedule.put()
-            newItem.schedules.append(newSchedule)
-            newItem.put()
+            userResultsItem.schedules.append(newSchedule)
+            userResultsItem.put()
 
         return webapp2.redirect('/results')
 
@@ -110,7 +111,7 @@ class ResultsHandler(webapp2.RequestHandler):
         userID = userQueryItem.userID
         date = userQueryItem.date
 
-        userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()[0]
+        userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()
         newList = userResultsItem.schedules
 
         data = {

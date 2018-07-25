@@ -156,13 +156,13 @@ def makeSchedules(location, radius, maxprice, numEventsPerSchedule, numSchedules
 
     schedules = []
     for index in range(numSchedules):
-        schedule = []
+        schedule = ""
         for event in range(numEventsPerSchedule):
             typeIndex = random.choice(range(len(dictionary)))
             while len(dictionary[typeIndex]) == 0:
                 typeIndex = random.choice(range(len(dictionary)))
             data = dictionary[typeIndex]
-            schedule.append(random.choice(data))
+            schedule += "\n\n" + str(random.choice(data))
         schedules.append(schedule)
 
     return schedules
