@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/static/style.css"></link>
     <link rel="stylesheet" href="/static/newDesign.css"></link>
     <link rel="icon" href="http://www.jmkxyy.com/planner-icon-png/planner-icon-png-17.jpg">
+    <script src="/static/favorites_script.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -33,5 +34,33 @@
     {% endfor %}
     {% endfor %}
     <!-- <button class="button" style="vertical-align:middle"><span>Log In</span></button> -->
+  </body>
+</html>
+
+
+
+    <h1> Results!</h1>
+      <h2>Here is a summary of your search query:</h2>
+      <p> DATE: {{queryObject.date}} </p>
+      <p> LOCATION: {{queryObject.location}} </p>
+      <p> RADIUS: {{queryObject.radius}} </p>
+      <p> PRICE: {{queryObject.price}} </p>
+      <p> RATING: {{queryObject.rating}} </p>
+      <p> TYPE: {{queryObject.type}} </p>
+      <h2> Here are your results:</h2>
+      {% for result in results %}
+        <p>Name: {{result["NAME"]}}</p>
+        <p>Address: {{result["ADDRESS"]}}</p>
+        <p>Type: {{result["TYPE"]}}</p>
+        <p>Price Level: {{result["PRICE"]}}</p>
+        <p>Rating: {{result["RATING"]}} stars</p>
+        <br>
+      {% endfor %}
+      <button id="seeNext">See Next Favorite!</button>
+      <button id="delete" method="delete">Remove this schedule from your favorites!</button>
+      <form method="post">
+        <input type="submit" value="postToGallery">
+      </form>
+      <a href="/search">NEW SEARCH</a>
   </body>
 </html>
