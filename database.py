@@ -14,8 +14,12 @@ class LastSearchQuery(ndb.Model):
 
 class Schedule(ndb.Model): #for now, this will be a single-day schedule
     events = ndb.StringProperty()
-    usersWhoSaved = ndb.StringProperty()
+    # usersWhoSaved = ndb.StringProperty()
     #this will have to be a list in String form
+
+class UserFavorites(ndb.Model):
+    userID = ndb.StringProperty()
+    favorites = ndb.StructuredProperty(Schedule, repeated=True)
 
 class LastResultSchedules(ndb.Model):
     schedules = ndb.StructuredProperty(Schedule, repeated=True)

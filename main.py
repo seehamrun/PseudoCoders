@@ -15,6 +15,10 @@ class FavoritesHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/favorites.html')
+        userFavorites = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()[0]
+        data = {
+            "favorites":userFavorites.favorites
+        }
         return self.response.write(template.render())
 
 class GalleryHandler(webapp2.RequestHandler):
@@ -133,7 +137,15 @@ class ResultsHandler(webapp2.RequestHandler):
         #logging.info(data)
 
     def post(self):
-        logging.data("")
+        userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()[0]
+        currentSchedule = userResultsItem.schedules[userResultsItem.current]
+
+        userProfile = database.UserFavorites.query(database.UserFavorites.userID==users.get_current_user().user_id()).fetch()[0]
+        if userResultsItem == []:
+            userProfile = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
+            userProfile.put()
+        userProfile.schedules.append(currentSchedule)
+
 
 class AboutHandler(webapp2.RequestHandler):
     def get(self):

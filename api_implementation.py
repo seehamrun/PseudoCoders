@@ -140,7 +140,9 @@ def fixFormat(stringText):
     # stringText = str(stringText).replace("u"," ")
     stringText = stringText.encode("utf-8").decode('utf-8').encode('ascii', errors='ignore')
     stringText = re.sub(r'[^\x00-\x7f]',r'', stringText)
-    return stringText.replace("\xe2\x80\x99","'")
+    stringText = stringText.replace("\xe2\x80\x99","'")
+    stringText = stringText.encode('ascii',errors='ignore')
+    return stringText
 
 #def getLatitudeLongitude(first_line, city, state):
 def getLatitudeLongitude(location):
