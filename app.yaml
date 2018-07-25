@@ -13,6 +13,8 @@ handlers:
   script: main.app
 - url: /gallery
   script: main.app
+- url: /more
+  script: main.app
 - url: /.*
   script: main.app
   login: required
