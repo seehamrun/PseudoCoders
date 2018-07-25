@@ -107,7 +107,8 @@ class SearchHandler(webapp2.RequestHandler):
         userQueryItem.type = typeVar
         userQueryItem.put()
 
-        output = api_implementation.makeSchedules(locationVar, radiusVar, priceVar, 5, 10)
+        types = ['restaurant', 'cafe', 'shopping_mall', 'museum', 'gym','movie_theater','bakery', 'store', 'park', 'bowling_alley']
+        output = api_implementation.makeSchedules(locationVar, radiusVar, priceVar, 4, 20, types)
         #assume this is a list of lists of strings
 
         userResultsItemList = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
