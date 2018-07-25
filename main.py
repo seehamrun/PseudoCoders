@@ -270,14 +270,17 @@ class ResultsHandler(webapp2.RequestHandler):
 
         if userProfile == [] or userProfile == None:
             userProfile = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
+            userProfile.put()
+
+        userProfile = database.UserFavorites.query(database.UserFavorites.userID==users.get_current_user().user_id()).fetch()[0]
 
         if len(userResultsItem.schedules) == 0:
             logging.info("NOTHING CAN BE DONE")
         elif userResultsItem.current == 0:
-            userProfile[0].favorites.append(userResultsItem.schedules[len(userResultsItem.schedules)-1])
+            userProfile.favorites.append(userResultsItem.schedules[len(userResultsItem.schedules)-1])
         else:
-            userProfile[0].favorites.append(userResultsItem.schedules[userResultsItem.current-1])
-        userProfile[0].put()
+            userProfile.favorites.append(userResultsItem.schedules[userResultsItem.current-1])
+        userProfile.put()
 
         # if userResultsItem.current == len(userResultsItem.schedules)-1:
         #     userResultsItem.current = 0
