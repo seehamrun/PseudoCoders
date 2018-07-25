@@ -62,7 +62,7 @@ class SearchHandler(webapp2.RequestHandler):
         radiusVar = self.request.get('radius')
         typeVar = self.request.get('type')
 
-        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
         if userQueryItem == []:
             newItem = database.LastSearchQuery(userID=users.get_current_user().user_id(), price=priceVar, rating=ratingVar, date=dateVar, location=locationVar, radius=radiusVar, type=typeVar)
             newItem.put()
@@ -75,28 +75,27 @@ class SearchHandler(webapp2.RequestHandler):
             userQueryItem[0].type = typeVar
             userQueryItem[0].put()
 
-        #logging.info(userQueryItem)
         userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
         userQueryItem[0].put()
-
 
         output = api_implementation.makeSchedules(locationVar, radiusVar, priceVar, 5, 10)
         #assume this is a list of lists of strings
 
         userResultsItem = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
-        logging.info(userResultsItem)
-        if userResultsItem == []:
+        if userResultsItem[0] == []:
             generatedSchedules = []
-            userResultsItem = database.LastResultSchedules(userID=users.get_current_user().user_id(), schedules=[])
+            userResultsItem = database.LastResultSchedules(userID=users.get_current_user().user_id(), schedules=[])[0]
             userResultsItem.put()
         else:
-            userResultsItem.schedules = []
-            userResultsItem.put()
+            userResultsItem[0].schedules = []
+            userResultsItem[0].put()
         for schedule in output:
             newSchedule = database.Schedule(events=schedule, usersWhoSaved="")
             newSchedule.put()
-            userResultsItem.schedules.append(newSchedule)
-            userResultsItem.put()
+            userResultsItem[0].schedules.append(newSchedule)
+            userResultsItem[0].put()
+
+        #MAJOR TODO - FIX THE 0 INDEX ISSUE ABOVE
 
         return webapp2.redirect('/results')
 
