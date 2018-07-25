@@ -15,14 +15,14 @@ class FavoritesHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/favorites.html')
-        userFavorites = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
-        if userFavorites == []:
+        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
+        userFavorites = None
+        if userFavoritesList == []:
             userFavorites = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
             userFavorites.put()
-            logging.info("EMPTY LIST REACTION")
-
-        logging.info(userFavorites)
-        newList = userFavorites[0].favorites #newList holds list of favoriteSchedules in Schedule forms
+        else:
+            userFavorites = userFavoritesList[0]
+        newList = userFavorites.favorites #newList holds list of favoriteSchedules in Schedule forms
         list = []
         for schedule in newList: #for each Schedule object "schedule" in ^^^^
             list2 = []
@@ -84,11 +84,13 @@ class SearchHandler(webapp2.RequestHandler):
         radiusVar = self.request.get('radius')
         typeVar = self.request.get('type')
 
-        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
-        if userQueryItem == []:
-            newItem = database.LastSearchQuery(userID=users.get_current_user().user_id(), price=priceVar, rating=ratingVar, date=dateVar, location=locationVar, radius=radiusVar, type=typeVar)
-            newItem.put()
-        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
+        userQueryItemList = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        userQueryItem = None
+        if userQueryItemList == []:
+            userQueryItem = database.LastSearchQuery(userID=users.get_current_user().user_id(), price=priceVar, rating=ratingVar, date=dateVar, location=locationVar, radius=radiusVar, type=typeVar)
+            userQueryItem.put()
+        else:
+            userQueryItem = userQueryItemList[0]
         userQueryItem.price = priceVar
         userQueryItem.rating = ratingVar
         userQueryItem.date = dateVar
@@ -100,12 +102,13 @@ class SearchHandler(webapp2.RequestHandler):
         output = api_implementation.makeSchedules(locationVar, radiusVar, priceVar, 5, 10)
         #assume this is a list of lists of strings
 
-        userResultsItem = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
-        if userResultsItem == []:
-            newItem2 = database.LastResultSchedules(userID=users.get_current_user().user_id(), schedules=[], current=0)
-            newItem2.put()
-
-        userResultsItem = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
+        userResultsItemList = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        userResultsItem = None
+        if userResultsItemList == []:
+            userResultsItem = database.LastResultSchedules(userID=users.get_current_user().user_id(), schedules=[], current=0)
+            userResultsItem.put()
+        else:
+            userResultsItem = userResultsItemList[0]
 
         userResultsItem.schedules = []
         userResultsItem.current = 0
@@ -120,14 +123,14 @@ class SearchHandler(webapp2.RequestHandler):
 
 class ResultsHandler(webapp2.RequestHandler):
     def get(self):
-        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        userQueryItemList = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        userQueryItem = None
+        if userQueryItemList == []:
+            userQueryItem = database.LastSearchQuery(price="", rating="", location="", radius="", date="", type="", userID=users.get_current_user().user_id())
+            userQueryItem.put()
+        else:
+            userQueryItem = userQueryItemList[0]
 
-        if userQueryItem == []:
-            newItem = database.LastSearchQuery(price="", rating="", location="", radius="", date="", type="", userID=users.get_current_user().user_id())
-            newItem.put()
-            logging.info("EMPTY LIST REACTION")
-
-        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
         location = userQueryItem.location
         radius = userQueryItem.radius
         type = userQueryItem.type
@@ -136,14 +139,13 @@ class ResultsHandler(webapp2.RequestHandler):
         userID = userQueryItem.userID
         date = userQueryItem.date
 
-        userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()
-        if userResultsItem == []:
-            newItem2 = database.LastResultSchedules(schedules=[], userID=users.get_current_user().user_id(), current=0)
-            newItem2.put()
-            logging.info("EMPTY LIST REACTION")
-
-        logging.info(userResultsItem)
-        userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()[0]
+        userResultsItemList = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()
+        userResultsItem = None
+        if userResultsItemList == []:
+            userResultsItem = database.LastResultSchedules(schedules=[], userID=users.get_current_user().user_id(), current=0)
+            userResultsItem.put()
+        else:
+            userResultsItem = userResultsItemList[0]
 
         newList = []
         if not len(userResultsItem.schedules) == 0:
