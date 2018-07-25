@@ -147,24 +147,43 @@ so yeah this is a test page -->
 
 
 
-              <h4>More Info</h4>
-              Minim duis incididunt est cillum est ex occaecat consectetur. Qui sint ut et qui nisi cupidatat. Reprehenderit nostrud proident officia exercitation anim et pariatur ex.
-              <ul class="toc">
-                <h4>Contents</h4>
-                <a href="#lorem1">Lorem ipsum</a>
-                <a href="#lorem2">Lorem ipsum</a>
-                <a href="#lorem3">Lorem ipsum</a>
-                <a href="#lorem4">Lorem ipsum</a>
-                <a href="#lorem5">Lorem ipsum</a>
-              </ul>
+              <h4>Search</h4>
+              Enter your queries below!
+              <form method="post">
+                <p>Date: <br> <input type="date" id="date" name="date"></p>
+                <p>Location: <br> <input type="text" id="location" name="location"></p>
+                <p>Radius: </p>
+                <select id="radius" name="radius">
+                  <option value=1610>Within one mile</option>
+                  <option value=3219>Within two miles</option>
+                  <option value=8047>Within five miles</option>
+                  <option value=16093>Within ten miles</option>
+                  <option value=32186>Within twenty miles</option>
+                </select>
+                <p>Select your budget/price level:</p>
+                <select id="price" name="price">
+                  <option value="0">Free</option>
+                  <option value="1">Inexpensive($)</option>
+                  <option value="2">Intermediate($$)</option>
+                  <option value="3">Expensive ($$$)</option>
+                  <option value="4">Bank🤑💸 ($$$$)</option>
+                </select>
+                <p>Select the minimum user rating:</p>
+                <select id="rating" name="rating">
+                  <option value="1">One star</option>
+                  <option value="2">Two stars</option>
+                  <option value="3">Three stars</option>
+                  <option value="4">Four stars</option>
+                  <option value="5">Five stars</option>
+                </select>
+                <input id="submit" type="submit">
+                </form>
+                </div>
+                <div id="loadingMessage">Your results are loading...!</div>
+                <br>
+                <div id="futureLoader"></div>
+                <iframe id="loaderVideo" width="1188" height="567" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-              <h5 id="lorem1">Lorem ipsum dolor sit amet</h5>
-              Excepteur et pariatur officia veniam anim culpa cupidatat consequat ad velit culpa est non.
-              <ul>
-                <li>Nisi qui nisi duis commodo duis reprehenderit consequat velit aliquip.</li>
-                <li>Dolor consectetur incididunt in ipsum laborum non et irure pariatur excepteur anim occaecat officia sint.</li>
-                <li>Lorem labore proident officia excepteur do.</li>
-              </ul>
 
             </div>
           </section>
