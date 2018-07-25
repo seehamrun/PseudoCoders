@@ -25,8 +25,7 @@
     </header>
     <div class="plain-text">
     <h2>You have saved {{numEntries}} schedules!</h2>
-
-    <h2>Here is a schedule you have saved:</h2>
+    <div class="favs">
     {% for favorite in favorites %}
       <p>Name: {{favorite["NAME"]}}</p>
       <p>Address: {{favorite["ADDRESS"]}}</p>
@@ -34,6 +33,23 @@
       <p>Price Level: {{favorite["PRICE"]}}</p>
       <br>
     {% endfor %}
+  </div>
+  <div class="rapper" id="fav_page_info">
+      <main>
+          <div>
+              <a ><img src="https://s3.amazonaws.com/peoplepng/wp-content/uploads/2018/07/15065443/Next-Button-Download-Transparent-PNG-Image-1024x1024.png"  class="animation" alt="Search">
+                  <span class="title">See Next</span></a>
+          </div>
+          <div>
+              <a> <img src="http://www.free-icons-download.net/images/add-button-icon-16545.png"  class="animation" alt="Favorites">
+                  <span class="title">Remove From Favorites</span></a>
+          </div>
+          <div>
+              <a ><img src="https://www.shareicon.net/download/2016/11/03/849462_messenger_512x512.png" class="animation" alt="Gallery">
+                  <span class="title">Post to Gallery</span></a>
+          </div>
+      </main>
+  </div>
     <br>
     <br>
     <button id="seeNext">See Next Favorite!</button>

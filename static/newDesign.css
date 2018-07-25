@@ -149,3 +149,11 @@ main {
     text-decoration: underline;
 
 }
+
+.favs {
+    margin-left: 150px;
+    width: 300px;
+    border: 20px solid purple;
+    padding: 25px;
+
+}
