@@ -13,9 +13,13 @@ function refresh() {
 function deleteCall() {
   var result = confirm("Want to delete?");
   if (result) {
-    console.log("CALL TO DELETE")
-}
-}
+    document.ajax({
+    url: '/favorites',
+    type: 'DELETE',
+    success: refresh {
+    }
+});
+}}
 
 
 window.addEventListener('load', () => {
