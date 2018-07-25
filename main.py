@@ -163,8 +163,18 @@ class ResultsHandler(webapp2.RequestHandler):
         #     self.response.write(responseHTML.render(data))
         #     return
 
-        newList = userResultsItem[0].schedules[userResultsItem[0].current].events.split("||")
-        userResultsItem[0].put()
+        try:
+            userResultsItem[0]
+        except IndexError:
+            userResultsItem = database.LastResultSchedules(userID=users.get_current_user().user_id(), current=0, schedules=[])
+            userResultsItem.put()
+
+        userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()
+
+        newList = []
+        if not len(userResultsItem[0].schedules) == 0:
+            newList = userResultsItem[0].schedules[userResultsItem[0].current].events.split("||")
+            userResultsItem[0].put()
 
         # logging.info(userResultsItem[0].current)
         # logging.info(len(userResultsItem[0].schedules))
