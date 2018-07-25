@@ -32,6 +32,8 @@ class FavoritesHandler(webapp2.RequestHandler):
             data = {
                 "favorites":list
             }
+        else:
+            data = {}
         return self.response.write(template.render(data))
 
 class GalleryHandler(webapp2.RequestHandler):
@@ -79,18 +81,18 @@ class SearchHandler(webapp2.RequestHandler):
         radiusVar = self.request.get('radius')
         typeVar = self.request.get('type')
 
-        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
-        if userQueryItem == []:
+        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        if userQueryItem == None:
             newItem = database.LastSearchQuery(userID=users.get_current_user().user_id(), price=priceVar, rating=ratingVar, date=dateVar, location=locationVar, radius=radiusVar, type=typeVar)
             newItem.put()
         else:
-            userQueryItem.price = priceVar
-            userQueryItem.rating = ratingVar
-            userQueryItem.date = dateVar
-            userQueryItem.location = locationVar
-            userQueryItem.radius = radiusVar
-            userQueryItem.type = typeVar
-            userQueryItem.put()
+            userQueryItem[0].price = priceVar
+            userQueryItem[0].rating = ratingVar
+            userQueryItem[0].date = dateVar
+            userQueryItem[0].location = locationVar
+            userQueryItem[0].radius = radiusVar
+            userQueryItem[0].type = typeVar
+            userQueryItem[0].put()
 
         userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
         userQueryItem.put()
@@ -98,41 +100,78 @@ class SearchHandler(webapp2.RequestHandler):
         output = api_implementation.makeSchedules(locationVar, radiusVar, priceVar, 5, 10)
         #assume this is a list of lists of strings
 
-        userResultsItem = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
-        if userResultsItem == []:
+        userResultsItem = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        if userResultsItem == None or userResultsItem == []:
             generatedSchedules = []
-            userResultsItem = database.LastResultSchedules(userID=users.get_current_user().user_id(), schedules=[], current=0)
+            userResultsItem = database.LastResultSchedules(userID=users.get_current_user().user_id(), schedules=[], current=0)[0]
             userResultsItem.put()
         else:
-            userResultsItem.schedules = []
-            userResultsItem.current = 0
-            userResultsItem.put()
+            userResultsItem[0].schedules = []
+            userResultsItem[0].current = 0
+            userResultsItem[0].put()
         for schedule in output:
             newSchedule = database.Schedule(events=schedule)
             newSchedule.put()
-            userResultsItem.schedules.append(newSchedule)
-            userResultsItem.put()
-
+            userResultsItem[0].schedules.append(newSchedule)
+            userResultsItem[0].put()
 
         return webapp2.redirect('/results')
 
 class ResultsHandler(webapp2.RequestHandler):
     def get(self):
-        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
-        location = userQueryItem.location
-        radius = userQueryItem.radius
-        type = userQueryItem.type
-        rating = userQueryItem.rating
-        price = userQueryItem.price
-        userID = userQueryItem.userID
-        date = userQueryItem.date
+        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
 
-        userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()[0]
-        newList = userResultsItem.schedules[userResultsItem.current].events.split("||")
-        userResultsItem.current += 1
-        if userResultsItem.current == len(userResultsItem.schedules):
-            userResultsItem.current = 0
-        userResultsItem.put()
+        # try:
+        #     userQueryItem[0].date
+        # except NameError:
+        #     data = {}
+        #     self.response.headers['Content-Type'] = 'text/html'
+        #     responseHTML = jinja_env.get_template('templates/results.html')
+        #     self.response.write(responseHTML.render(data))
+        #     return
+        #
+        # if userQueryItem == [] or userQueryItem == None:
+        #     data = {}
+        #     self.response.headers['Content-Type'] = 'text/html'
+        #     responseHTML = jinja_env.get_template('templates/results.html')
+        #     self.response.write(responseHTML.render(data))
+        #     return
+
+        location = userQueryItem[0].location
+        radius = userQueryItem[0].radius
+        type = userQueryItem[0].type
+        rating = userQueryItem[0].rating
+        price = userQueryItem[0].price
+        userID = userQueryItem[0].userID
+        date = userQueryItem[0].date
+
+        userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()
+        # try:
+        #     userResultsItem[0].current
+        # except IndexError:
+        #     data = {}
+        #     self.response.headers['Content-Type'] = 'text/html'
+        #     responseHTML = jinja_env.get_template('templates/results.html')
+        #     self.response.write(responseHTML.render(data))
+        #     return
+        #
+        # if userResultsItem == [] or userResultsItem == None:
+        #     data = {}
+        #     self.response.headers['Content-Type'] = 'text/html'
+        #     responseHTML = jinja_env.get_template('templates/results.html')
+        #     self.response.write(responseHTML.render(data))
+        #     return
+
+        newList = userResultsItem[0].schedules[userResultsItem[0].current].events.split("||")
+        userResultsItem[0].current += 1
+        if userResultsItem[0].current == len(userResultsItem[0].schedules):
+            userResultsItem[0].current = 0
+            #logging.info("BIG TEST MESSAGE")
+            userResultsItem[0].put()
+        userResultsItem[0].put()
+
+        # logging.info(userResultsItem[0].current)
+        # logging.info(len(userResultsItem[0].schedules))
 
         newList2 = []
         for item in newList:
@@ -140,7 +179,7 @@ class ResultsHandler(webapp2.RequestHandler):
                 newList2.append(api_implementation.getDictionary(item))
 
         data = {
-            "queryObject" : userQueryItem,
+            "queryObject" : userQueryItem[0],
             "results" : newList2
         }
 
