@@ -50,22 +50,22 @@ class FavoritesHandler(webapp2.RequestHandler):
         return webapp2.redirect('/post')
 
     def delete(self):
-        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
-        schedules = userFavoritesList.favorites
-        current = userFavoritesList.current
-        #del userFavoritesList[]
-
-
-        if userProfile == [] or userProfile == None:
-            userProfile = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
-
-        if len(userResultsItem.schedules) == 0:
-            logging.info("NOTHING CAN BE DONE")
-        elif userResultsItem.current == 0:
-            userProfile[0].favorites.append(userResultsItem.schedules[len(userResultsItem.schedules)-1])
-        else:
-            userProfile[0].favorites.append(userResultsItem.schedules[userResultsItem.current-1])
-        userProfile[0].put()
+        # userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
+        # schedules = userFavoritesList.favorites
+        # current = userFavoritesList.current
+        # #del userFavoritesList[]
+        #
+        #
+        # if userProfile == [] or userProfile == None:
+        #     userProfile = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
+        #
+        # if len(userResultsItem.schedules) == 0:
+        #     logging.info("NOTHING CAN BE DONE")
+        # elif userResultsItem.current == 0:
+        #     userProfile[0].favorites.append(userResultsItem.schedules[len(userResultsItem.schedules)-1])
+        # else:
+        #     userProfile[0].favorites.append(userResultsItem.schedules[userResultsItem.current-1])
+        # userProfile[0].put()
 
         return webapp2.redirect('/favorites')
 
