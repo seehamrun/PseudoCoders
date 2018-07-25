@@ -107,8 +107,9 @@ class SearchHandler(webapp2.RequestHandler):
         userQueryItem.type = typeVar
         userQueryItem.put()
 
-        types = ['restaurant', 'cafe', 'shopping_mall', 'museum', 'gym','movie_theater','bakery', 'store', 'park', 'bowling_alley']
-        output = api_implementation.makeSchedules(locationVar, radiusVar, priceVar, 4, 20, types)
+        #types = ['restaurant', 'cafe', 'shopping_mall', 'museum', 'gym','movie_theater','bakery', 'store', 'park', 'bowling_alley']
+        types = ['restaurant']
+        output = api_implementation.makeSchedules(locationVar, radiusVar, priceVar, 4, 1, types)
         #assume this is a list of lists of strings
 
         userResultsItemList = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
@@ -188,7 +189,9 @@ class ResultsHandler(webapp2.RequestHandler):
         if userProfile == [] or userProfile == None:
             userProfile = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
 
-        if userResultsItem.current == 0:
+        if len(userResultsItem.schedules) == 0:
+            logging.info("NOTHING CAN BE DONE")
+        elif userResultsItem.current == 0:
             userProfile[0].favorites.append(userResultsItem.schedules[len(userResultsItem.schedules)-1])
         else:
             userProfile[0].favorites.append(userResultsItem.schedules[userResultsItem.current-1])
