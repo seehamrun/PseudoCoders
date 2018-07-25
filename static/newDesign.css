@@ -14,7 +14,7 @@ h1 {
 
 .navbar {
     position: fixed;
-    width: 100%;
+    width: 95%;
     top: 0;
 }
 
@@ -66,8 +66,8 @@ header {
 
 
     header img {
-        width: 100px;
-        height: 100px;
+        width: 70px;
+        height: 70px;
     }
 
 
