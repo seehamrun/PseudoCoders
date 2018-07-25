@@ -11,6 +11,7 @@ def create_map(location, schedule):
     for event in schedule:
         address = event['ADDRESS']
         waypoints.append(address)
+        
     formatted_waypoints = waypoints[0]
     for waypoint in waypoints[1:]:
         formatted_waypoints += "|" + waypoint.replace(' ', '+')
