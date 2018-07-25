@@ -331,6 +331,13 @@ class TestHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/test.html')
         return self.response.write(template.render())
 
+class MoreHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        template = jinja_env.get_template('templates/more.html')
+        return self.response.write(template.render())
+
+
     def post(self):
         # #THIS IS A TEST OF THE fetchPlaceDetails FUNCTION:
         # self.response.headers['Content-Type'] = 'text/html'
@@ -433,6 +440,7 @@ app = webapp2.WSGIApplication([
     ('/search', SearchHandler),
     ('/about', AboutHandler),
     ('/test', TestHandler),
+    ('/more', MoreHandler),
     ('/material', MaterialTestHandler),
     ('/materialsearch', MaterialSearchTestHandler),
     ('/', MainHandler)
