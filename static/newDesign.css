@@ -22,7 +22,9 @@ a {
     color: inherit;
 }
 
-
+#login_text {
+  font-family: cursive;
+}
 
 header {
     background: purple;

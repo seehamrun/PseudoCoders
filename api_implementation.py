@@ -183,7 +183,7 @@ def makeSchedules(location, radius, maxprice, numEventsPerSchedule, numSchedules
             #logging.info(item2)
         #    output.append(item2)
         output.append(item)
-    #logging.info(output)
+    logging.info("MAKE SCHEDULES HAS FINISHED RUNNING!!!!")
     return output
 
 def getDictionary(inputString):
