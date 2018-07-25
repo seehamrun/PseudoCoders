@@ -274,8 +274,9 @@ class ResultsHandler(webapp2.RequestHandler):
         userProfile = database.UserFavorites.query(database.UserFavorites.userID==users.get_current_user().user_id()).fetch()
 
         if userProfile == [] or userProfile == None:
-            userProfile = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
-            userProfile.put()
+            userTemp = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
+            userTemp.put()
+            time.sleep(2)
 
         userProfile = database.UserFavorites.query(database.UserFavorites.userID==users.get_current_user().user_id()).fetch()[0]
 
