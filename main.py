@@ -16,31 +16,38 @@ jinja_env = jinja2.Environment(
 
 class FavoritesHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('templates/favorites.html')
+
         userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
         userFavorites = None
+
         if userFavoritesList == []:
-            userFavorites = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
+            userFavorites = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[], current=0)
             userFavorites.put()
         else:
             userFavorites = userFavoritesList[0]
-        newList = userFavorites.favorites #newList holds list of favoriteSchedules in Schedule forms
-        list = []
-        for schedule in newList: #for each Schedule object "schedule" in ^^^^
-            list2 = []
-            events = schedule.events #string of events
-            list3 = events.split("||")
-            for li in list3:
-                #if len(li) > 0:
-                list2.append(api_implementation.getDictionary(li))
-            list.append(list2)
+
+        favoriteSchedules = userFavorites.favorites #holds list of favoriteSchedules in Schedule forms
+        current = userFavorites.current #current one to display
+
+        currentFavorite = favoriteSchedules[current] #this is a Schedule item
+        events = []
+        for event in currentFavorite.split("||"):
+            events.append(api_implementation.getDictionary(event))
 
         data = {
-            "favorites":list,
-            "numEntries":len(newList)
+            'numEntries' : len(favorites),
+            'favorites' : events
         }
-        return self.response.write(template.render(data))
+
+        self.response.headers['Content-Type'] = 'text/html'
+        responseHTML = jinja_env.get_template('templates/favorites.html')
+        self.response.write(responseHTML.render(data))
+
+        userFavorites.current += 1
+        if userFavorites.current >= len(favorites):
+            userFavorites.current = 0
+        userFavorites.put()
+
 
 class GalleryHandler(webapp2.RequestHandler):
     def get(self):

@@ -25,10 +25,13 @@
     <h2>You have saved {{numEntries}} schedules!</h2>
 
     <h2>Here is a schedule you have saved:</h2>
+    {% for favorite in favorites %}
       <p>Name: {{favorite["NAME"]}}</p>
       <p>Address: {{favorite["ADDRESS"]}}</p>
       <p>Type: {{favorite["TYPE"]}}</p>
       <p>Price Level: {{favorite["PRICE"]}}</p>
+      <br>
+    {% endfor %}
     <button id="seeNext">See Next Favorite!</button>
     <form method="delete">
       <button id="delete">Remove This From favorites!</button>
