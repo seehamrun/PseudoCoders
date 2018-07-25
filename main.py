@@ -67,33 +67,35 @@ class SearchHandler(webapp2.RequestHandler):
             newItem = database.LastSearchQuery(userID=users.get_current_user().user_id(), price=priceVar, rating=ratingVar, date=dateVar, location=locationVar, radius=radiusVar, type=typeVar)
             newItem.put()
         else:
-            userQueryItem[0].price = priceVar
-            userQueryItem[0].rating = ratingVar
-            userQueryItem[0].date = dateVar
-            userQueryItem[0].location = locationVar
-            userQueryItem[0].radius = radiusVar
-            userQueryItem[0].type = typeVar
-            userQueryItem[0].put()
+            userQueryItem.price = priceVar
+            userQueryItem.rating = ratingVar
+            userQueryItem.date = dateVar
+            userQueryItem.location = locationVar
+            userQueryItem.radius = radiusVar
+            userQueryItem.type = typeVar
+            userQueryItem.put()
 
-        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
-        userQueryItem[0].put()
+        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
+        userQueryItem.put()
 
         output = api_implementation.makeSchedules(locationVar, radiusVar, priceVar, 5, 10)
         #assume this is a list of lists of strings
 
-        userResultsItem = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
-        if userResultsItem[0] == []:
+        userResultsItem = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
+        if userResultsItem == []:
             generatedSchedules = []
-            userResultsItem = database.LastResultSchedules(userID=users.get_current_user().user_id(), schedules=[])[0]
+            userResultsItem = database.LastResultSchedules(userID=users.get_current_user().user_id(), schedules=[], current=0)
             userResultsItem.put()
         else:
-            userResultsItem[0].schedules = []
-            userResultsItem[0].put()
+            userResultsItem.schedules = []
+            userResultsItem.current = 0
+            userResultsItem.put()
         for schedule in output:
             newSchedule = database.Schedule(events=schedule, usersWhoSaved="")
             newSchedule.put()
-            userResultsItem[0].schedules.append(newSchedule)
-            userResultsItem[0].put()
+            userResultsItem.schedules.append(newSchedule)
+            userResultsItem.put()
+
 
         #MAJOR TODO - FIX THE 0 INDEX ISSUE ABOVE
 
@@ -110,12 +112,16 @@ class ResultsHandler(webapp2.RequestHandler):
         userID = userQueryItem.userID
         date = userQueryItem.date
 
-        userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()
-        newList = userResultsItem.schedules
+        userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()[0]
+        newList = (userResultsItem.schedules[userResultsItem.current].events).split("||")
+        userResultsItem.current += 1
+        if userResultsItem.current == len(userResultsItem.schedules):
+            userResultsItem.current = 0
+        userResultsItem.put()
 
         data = {
-            "queryObject":userQueryItem,
-            "results" : newList
+            "queryObject" : userQueryItem,
+            "results" : formatJSON(newList)
         }
 
         self.response.headers['Content-Type'] = 'text/html'

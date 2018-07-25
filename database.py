@@ -20,6 +20,7 @@ class Schedule(ndb.Model): #for now, this will be a single-day schedule
 class LastResultSchedules(ndb.Model):
     schedules = ndb.StructuredProperty(Schedule, repeated=True)
     userID = ndb.StringProperty()
+    current = ndb.IntegerProperty()
 
 #THIS IS THE ONLY ONE WE NEED TO CHANGE
 class GalleryPost(ndb.Model):

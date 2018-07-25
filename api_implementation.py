@@ -162,7 +162,11 @@ def makeSchedules(location, radius, maxprice, numEventsPerSchedule, numSchedules
             while len(dictionary[typeIndex]) == 0:
                 typeIndex = random.choice(range(len(dictionary)))
             data = dictionary[typeIndex]
-            schedule += "\n\n" + str(random.choice(data))
+            schedule += "||" + str(random.choice(data))
         schedules.append(schedule)
 
     return schedules
+
+def formatJSON(inputJSON):
+    menu = json.loads(inputJSON)
+    return menu
