@@ -4,6 +4,22 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
   </head>
   <body>
-    <h1> Post Page</h1>
+    <h1> Post your schedule!</h1>
+    <!-- display schedule -->
+    <form method="post">
+      <p>Give your schedule a title: <input type="text" id="title" name="title"></p>
+      <p>Rate your schedule:</p>
+      <select id="rating" name="rating">
+        <option value="1">One star</option>
+        <option value="2">Two stars</option>
+        <option value="3">Three stars</option>
+        <option value="4">Four stars</option>
+        <option value="5">Five stars</option>
+      </select>
+      <p>Comments (optional): </p>
+      <div><textarea name="comments" style="width:250px;height:150px;"></textarea></div>
+      <br>
+      <input id="submit" type="submit">
+    </form>
   </body>
 </html>
