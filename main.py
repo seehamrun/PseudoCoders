@@ -123,6 +123,7 @@ class ResultsHandler(webapp2.RequestHandler):
         if userQueryItem == []:
             newItem = database.LastSearchQuery(price="", rating="", location="", radius="", date="", type="", userID=users.get_current_user().user_id())
             newItem.put()
+            logging.info("EMPTY LIST REACTION")
 
         userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
         location = userQueryItem.location
@@ -135,8 +136,11 @@ class ResultsHandler(webapp2.RequestHandler):
 
         userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()
         if userResultsItem == []:
-            newItem2 = database.LastResultsSchedule(schedules=[], userID=users.get_current_user().user_id(), current=0)
+            newItem2 = database.LastResultSchedules(schedules=[], userID=users.get_current_user().user_id(), current=0)
             newItem2.put()
+            logging.info("EMPTY LIST REACTION")
+
+        logging.info(userResultsItem)
         userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()[0]
 
         newList = []
