@@ -156,10 +156,9 @@ def getLatitudeLongitude(location):
     pair = response['results'][0]['geometry']['location']['lat'], response['results'][0]['geometry']['location']['lng']
     return str(pair)[1:-1].replace(" ","")
 
-
-def makeSchedules(location, radius, maxprice, numEventsPerSchedule, numSchedules):
-    types = ['amusement_park', 'aquarium', 'art_gallery', 'bakery', 'bar', 'beauty_salon', 'bowling_alley', 'cafe', 'casino', 'gym', 'library', 'movie_theater', 'museum', 'night_club', 'park', 'restaurant', 'shopping_mall', 'stadium', 'store', 'zoo']
-    #types = ['restaurant', 'cafe', 'shopping_mall', 'museum', 'gym','movie_theater','bakery', 'store', 'park', 'bowling_alley']
+#types = ['amusement_park', 'aquarium', 'art_gallery', 'bakery', 'bar', 'beauty_salon', 'bowling_alley', 'cafe', 'casino', 'gym', 'library', 'movie_theater', 'museum', 'night_club', 'park', 'restaurant', 'shopping_mall', 'stadium', 'store', 'zoo']
+#types = ['restaurant', 'cafe', 'shopping_mall', 'museum', 'gym','movie_theater','bakery', 'store', 'park', 'bowling_alley']
+def makeSchedules(location, radius, maxprice, numEventsPerSchedule, numSchedules, types):
     dictionary = []
     for i in range(0, len(types)):
         locations = nearbySearchRequestFiltered(location, radius, maxprice, types[i])
