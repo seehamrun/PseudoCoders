@@ -19,8 +19,7 @@ function deleteCall() {
     success: refresh {
     }
 });
-}
-}
+}}
 
 
 window.addEventListener('load', () => {
