@@ -41,35 +41,6 @@ class PostHandler(webapp2.RequestHandler):
         stored_schedule.put()
         #not sure how exactly this will work
 
-
-class ResultsHandler(webapp2.RequestHandler):
-    def get(self):
-        userItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
-        location = userItem.location
-        radius = userItem.radius
-        type = userItem.type
-        rating = userItem.rating
-        price = userItem.price
-        userID = userItem.userID
-        date = userItem.date
-
-        json = api_implementation.makeSchedules(location, radius, price)
-        logging.info(json)
-        newList = json
-
-        data = {
-            "queryObject":userItem,
-            "results" : newList
-        }
-
-        self.response.headers['Content-Type'] = 'text/html'
-        responseHTML = jinja_env.get_template('templates/results.html')
-        self.response.write(responseHTML.render(data))
-        #logging.info(data)
-
-    def post(self):
-        logging.data("")
-
 class SearchHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
@@ -91,28 +62,69 @@ class SearchHandler(webapp2.RequestHandler):
         radiusVar = self.request.get('radius')
         typeVar = self.request.get('type')
 
-        userItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
-        if userItem == []:
+        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        if userQueryItem == []:
             newItem = database.LastSearchQuery(userID=users.get_current_user().user_id(), price=priceVar, rating=ratingVar, date=dateVar, location=locationVar, radius=radiusVar, type=typeVar)
             newItem.put()
         else:
-            userItem[0].price = priceVar
-            userItem[0].rating = ratingVar
-            userItem[0].date = dateVar
-            userItem[0].location = locationVar
-            userItem[0].radius = radiusVar
-            userItem[0].type = typeVar
-            userItem[0].put()
+            userQueryItem[0].price = priceVar
+            userQueryItem[0].rating = ratingVar
+            userQueryItem[0].date = dateVar
+            userQueryItem[0].location = locationVar
+            userQueryItem[0].radius = radiusVar
+            userQueryItem[0].type = typeVar
+            userQueryItem[0].put()
 
-        logging.info(userItem)
-        userItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
-        userItem[0].put()
-        # lastQuery.budget = budgetVar
-        # lastQuery.rating = ratingVar
-         #lastQuery.put()
+        #logging.info(userQueryItem)
+        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        userQueryItem[0].put()
 
-        #return self.response.write(template.render(searchQuery))
+
+        output = api_implementation.makeSchedules(locationVar, radiusVar, priceVar, 5, 10)
+        #assume this is a list of lists of strings
+
+        userResultsItem = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        if userResultsItem == []:
+            generatedSchedules = []
+            userResultsItem = database.LastResultSchedules(userID=users.get_current_user().user_id(), schedules=[])
+            userResultsItem.put()
+        else:
+            userResultsItem[0].schedules = []
+            userResultsItem[0].put()
+        for schedule in output:
+            newSchedule = database.Schedule(events=schedule, usersWhoSaved=[])
+            newSchedule.put()
+            newItem.schedules.append(newSchedule)
+            newItem.put()
+
         return webapp2.redirect('/results')
+
+class ResultsHandler(webapp2.RequestHandler):
+    def get(self):
+        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
+        location = userQueryItem.location
+        radius = userQueryItem.radius
+        type = userQueryItem.type
+        rating = userQueryItem.rating
+        price = userQueryItem.price
+        userID = userQueryItem.userID
+        date = userQueryItem.date
+
+        userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()[0]
+        newList = userResultsItem.schedules
+
+        data = {
+            "queryObject":userQueryItem,
+            "results" : newList
+        }
+
+        self.response.headers['Content-Type'] = 'text/html'
+        responseHTML = jinja_env.get_template('templates/results.html')
+        self.response.write(responseHTML.render(data))
+        #logging.info(data)
+
+    def post(self):
+        logging.data("")
 
 class AboutHandler(webapp2.RequestHandler):
     def get(self):

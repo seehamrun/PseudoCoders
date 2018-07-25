@@ -12,22 +12,15 @@ class LastSearchQuery(ndb.Model):
     # rating = ndb.IntegerProperty()
     #this will be useful later, maybe?
 
-# class Event(ndb.Model):
-#     name = ndb.StringProperty()
-#     location = ndb.StringProperty()
-#     date = ndb.DateProperty(auto_now_add=True)
-#     time = ndb.TimeProperty(auto_now_add=True)
-#     user_rating = ndb.IntegerProperty()
-#     price_level = ndb.IntegerProperty()
-
 class Schedule(ndb.Model): #for now, this will be a single-day schedule
-    # events = ndb.StructuredProperty(Event, repeated=True)
-    # ID = ndb.IntegerProperty() #this will help us communicate with client quickly
-    # usersWhoSaved = ndb.StringProperty(repeated=True)
     events = ndb.StringProperty(repeated=True)
-    ID = ndb.IntegerProperty() #maybe will use???
     usersWhoSaved = ndb.StringProperty(repeated=True)
 
+class LastResultSchedules(ndb.Model):
+    schedules = ndb.StructuredProperty(Schedule, repeated=True)
+    userID = ndb.StringProperty()
+
+#THIS IS THE ONLY ONE WE NEED TO CHANGE
 class GalleryPost(ndb.Model):
     schedule = ndb.StructuredProperty(Schedule, repeated=False)
     ID = ndb.IntegerProperty()
@@ -35,4 +28,3 @@ class GalleryPost(ndb.Model):
     rating = ndb.IntegerProperty()
     title = ndb.StringProperty()
     poster = ndb.StringProperty() #this will be their email
-    ###CHANGE THIS!!!!

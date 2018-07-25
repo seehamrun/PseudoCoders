@@ -121,8 +121,8 @@ def nearbySearchRequestFiltered(location, radius, maxprice, type):
             dictionary["ADDRESS"] = results['formatted_address']
         if ('types' in results):
             dictionary["TYPE"] = results['types']
-        if ('opening_hours' in results):
-            dictionary["HOURS"] = results['opening_hours']
+        # if ('opening_hours' in results):
+        #     dictionary["HOURS"] = results['opening_hours']
         if ('price_level' in results):
             dictionary["PRICE"] = results['price_level']
         if ('rating' in results):
@@ -146,19 +146,23 @@ def getLatitudeLongitude(location):
     return str(pair)[1:-1].replace(" ","")
 
 
-def makeSchedules(location, radius, maxprice):
-    #types = ['amusement_park', 'aquarium', 'art_gallery', 'bakery', 'bar', 'beauty_salon', 'bowling_alley', 'cafe', 'casino', 'gym', 'library', 'movie_theater', 'museum', 'night_club', 'park', 'restaurant', 'shopping_mall', 'stadium', 'store', 'zoo']
-    types = ['restaurant']
+def makeSchedules(location, radius, maxprice, numEventsPerSchedule, numSchedules):
+    types = ['amusement_park', 'aquarium', 'art_gallery', 'bakery', 'bar', 'beauty_salon', 'bowling_alley', 'cafe', 'casino', 'gym', 'library', 'movie_theater', 'museum', 'night_club', 'park', 'restaurant', 'shopping_mall', 'stadium', 'store', 'zoo']
+    #types = ['restaurant', 'cafe', 'shopping_mall', 'museum', 'gym','movie_theater','bakery', 'store', 'park', 'bowling_alley']
     dictionary = []
     for i in range(0, len(types)):
         locations = nearbySearchRequestFiltered(location, radius, maxprice, types[i])
         dictionary.append(locations)
 
-    schedule = []
-    numEvents = 5
-    for event in range(numEvents):
-        type = random.choice(range(len(dictionary)))
-        data = dictionary[type]
-        schedule.append(random.choice(data))
+    schedules = []
+    for index in range(numSchedules):
+        schedule = []
+        for event in range(numEventsPerSchedule):
+            typeIndex = random.choice(range(len(dictionary)))
+            while len(dictionary[typeIndex]) == 0:
+                typeIndex = random.choice(range(len(dictionary)))
+            data = dictionary[typeIndex]
+            schedule.append(random.choice(data))
+        schedules.append(schedule)
 
-    return schedule
+    return schedules
