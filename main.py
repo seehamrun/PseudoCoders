@@ -29,22 +29,20 @@ class FavoritesHandler(webapp2.RequestHandler):
         favoriteSchedules = userFavorites.favorites #holds list of favoriteSchedules in Schedule forms
         current = userFavorites.current #current one to display
 
-        currentFavorite = favoriteSchedules[current] #this is a Schedule item
-        events = []
-        for event in currentFavorite.split("||"):
-            events.append(api_implementation.getDictionary(event))
-
-        data = {
-            'numEntries' : len(favorites),
-            'favorites' : events
-        }
+        data = {'numEntries' : len(favoriteSchedules)}
+        if len(favoriteSchedules) > 0:
+            currentFavorite = favoriteSchedules[current] #this is a Schedule item
+            events = []
+            for event in currentFavorite.split("||"):
+                events.append(api_implementation.getDictionary(event))
+            data['favorites'] = events
 
         self.response.headers['Content-Type'] = 'text/html'
         responseHTML = jinja_env.get_template('templates/favorites.html')
         self.response.write(responseHTML.render(data))
 
         userFavorites.current += 1
-        if userFavorites.current >= len(favorites):
+        if userFavorites.current >= len(favoriteSchedules):
             userFavorites.current = 0
         userFavorites.put()
 
