@@ -85,6 +85,8 @@ class SearchHandler(webapp2.RequestHandler):
         # self.response.write(response_html.render(data))
 
     def post(self):
+        start = time.time()
+
         priceVar = self.request.get('price')
         ratingVar = self.request.get('rating')
         dateVar = self.request.get('date')
@@ -92,7 +94,7 @@ class SearchHandler(webapp2.RequestHandler):
         radiusVar = self.request.get('radius')
         typeVar = self.request.get('type')
 
-        markerA = time.time()
+        #markerA = time.time()
         #logging.info("MARKER A RUNTIME = " + str(markerA - start))
 
         userQueryItemList = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
@@ -103,7 +105,7 @@ class SearchHandler(webapp2.RequestHandler):
         else:
             userQueryItem = userQueryItemList[0]
 
-        markerB = time.time()
+        #markerB = time.time()
         #logging.info("MARKER B RUNTIME = " + str(markerB - markerA))
 
         userQueryItem.price = priceVar
@@ -114,7 +116,7 @@ class SearchHandler(webapp2.RequestHandler):
         userQueryItem.type = typeVar
         userQueryItem.put()
 
-        markerC = time.time()
+        #markerC = time.time()
         #logging.info("MARKER C RUNTIME = " + str(markerC - markerB))
 
         types = []
@@ -127,7 +129,7 @@ class SearchHandler(webapp2.RequestHandler):
         elif typeVar == "diverse":
             types = ['museum', 'gym', 'store']
 
-        markerD = time.time()
+        #markerD = time.time()
         #logging.info("MARKER D RUNTIME = " + str(markerD - markerC))
 
 
@@ -135,12 +137,12 @@ class SearchHandler(webapp2.RequestHandler):
         output = api_implementation.makeSchedules(locationVar, radiusVar, priceVar, 3, 5, types)
         #assume this is a list (of schedules -> lists (of events -> strings) combined with "||")
 
-        markerE = time.time()
-        logging.info("MARKER E RUNTIME = " + str(markerE - markerD))
+        #markerE = time.time()
+        #logging.info("MARKER E RUNTIME = " + str(markerE - markerD))
 
         userResultsItemList = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
 
-        markerF = time.time()
+        #markerF = time.time()
         #logging.info("MARKER F RUNTIME = " + str(markerF - markerE))
 
         userResultsItem = None
@@ -150,7 +152,7 @@ class SearchHandler(webapp2.RequestHandler):
         else:
             userResultsItem = userResultsItemList[0]
 
-        markerG = time.time()
+        #markerG = time.time()
         #logging.info("MARKER G RUNTIME = " + str(markerG - markerF))
 
         userResultsItem.schedules = []
@@ -163,7 +165,7 @@ class SearchHandler(webapp2.RequestHandler):
             userResultsItem.schedules.append(newSchedule)
             userResultsItem.put()
 
-        markerH = time.time()
+        #markerH = time.time()
         #logging.info("MARKER H RUNTIME = " + str(markerH - markerG))
 
         userResultsItem.put()
@@ -171,13 +173,10 @@ class SearchHandler(webapp2.RequestHandler):
         #logging.info(output)
         #logging.info(len(userResultsItem.schedules))
 
-<<<<<<< HEAD
         end = time.time()
         #logging.info("MARKER END RUNTIME = " + str(end - markerH))
         logging.info("Runtime of the Search Handler POST method is " + str(end - start) + " seconds")
 
-=======
->>>>>>> e742669d2a6f5cf73439f013c397900c7958ee7c
         return webapp2.redirect('/results')
 
 class ResultsHandler(webapp2.RequestHandler):
