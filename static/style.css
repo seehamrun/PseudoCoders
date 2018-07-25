@@ -196,3 +196,31 @@
 	83% {
 		-moz-transform: rotateX(45deg) rotate(45deg) scaleY(3);
 	}
+
+/* About Us page formatting */
+
+.aboutwrapper {
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 200px;
+  grid-template-rows: 2fr 2fr;
+  grid-column-gap: 200px;
+}
+
+
+.about_ethan {
+  grid-column: 1;
+  grid-row: 1;
+  }
+.about_maeve {
+  grid-column: 1;
+  grid-row: 2;
+}
+.about_tiera {
+  grid-column: 2;
+  grid-row: 1;
+}
+.about_juan {
+  grid-column: 2;
+  grid-row: 2;
+}
