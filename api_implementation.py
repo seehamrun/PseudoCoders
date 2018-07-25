@@ -129,7 +129,7 @@ def nearbySearchRequestFiltered(location, radius, maxprice, type):
         if ('rating' in results):
             dictionary["RATING"] = results['rating']
 
-        if not len(dictionary) == 0:
+        if not len(dictionary["NAME"]) == 0:
             newList.append(dictionary)
 
     return newList
