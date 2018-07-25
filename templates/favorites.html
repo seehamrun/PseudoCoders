@@ -57,7 +57,9 @@
         <br>
       {% endfor %}
       <button id="seeNext">See Next Favorite!</button>
-      <button id="delete" method="delete">Remove this schedule from your favorites!</button>
+      <form method="delete">
+        <button id="delete">Remove This From favorites!</button>
+      </form>
       <form method="post">
         <input type="submit" value="postToGallery">
       </form>
