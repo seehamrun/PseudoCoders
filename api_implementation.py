@@ -5,6 +5,7 @@ import ast
 import random
 import yaml
 import re
+import time
 from google.appengine.api import urlfetch
 
 
@@ -103,14 +104,23 @@ def nearbySearchRequest(location, radius):
 #             newString += c
 
 def nearbySearchRequestFiltered(location, radius, maxprice, type):
-    #time1 = time.clock()
+    markerA = time.time()
+
     google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/nearbysearch/%s?key=%s&location=%s&radius=%s&type=%s&minprice=%s&maxprice=%s" % ("json", api.googleKey, getLatitudeLongitude(location), radius, type, 0, maxprice)
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
     response = response['results']
     logging.info(google_url)
     newList = []
-    for item in response:
+
+    markerB = time.time()
+    logging.info("markerB just took " +str(markerB-markerA) + " seconds to run!")
+
+    for index in range(len(response)):
+    #for item in response:
+        if index > 4:
+            break
+        item = response[index]
         dictionary = {}
         place_id = item['place_id']
         place_details = fetchPlaceDetails(place_id)
@@ -133,7 +143,11 @@ def nearbySearchRequestFiltered(location, radius, maxprice, type):
         if not len(dictionary["NAME"]) == 0:
             newList.append(dictionary)
     #time2 = time.clock()
-    #logging.info(time2-time1)
+    #logging.info("The runtime of nearbySearchRequestFiltered is " + str(time2-time1))
+
+    markerC = time.time()
+    logging.info("markerC just took " +str(markerC-markerB) + " seconds to run!")
+
     return newList
 
 def fixFormat(stringText):
@@ -160,11 +174,20 @@ def getLatitudeLongitude(location):
 #types = ['amusement_park', 'aquarium', 'art_gallery', 'bakery', 'bar', 'beauty_salon', 'bowling_alley', 'cafe', 'casino', 'gym', 'library', 'movie_theater', 'museum', 'night_club', 'park', 'restaurant', 'shopping_mall', 'stadium', 'store', 'zoo']
 #types = ['restaurant', 'cafe', 'shopping_mall', 'museum', 'gym','movie_theater','bakery', 'store', 'park', 'bowling_alley']
 def makeSchedules(location, radius, maxprice, numEventsPerSchedule, numSchedules, types):
+    #start = time.time()
+
     dictionary = []
     for i in range(0, len(types)):
         locations = nearbySearchRequestFiltered(location, radius, maxprice, types[i])
+        ##THIS METHOD IS TAKING WAY TOO LONG ^^^^^
+        #duration = time.time() - start
+        #start = time.time()
+        #logging.info("nearbySearchRequestFiltered just took " +str(duration) + " seconds to run!")
         dictionary.append(locations)
     #logging.info(dictionary)
+
+    #markerA = time.time()
+    #logging.info("MARKER A RUNTIME = " + str(markerA - start))
 
     schedules = []
     for index in range(numSchedules):
@@ -177,6 +200,10 @@ def makeSchedules(location, radius, maxprice, numEventsPerSchedule, numSchedules
             schedule +=  str(random.choice(data)) + "||"
         schedules.append(schedule[0:-2])
 
+    #markerB = time.time()
+    #logging.info("MARKER B RUNTIME = " + str(markerB - markerA))
+
+
     output = []
     for item in schedules:
         #logging.info(item)
@@ -184,7 +211,9 @@ def makeSchedules(location, radius, maxprice, numEventsPerSchedule, numSchedules
             #logging.info(item2)
         #    output.append(item2)
         output.append(item)
-    logging.info("MAKE SCHEDULES HAS FINISHED RUNNING!!!!")
+
+    #markerC = time.time()
+    #logging.info("MARKER C RUNTIME = " + str(markerC - markerB))
     return output
 
 def getDictionary(inputString):
