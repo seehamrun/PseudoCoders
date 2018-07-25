@@ -15,11 +15,12 @@ class FavoritesHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/favorites.html')
-        userFavorites = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()[0]
-        data = {
-            "favorites":userFavorites.favorites
-        }
-        return self.response.write(template.render())
+        userFavorites = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
+        if len(userFavorites) > 0:
+            data = {
+                "favorites":userFavorites[0].favorites
+                }
+        return self.response.write(template.render(data))
 
 class GalleryHandler(webapp2.RequestHandler):
     def get(self):
@@ -140,11 +141,15 @@ class ResultsHandler(webapp2.RequestHandler):
         userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()[0]
         currentSchedule = userResultsItem.schedules[userResultsItem.current]
 
-        userProfile = database.UserFavorites.query(database.UserFavorites.userID==users.get_current_user().user_id()).fetch()[0]
-        if userResultsItem == []:
+        userProfile = database.UserFavorites.query(database.UserFavorites.userID==users.get_current_user().user_id()).fetch()
+        if userProfile == []:
             userProfile = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
             userProfile.put()
-        userProfile.schedules.append(currentSchedule)
+        userProfile[0].put()
+        userProfile[0].favorites.append(currentSchedule)
+        userProfile[0].put()
+
+        return webapp2.redirect('/results')
 
 
 class AboutHandler(webapp2.RequestHandler):

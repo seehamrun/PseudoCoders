@@ -29,8 +29,12 @@
         <p>Rating: {{result["RATING"]}}</p>
         <br>
       {% endfor %}
-      <button id="addFavorite" method="post">Add To Favorites!</button>
+      <form method="post">
       <button id="getAnother">Get Another Schedule!</button>
+      <!-- <button id="addFavorite" method="post">Add To Favorites!</button> -->
+      <!-- <input type="submit" value="Submit"> -->
+      <input type="submit" value="addFavorite">
+      </form>
       <a href="/search">NEW SEARCH</a>
   </body>
 </html>

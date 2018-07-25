@@ -7,7 +7,7 @@ function refresh() {
 
 function addFavorite() {
   alert("Schedule added to your favorites...a new schedule has been generated for you!")
-  refresh()
+  //refresh()
 }
 
 
