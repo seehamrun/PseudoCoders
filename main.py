@@ -187,12 +187,17 @@ class ResultsHandler(webapp2.RequestHandler):
         #logging.info(data)
 
     def post(self):
+        #logging.info("")
         userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()[0]
-        currentSchedule = userResultsItem.schedules[userResultsItem.current]
+        if userResultsItem.current == 0:
+            currentSchedule = userResults.Item.schedules[len(userResults.Item.schedules)-1]
+        else:
+            currentSchedule = userResultsItem.schedules[userResultsItem.current-1]
 
         userProfile = database.UserFavorites.query(database.UserFavorites.userID==users.get_current_user().user_id()).fetch()
         if userProfile == []:
             userProfile = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
+        logging.info(currentSchedule)
         userProfile[0].favorites.append(currentSchedule)
         userProfile[0].put()
 
