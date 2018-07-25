@@ -20,6 +20,7 @@ class Schedule(ndb.Model): #for now, this will be a single-day schedule
 class UserFavorites(ndb.Model):
     userID = ndb.StringProperty()
     favorites = ndb.StructuredProperty(Schedule, repeated=True)
+    current = ndb.IntegerProperty()
 
 class LastResultSchedules(ndb.Model):
     schedules = ndb.StructuredProperty(Schedule, repeated=True)
