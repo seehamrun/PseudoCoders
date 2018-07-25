@@ -204,9 +204,13 @@
   color:purple;
   display:grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 200px;
+  grid-gap: 50px;
   grid-template-rows: 2fr 2fr;
-  grid-column-gap: 200px;
+  grid-column-gap: 75px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 
