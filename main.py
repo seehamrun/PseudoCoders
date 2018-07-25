@@ -17,12 +17,14 @@ class FavoritesHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/favorites.html')
-        userFavorites = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
-        if userFavorites == []:
+        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
+        userFavorites = None
+        if userFavoritesList == []:
             userFavorites = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
             userFavorites.put()
-
-        newList = userFavorites[0].favorites #newList holds list of favoriteSchedules in Schedule forms
+        else:
+            userFavorites = userFavoritesList[0]
+        newList = userFavorites.favorites #newList holds list of favoriteSchedules in Schedule forms
         list = []
         for schedule in newList: #for each Schedule object "schedule" in ^^^^
             list2 = []
@@ -90,102 +92,72 @@ class SearchHandler(webapp2.RequestHandler):
         radiusVar = self.request.get('radius')
         typeVar = self.request.get('type')
 
-        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
-        if userQueryItem == None:
-            newItem = database.LastSearchQuery(userID=users.get_current_user().user_id(), price=priceVar, rating=ratingVar, date=dateVar, location=locationVar, radius=radiusVar, type=typeVar)
-            newItem.put()
+        userQueryItemList = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        userQueryItem = None
+        if userQueryItemList == []:
+            userQueryItem = database.LastSearchQuery(userID=users.get_current_user().user_id(), price=priceVar, rating=ratingVar, date=dateVar, location=locationVar, radius=radiusVar, type=typeVar)
+            userQueryItem.put()
         else:
-            userQueryItem[0].price = priceVar
-            userQueryItem[0].rating = ratingVar
-            userQueryItem[0].date = dateVar
-            userQueryItem[0].location = locationVar
-            userQueryItem[0].radius = radiusVar
-            userQueryItem[0].type = typeVar
-            userQueryItem[0].put()
-
-        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()[0]
+            userQueryItem = userQueryItemList[0]
+        userQueryItem.price = priceVar
+        userQueryItem.rating = ratingVar
+        userQueryItem.date = dateVar
+        userQueryItem.location = locationVar
+        userQueryItem.radius = radiusVar
+        userQueryItem.type = typeVar
         userQueryItem.put()
 
         output = api_implementation.makeSchedules(locationVar, radiusVar, priceVar, 5, 10)
         #assume this is a list of lists of strings
 
-        userResultsItem = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
-        if userResultsItem == None or userResultsItem == []:
-            generatedSchedules = []
-            userResultsItem = database.LastResultSchedules(userID=users.get_current_user().user_id(), schedules=[], current=0)[0]
+        userResultsItemList = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        userResultsItem = None
+        if userResultsItemList == []:
+            userResultsItem = database.LastResultSchedules(userID=users.get_current_user().user_id(), schedules=[], current=0)
             userResultsItem.put()
         else:
-            userResultsItem[0].schedules = []
-            userResultsItem[0].current = 0
-            userResultsItem[0].put()
+            userResultsItem = userResultsItemList[0]
+
+        userResultsItem.schedules = []
+        userResultsItem.current = 0
+        userResultsItem.put()
         for schedule in output:
             newSchedule = database.Schedule(events=schedule)
             newSchedule.put()
-            userResultsItem[0].schedules.append(newSchedule)
-            userResultsItem[0].put()
+            userResultsItem.schedules.append(newSchedule)
+            userResultsItem.put()
 
         return webapp2.redirect('/results')
 
 class ResultsHandler(webapp2.RequestHandler):
     def get(self):
-        userQueryItem = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        userQueryItemList = database.LastSearchQuery.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
+        userQueryItem = None
+        if userQueryItemList == []:
+            userQueryItem = database.LastSearchQuery(price="", rating="", location="", radius="", date="", type="", userID=users.get_current_user().user_id())
+            userQueryItem.put()
+        else:
+            userQueryItem = userQueryItemList[0]
 
-        # try:
-        #     userQueryItem[0].date
-        # except NameError:
-        #     data = {}
-        #     self.response.headers['Content-Type'] = 'text/html'
-        #     responseHTML = jinja_env.get_template('templates/results.html')
-        #     self.response.write(responseHTML.render(data))
-        #     return
-        #
-        # if userQueryItem == [] or userQueryItem == None:
-        #     data = {}
-        #     self.response.headers['Content-Type'] = 'text/html'
-        #     responseHTML = jinja_env.get_template('templates/results.html')
-        #     self.response.write(responseHTML.render(data))
-        #     return
+        location = userQueryItem.location
+        radius = userQueryItem.radius
+        type = userQueryItem.type
+        rating = userQueryItem.rating
+        price = userQueryItem.price
+        userID = userQueryItem.userID
+        date = userQueryItem.date
 
-        location = userQueryItem[0].location
-        radius = userQueryItem[0].radius
-        type = userQueryItem[0].type
-        rating = userQueryItem[0].rating
-        price = userQueryItem[0].price
-        userID = userQueryItem[0].userID
-        date = userQueryItem[0].date
-
-        userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()
-        # try:
-        #     userResultsItem[0].current
-        # except IndexError:
-        #     data = {}
-        #     self.response.headers['Content-Type'] = 'text/html'
-        #     responseHTML = jinja_env.get_template('templates/results.html')
-        #     self.response.write(responseHTML.render(data))
-        #     return
-        #
-        # if userResultsItem == [] or userResultsItem == None:
-        #     data = {}
-        #     self.response.headers['Content-Type'] = 'text/html'
-        #     responseHTML = jinja_env.get_template('templates/results.html')
-        #     self.response.write(responseHTML.render(data))
-        #     return
-
-        try:
-            userResultsItem[0]
-        except IndexError:
-            userResultsItem = database.LastResultSchedules(userID=users.get_current_user().user_id(), current=0, schedules=[])
+        userResultsItemList = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()
+        userResultsItem = None
+        if userResultsItemList == []:
+            userResultsItem = database.LastResultSchedules(schedules=[], userID=users.get_current_user().user_id(), current=0)
             userResultsItem.put()
-
-        userResultsItem = database.LastResultSchedules.query(database.LastResultSchedules.userID==users.get_current_user().user_id()).fetch()
+        else:
+            userResultsItem = userResultsItemList[0]
 
         newList = []
-        if not len(userResultsItem[0].schedules) == 0:
-            newList = userResultsItem[0].schedules[userResultsItem[0].current].events.split("||")
-            userResultsItem[0].put()
-
-        # logging.info(userResultsItem[0].current)
-        # logging.info(len(userResultsItem[0].schedules))
+        if not len(userResultsItem.schedules) == 0:
+            newList = userResultsItem.schedules[userResultsItem.current].events.split("||")
 
         newList2 = []
         for item in newList:
@@ -193,7 +165,7 @@ class ResultsHandler(webapp2.RequestHandler):
                 newList2.append(api_implementation.getDictionary(item))
 
         data = {
-            "queryObject" : userQueryItem[0],
+            "queryObject" : userQueryItem,
             "results" : newList2
         }
 
@@ -202,10 +174,10 @@ class ResultsHandler(webapp2.RequestHandler):
         self.response.write(responseHTML.render(data))
         #logging.info(data)
 
-        userResultsItem[0].current += 1
-        if userResultsItem[0].current == len(userResultsItem[0].schedules):
-            userResultsItem[0].current = 0
-        userResultsItem[0].put()
+        userResultsItem.current += 1
+        if userResultsItem.current >= len(userResultsItem.schedules):
+            userResultsItem.current = 0
+        userResultsItem.put()
 
     def post(self):
         #logging.info("")
