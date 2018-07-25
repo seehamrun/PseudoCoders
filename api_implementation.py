@@ -116,9 +116,9 @@ def nearbySearchRequestFiltered(location, radius, maxprice, type):
         results = place_details
         dictionary["PLACEID"] = place_id
         if ('name' in results):
-            dictionary["NAME"] = results['name']
+            dictionary["NAME"] = fixFormat(results['name'])
         if ('formatted_address' in results):
-            dictionary["ADDRESS"] = results['formatted_address']
+            dictionary["ADDRESS"] = fixFormat(results['formatted_address'])
         # if ('types' in results):
         #     dictionary["TYPE"] = results['types']
         dictionary["TYPE"] = type.replace("_", " ").title()
@@ -134,6 +134,10 @@ def nearbySearchRequestFiltered(location, radius, maxprice, type):
 
     return newList
 
+def fixFormat(stringText):
+    # stringText = str(stringText).replace("\u"," ")
+    # stringText = str(stringText).replace("u"," ")
+    return stringText.encode("utf-8")
 
 
 #def getLatitudeLongitude(first_line, city, state):
