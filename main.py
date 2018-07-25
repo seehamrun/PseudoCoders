@@ -119,8 +119,8 @@ class ResultsHandler(webapp2.RequestHandler):
 
         newList2 = []
         for item in newList:
-            #logging.info(item)
-            newList2.append(api_implementation.getDictionary(item))
+            if len(item) > 0:
+                newList2.append(api_implementation.getDictionary(item))
 
         data = {
             "queryObject" : userQueryItem,
