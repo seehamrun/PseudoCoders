@@ -54,7 +54,7 @@ class MapHandler(webapp2.RequestHandler):
         # location =
         # schedule =
         map_image_url = {
-            "map_image_url": "https://www.google.com/maps/embed/v1/directions?origin=place_id:ChIJ7cv00DwsDogRAMDACa2m4K8&destination=place_id:ChIJh7cdP7o0DogRqK7U1X2NWN8&key=%s" % (api.googleKey)
+            "map_image_url": "https://www.google.com/maps/embed/v1/directions?origin=+chicago,+il&waypoints=+river+forest,+il|+naperville,+il&destination=+oak+park,+il&key=%s" % (api.googleKey)
             #maps.create_map_url(location, schedule)
         }
         return self.response.write(template.render(map_image_url))
