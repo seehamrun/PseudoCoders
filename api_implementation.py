@@ -137,7 +137,7 @@ def nearbySearchRequestFiltered(location, radius, maxprice, type):
 def fixFormat(stringText):
     # stringText = str(stringText).replace("\u"," ")
     # stringText = str(stringText).replace("u"," ")
-    return stringText.encode("utf-8")
+    return stringText.encode("utf-8").decode('utf8').encode('ascii', errors='ignore')
 
 
 #def getLatitudeLongitude(first_line, city, state):
