@@ -3,6 +3,7 @@ import json
 import logging
 import ast
 import random
+import yaml
 from google.appengine.api import urlfetch
 
 
@@ -118,8 +119,9 @@ def nearbySearchRequestFiltered(location, radius, maxprice, type):
             dictionary["NAME"] = results['name']
         if ('formatted_address' in results):
             dictionary["ADDRESS"] = results['formatted_address']
-        if ('types' in results):
-            dictionary["TYPE"] = results['types']
+        # if ('types' in results):
+        #     dictionary["TYPE"] = results['types']
+        dictionary["TYPE"] = type
         # if ('opening_hours' in results):
         #     dictionary["HOURS"] = results['opening_hours']
         if ('price_level' in results):
@@ -166,9 +168,8 @@ def makeSchedules(location, radius, maxprice, numEventsPerSchedule, numSchedules
 
     return schedules
 
-def getJSONDictionary(inputString):
-    betterString = str(inputString).replace("'", "\"")
-    logging.info(betterString)
-    #dictionary = json.loads(betterString)
-    dictionary = []
+def getDictionary(inputString):
+    #dictionary = {}
+    #logging.info(inputString)
+    dictionary = yaml.load(inputString)
     return dictionary
