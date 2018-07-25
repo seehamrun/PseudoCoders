@@ -12,7 +12,7 @@ body {
     background: #e6e6e6;
     color: #333;
     font-family: 'Open Sans', sans-serif;
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     align-items: stretch;
 }
