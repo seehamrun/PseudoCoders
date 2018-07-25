@@ -195,9 +195,17 @@ class ResultsHandler(webapp2.RequestHandler):
             currentSchedule = userResultsItem.schedules[userResultsItem.current-1]
 
         userProfile = database.UserFavorites.query(database.UserFavorites.userID==users.get_current_user().user_id()).fetch()
-        if userProfile == []:
+        # if userProfile == [] or userProfile == None:
+        #     userProfile = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
+        try:
+            userProfile[0]
+        except (TypeError, IndexError):
             userProfile = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
-        logging.info(currentSchedule)
+            userProfile.put()
+            logging.info("CAUGHT ERROR")
+
+        #logging.info(currentSchedule)
+        userProfile = database.UserFavorites.query(database.UserFavorites.userID==users.get_current_user().user_id()).fetch()
         userProfile[0].favorites.append(currentSchedule)
         userProfile[0].put()
 
