@@ -1,18 +1,23 @@
 <html>
   <head>
-    <link rel="stylesheet" href="/static/style.css"></link>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="/static/results_script.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
-  </head>
-  <body>
-    <ul class="navbar">
-      <li><a href="/" >Main</a></li>
-      <li><a class="active" href="/search">Search</a></li>
-      <li><a href='/favorites'>Favorites</a></li>
-      <li><a href='/gallery'>Gallery</a></li>
-      <li><a href='/about'>About Us</a></li>
-    </ul>
+    <meta charset="UTF-8">
+    <title>Results</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="/static/newDesign.css"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <header>
+        <div class="title">
+            Planner Pro
+        </div>
+        <div class="menu">
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/material">More</a>
+        </div>
+        <img src="http://www.jmkxyy.com/planner-icon-png/planner-icon-png-17.jpg" alt="Logo">
+    </header>
     <h1> Results!</h1>
       <h2>Here is a summary of your search query:</h2>
       <p> DATE: {{queryObject.date}} </p>
