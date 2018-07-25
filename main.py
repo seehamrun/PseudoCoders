@@ -33,7 +33,7 @@ class FavoritesHandler(webapp2.RequestHandler):
         if len(favoriteSchedules) > 0:
             currentFavorite = favoriteSchedules[current] #this is a Schedule item
             events = []
-            for event in currentFavorite.split("||"):
+            for event in currentFavorite.events.split("||"):
                 events.append(api_implementation.getDictionary(event))
             data['favorites'] = events
 
