@@ -193,8 +193,6 @@ class ResultsHandler(webapp2.RequestHandler):
         userProfile = database.UserFavorites.query(database.UserFavorites.userID==users.get_current_user().user_id()).fetch()
         if userProfile == []:
             userProfile = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
-            userProfile.put()
-        userProfile[0].put()
         userProfile[0].favorites.append(currentSchedule)
         userProfile[0].put()
 
