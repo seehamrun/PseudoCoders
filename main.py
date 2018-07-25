@@ -31,8 +31,8 @@ class FavoritesHandler(webapp2.RequestHandler):
             events = schedule.events #string of events
             list3 = events.split("||")
             for li in list3:
-                if len(li) > 0:
-                    list2.append(api_implementation.getDictionary(li))
+                #if len(li) > 0:
+                list2.append(api_implementation.getDictionary(li))
             list.append(list2)
 
         data = {
@@ -110,7 +110,7 @@ class SearchHandler(webapp2.RequestHandler):
         #types = ['restaurant', 'cafe', 'shopping_mall', 'museum', 'gym','movie_theater','bakery', 'store', 'park', 'bowling_alley']
         types = ['restaurant']
         output = api_implementation.makeSchedules(locationVar, radiusVar, priceVar, 4, 1, types)
-        #assume this is a list of lists of strings
+        #assume this is a list (of schedules -> lists (of events -> strings) combined with "||")
 
         userResultsItemList = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
         userResultsItem = None
@@ -123,11 +123,17 @@ class SearchHandler(webapp2.RequestHandler):
         userResultsItem.schedules = []
         userResultsItem.current = 0
         userResultsItem.put()
-        for schedule in output:
+        for schedule in output: #schedule is a list of strings combined with "||"
+            #logging.info(schedule)
             newSchedule = database.Schedule(events=schedule)
             newSchedule.put()
             userResultsItem.schedules.append(newSchedule)
             userResultsItem.put()
+
+        userResultsItem.put()
+
+        #logging.info(output)
+        #logging.info(len(userResultsItem.schedules))
 
         return webapp2.redirect('/results')
 
@@ -156,15 +162,20 @@ class ResultsHandler(webapp2.RequestHandler):
             userResultsItem.put()
         else:
             userResultsItem = userResultsItemList[0]
+            #logging.info("WE RETRIEVED THE DATA AND DID SOMETHING WITH IT!!!!")
 
+        #userResultsItem is a datastore schedule object with field schedules as a list of schedules
+        logging.info(len(userResultsItem.schedules))
         newList = []
         if not len(userResultsItem.schedules) == 0:
             newList = userResultsItem.schedules[userResultsItem.current].events.split("||")
+        #newList holds the current schedule from UserResults which is then split to become a list of events in string dictionary form
 
         newList2 = []
         for item in newList:
-            if len(item) > 0:
-                newList2.append(api_implementation.getDictionary(item))
+            # if len(item) > 0:
+            logging.info(item)
+            newList2.append(api_implementation.getDictionary(item))
 
         data = {
             "queryObject" : userQueryItem,
