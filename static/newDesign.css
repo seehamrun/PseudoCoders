@@ -39,8 +39,8 @@ a {
   font-family: roboto;
 }
 
-#submit {
-    background-color: #4CAF50;
+.button {
+    background-color: purple;
     border: none;
     color: white;
     padding: 15px 32px;
