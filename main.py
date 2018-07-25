@@ -166,8 +166,6 @@ class ResultsHandler(webapp2.RequestHandler):
         userResultsItem[0].current += 1
         if userResultsItem[0].current == len(userResultsItem[0].schedules):
             userResultsItem[0].current = 0
-            #logging.info("BIG TEST MESSAGE")
-            userResultsItem[0].put()
         userResultsItem[0].put()
 
         # logging.info(userResultsItem[0].current)
