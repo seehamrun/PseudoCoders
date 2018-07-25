@@ -159,10 +159,10 @@ def getLatitudeLongitude(location):
 #types = ['amusement_park', 'aquarium', 'art_gallery', 'bakery', 'bar', 'beauty_salon', 'bowling_alley', 'cafe', 'casino', 'gym', 'library', 'movie_theater', 'museum', 'night_club', 'park', 'restaurant', 'shopping_mall', 'stadium', 'store', 'zoo']
 #types = ['restaurant', 'cafe', 'shopping_mall', 'museum', 'gym','movie_theater','bakery', 'store', 'park', 'bowling_alley']
 def makeSchedules(location, radius, maxprice, numEventsPerSchedule, numSchedules, types):
-    dictionary = {}
+    dictionary = []
     for i in range(0, len(types)):
         locations = nearbySearchRequestFiltered(location, radius, maxprice, types[i])
-        dictionary[i] = locations
+        dictionary.append(locations)
     #logging.info(dictionary)
 
     schedules = []
@@ -173,11 +173,18 @@ def makeSchedules(location, radius, maxprice, numEventsPerSchedule, numSchedules
             while len(dictionary[typeIndex]) == 0:
                 typeIndex = random.randint(0,len(types)-1)
             data = getDictionary(str(dictionary[typeIndex]))
-            schedule += "||" + str(random.choice(data))
-        logging.info(schedule)
-        schedules.append(schedule)
+            schedule +=  str(random.choice(data)) + "||"
+        schedules.append(schedule[0:-2])
 
-    return schedules
+    output = []
+    for item in schedules:
+        #logging.info(item)
+        #for item2 in item.split("||"):
+            #logging.info(item2)
+        #    output.append(item2)
+        output.append(item)
+    #logging.info(output)
+    return output
 
 def getDictionary(inputString):
     #dictionary = {}
