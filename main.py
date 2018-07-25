@@ -17,9 +17,21 @@ class FavoritesHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/favorites.html')
         userFavorites = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
         if len(userFavorites) > 0:
+
+            newList = userFavorites[0].favorites #newList holds list of favoriteSchedules in Schedule forms
+            list = []
+            for schedule in newList: #for each Schedule object "schedule" in ^^^^
+                list2 = []
+                events = schedule.events #string of events
+                list3 = events.split("||")
+                for li in list3:
+                    if len(li) > 0:
+                        list2.append(api_implementation.getDictionary(li))
+                list.append(list2)
+
             data = {
-                "favorites":userFavorites[0].favorites
-                }
+                "favorites":list
+            }
         return self.response.write(template.render(data))
 
 class GalleryHandler(webapp2.RequestHandler):
@@ -96,7 +108,7 @@ class SearchHandler(webapp2.RequestHandler):
             userResultsItem.current = 0
             userResultsItem.put()
         for schedule in output:
-            newSchedule = database.Schedule(events=schedule, usersWhoSaved="")
+            newSchedule = database.Schedule(events=schedule)
             newSchedule.put()
             userResultsItem.schedules.append(newSchedule)
             userResultsItem.put()

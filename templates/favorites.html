@@ -12,8 +12,16 @@
       <li><a  href='/about'>About Us</a></li>
     </ul>
     <h1>Favorites</h1>
-    {% for favorite in favorites %}
-      <div>{{favorite}}</div>
+    {% for favoriteSchedule in favorites %}
+      <h2>Here is a schedule you have saved:</h2>
+      {% for favorite in favoriteSchedule %}
+      <p>Name: {{favorite["NAME"]}}</p>
+      <p>Address: {{favorite["ADDRESS"]}}</p>
+      <p>Type: {{favorite["TYPE"]}}</p>
+      <p>Price Level: {{favorite["PRICE"]}}</p>
+      <p>Rating: {{favorite["RATING"]}}</p>
+      <br>
+    {% endfor %}
     {% endfor %}
     <!-- <button class="button" style="vertical-align:middle"><span>Log In</span></button> -->
   </body>
