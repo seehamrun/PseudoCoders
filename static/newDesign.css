@@ -8,6 +8,11 @@ html, body {
     font-size: 20px;
 }
 
+.navbar {
+    position: fixed;
+    width: 100%;
+}
+
 body {
     background: #e6e6e6;
     color: #333;
