@@ -4,6 +4,8 @@ import os
 import database
 import logging
 import api_implementation
+import maps_api_implementation as maps
+import api
 from google.appengine.api import users
 
 jinja_env = jinja2.Environment(
@@ -49,7 +51,13 @@ class MapHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/map.html')
-        return self.response.write(template.render())
+        # location =
+        # schedule =
+        map_image_url = {
+            "map_image_url": "https://www.google.com/maps/embed/v1/directions?origin=place_id:ChIJ7cv00DwsDogRAMDACa2m4K8&destination=place_id:ChIJh7cdP7o0DogRqK7U1X2NWN8&key=%s" % (api.googleKey)
+            #maps.create_map_url(location, schedule)
+        }
+        return self.response.write(template.render(map_image_url))
 
 class PostHandler(webapp2.RequestHandler):
     def get(self):
