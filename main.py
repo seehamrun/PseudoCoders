@@ -107,9 +107,17 @@ class SearchHandler(webapp2.RequestHandler):
         userQueryItem.type = typeVar
         userQueryItem.put()
 
+        types = []
+
+        if typeVar == "food":
+            types = ['restaurant', 'cafe', 'bakery']
+        elif typeVar == "friends":
+            types = ['shopping_mall', 'movie_theater', 'park', 'bowling_alley']
+        elif typeVar == "diverse":
+            types = ['museum', 'gym', 'store']
+
         #types = ['restaurant', 'cafe', 'shopping_mall', 'museum', 'gym','movie_theater','bakery', 'store', 'park', 'bowling_alley']
-        types = ['restaurant']
-        output = api_implementation.makeSchedules(locationVar, radiusVar, priceVar, 4, 1, types)
+        output = api_implementation.makeSchedules(locationVar, radiusVar, priceVar, 3, 5, types)
         #assume this is a list (of schedules -> lists (of events -> strings) combined with "||")
 
         userResultsItemList = database.LastResultSchedules.query(database.LastSearchQuery.userID==users.get_current_user().user_id()).fetch()
