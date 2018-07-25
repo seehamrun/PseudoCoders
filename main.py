@@ -282,7 +282,7 @@ class MainHandler(webapp2.RequestHandler):
             greeting = 'Welcome, {}! <a href="{}">sign out</a>'.format(nickname, logout_url)
         else:
             login_url = users.create_login_url('/')
-            greeting = '<a href="{}"><img src="/images/signinblue.png" height="46" width="191"></a>'.format(login_url)
+            greeting = '<a href="{}"><center><img src="/images/signinblue.png" height="46" width="191"></center></a>'.format(login_url)
 
         self.response.write('<html><body><div id="login_text">{}</div></body></html>'.format(greeting))
 
