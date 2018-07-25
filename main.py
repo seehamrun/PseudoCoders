@@ -34,6 +34,10 @@ class FavoritesHandler(webapp2.RequestHandler):
             userFavorites.current = 0
             userFavorites.put()
 
+        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
+        userFavorites = userFavoritesList[0]
+        favoriteSchedules = userFavorites.favorites
+
         data = {'numEntries' : len(favoriteSchedules)}
         if len(favoriteSchedules) > 0:
             currentFavorite = favoriteSchedules[current] #this is a Schedule item
