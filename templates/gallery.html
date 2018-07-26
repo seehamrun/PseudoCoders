@@ -21,7 +21,13 @@
         </header>
     <div class="plain-text">
     <h1> Gallery</h1>
-    <p>Todo: make a gallery lol</p>
+    {% for schedule in gallery_schedules %}
+      <p>Name: {{schedule["NAME"]}}</p>
+      <p>Address: {{schedule["ADDRESS"]}}</p>
+      <p>Type: {{schedule["TYPE"]}}</p>
+      <p>Price Level: {{schedule["PRICE"]}}</p>
+      <br>
+    {% endfor %}
     <a href="/">Back to Main Page</a>
       </div>
     </body>
