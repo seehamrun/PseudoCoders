@@ -50,6 +50,7 @@ class FavoritesHandler(webapp2.RequestHandler):
             for event in currentFavorite.events.split("||"):
                 eventsList.append(api_implementation.getDictionary(event))
             data['favorites'] = eventsList
+            data['number'] = userFavorites.current
 
         self.response.headers['Content-Type'] = 'text/html'
         responseHTML = jinja_env.get_template('templates/favorites.html')
