@@ -90,7 +90,7 @@ class GalleryHandler(webapp2.RequestHandler):
 class MapHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('templates/.html')
+        template = jinja_env.get_template('templates/map.html')
         # location =
         # schedule =
         map_image_url = {
