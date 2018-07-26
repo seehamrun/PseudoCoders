@@ -4,6 +4,8 @@ function refresh() {
 }
 
 function addFavorite() {
+  $.post("/results")
+
   window.alert("Schedule added to your favorites...a new schedule has been generated for you!")
   refresh()
 }
@@ -11,5 +13,5 @@ function addFavorite() {
 
 window.addEventListener('load', () => {
   document.querySelector('#getAnother').addEventListener("click", refresh)
-  //document.querySelector('#addFavorite').addEventListener("click", addFavorite)
+  document.querySelector('#addFavorite').addEventListener("click", addFavorite)
 });

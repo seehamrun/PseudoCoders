@@ -38,6 +38,12 @@ class FavoritesHandler(webapp2.RequestHandler):
         userFavorites = userFavoritesList[0]
         favoriteSchedules = userFavorites.favorites
 
+        if userFavorites.current >= len(favoriteSchedules):
+            userFavorites.current = 0
+
+        logging.info("CURRENT: " + str(userFavorites.current))
+        logging.info("LEN OF ARRAY: " + str(len(userFavorites.favorites)))
+
         data = {'numEntries' : len(favoriteSchedules)}
         if len(favoriteSchedules) > 0:
             currentFavorite = favoriteSchedules[current] #this is a Schedule item
@@ -288,7 +294,7 @@ class ResultsHandler(webapp2.RequestHandler):
         # else:
         #     userResultsItem.current += 1
 
-        return webapp2.redirect('/favorites')
+        #return webapp2.redirect('/favorites')
 
 
 class AboutHandler(webapp2.RequestHandler):
@@ -424,13 +430,31 @@ class deleteCurrentItemFromFavoritesListHandler(webapp2.RequestHandler):
 
         logging.info(len(userFavoritesList[0].favorites))
 
+        newList = []
+
         current = userFavoritesList[0].current
-        userFavoritesList[0].favorites.pop(current)
-        #userFavoritesList[0].current -= 1
+        if current == 0:
+            current = len(userFavoritesList[0].favorites) - 1
+        else:
+            current = current - 1
+
+        for int in range(len(userFavoritesList[0].favorites)):
+            if not int == current:
+                newList.append(userFavoritesList[0].favorites[int])
+        userFavoritesList[0].favorites = newList
+
+        # userFavoritesList[0].current -= 1
+        # if userFavoritesList[0].current == -1:
+        #     userFavoritesList[0].current = len(userFavoritesList[0].favorites) - 1
+        userFavoritesList[0].put()
+
+
+        logging.info(len(userFavoritesList[0].favorites))
+
         userFavoritesList[0].put()
         #logging.info(len(userFavoritesList[0].favorites))
         #return webapp2.redirect('/favorites')
-        return "DELETED"
+        #return "DELETED"
 
 
 
