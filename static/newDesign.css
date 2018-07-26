@@ -193,10 +193,17 @@ main {
     border: 10px solid purple;
     padding: 20px;
     margin-top: -15px;
-
-
-
 }
+
+.gallerylist {
+  margin-left: 400px;
+  width: 400px;
+  border: 10px solid purple;
+  padding: 20px;
+  margin-top: 115px;
+}
+
+
 
 .rapper {
   vertical-align: text-top;
