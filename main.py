@@ -128,17 +128,6 @@ class PostHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/post.html')
         return self.response.write(template.render(data))
 
-        # schedule =
-        # schedule = schedule.split('||')
-        # schedule_data = {
-        #     "name": schedule[0]
-        #     "address": schedule[1]
-        #     "type": schedule[2]
-        #     "price_level": schedule[3]
-        #     "rating": schedule[4]
-        # }
-        # return self.response.write(template.render(schedule_data))
-
     def post(self):
         user_id = users.get_current_user().user_id()
         title = self.request.get('title')
@@ -383,12 +372,12 @@ class MainHandler(webapp2.RequestHandler):
         if user:
             nickname = user.nickname()
             logout_url = users.create_logout_url('/')
-            greeting = 'Welcome, {}! <a href="{}">sign out</a>'.format(nickname, logout_url)
+            greeting = 'Welcome, {}! <br><a href="{}">sign out</a>'.format(nickname, logout_url)
         else:
             login_url = users.create_login_url('/')
             greeting = '<a href="{}"><center><img src="/images/signinblue.png" height="46" width="191"></center></a>'.format(login_url)
 
-        self.response.write('<html><body><div id="login_text">{}</div></body></html>'.format(greeting))
+        self.response.write('<html><body><div id="login_text" style="text-align: center;">{}</div></body></html>'.format(greeting))
 
 class TestHandler(webapp2.RequestHandler):
     def get(self):
