@@ -23,7 +23,7 @@ class FavoritesHandler(webapp2.RequestHandler):
         if userFavoritesList == []:
             userFavorites = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[], current = 0)
             userFavorites.put()
-            return webapp2.redirect('/favorites_empty.html')
+            return webapp2.redirect('/favorites_empty')
         else:
             userFavorites = userFavoritesList[0]
 
@@ -530,6 +530,12 @@ class InstructionsHandler(webapp2.RequestHandler):
         responseHTML = jinja_env.get_template('templates/gettingstarted.html')
         self.response.write(responseHTML.render())
 
+class favoritesEmptyHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        responseHTML = jinja_env.get_template('templates/favorites_empty.html')
+        self.response.write(responseHTML.render())
+
 
 app = webapp2.WSGIApplication([
     ('/favorites', FavoritesHandler),
@@ -543,5 +549,6 @@ app = webapp2.WSGIApplication([
     ('/more', MoreHandler),
     ('/', MainHandler),
     ('/gettingstarted', InstructionsHandler),
-    ('/deleteCurrentItemFromFavoritesList', deleteCurrentItemFromFavoritesListHandler)
+    ('/deleteCurrentItemFromFavoritesList', deleteCurrentItemFromFavoritesListHandler),
+    ('/favorites_empty', favoritesEmptyHandler)
 ], debug=True)
