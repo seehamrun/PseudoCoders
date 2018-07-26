@@ -200,7 +200,7 @@ main {
 
 .rapper {
   vertical-align: text-top;
-  position: absolute;
+  position: fixed;
   right: 125px;
   width: 300px;
   padding: 10px;
