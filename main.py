@@ -85,7 +85,7 @@ class PostHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/post.html')
-        self.response.write(template.render())
+        return self.response.write(template.render())
 
         # schedule =
         # schedule_data = {

@@ -16,14 +16,15 @@ function deleteCall() {
 }
 
 
-function postGallery() {
-  $.post("/post")
-}
+// function postGallery() {
+//   console.log("POST")
+//   $.get("/post", )
+// }
 
 
 window.addEventListener('load', () => {
   document.querySelector('#seeNext').addEventListener("click", refresh)
   document.querySelector('#deleteFav').addEventListener("click", deleteCall)
-  document.querySelector('#postGallery').addEventListener("click", postGallery)
+  // document.querySelector('#postGallery').addEventListener("click", postGallery)
 
 });
