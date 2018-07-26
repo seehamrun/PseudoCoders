@@ -65,6 +65,8 @@ class FavoritesHandler(webapp2.RequestHandler):
 
 class GalleryHandler(webapp2.RequestHandler):
     def get(self):
+        
+
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/gallery.html')
         return self.response.write(template.render())
@@ -123,11 +125,26 @@ class PostHandler(webapp2.RequestHandler):
 
     def post(self):
         user_id = users.get_current_user().user_id()
-        # current_value =
-        events = self.request.get('schedule')
-        stored_schedule = database.UserFavorites(userID=user_id, favorites=schedules, current=current_value) #ADD ID HERE
-        stored_schedule.put()
-        #not sure how exactly this will work
+        title = self.request.get('title')
+        rating = self.request.get('rating')
+        description = self.request.get('description')
+        scheduleString = self.request.get('hiddenData')
+
+        schedule = None
+        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID = user_id)
+        userFavoritesItem = userFavoritesList[0]
+        for item in userFavoritesItem.favorites:
+            if item.events == scheduleString:
+                schedule = item
+                break
+
+        if schedule is None:
+            return webapp2.redirect('/')
+
+        newPost = database.GalleryPost(schedule=schedule, description=description, rating=rating, title=title, poster=user_id)
+        newPost.put()
+
+        return webapp2.redirect('/gallery')
 
 class SearchHandler(webapp2.RequestHandler):
     def get(self):

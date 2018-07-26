@@ -30,8 +30,8 @@ class LastResultSchedules(ndb.Model):
 #THIS IS THE ONLY ONE WE NEED TO CHANGE
 class GalleryPost(ndb.Model):
     schedule = ndb.StructuredProperty(Schedule, repeated=False)
-    ID = ndb.IntegerProperty()
+    #ID = ndb.IntegerProperty()
     description = ndb.StringProperty()
     rating = ndb.IntegerProperty()
     title = ndb.StringProperty()
-    poster = ndb.StringProperty() #this will be their email
+    poster = ndb.StringProperty() #this will be their ID
