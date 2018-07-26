@@ -9,7 +9,7 @@ html, body {
 }
 
 h1 {
-  margin-top: 120px;
+  margin-top: 130px;
 }
 
 #main_page_info {
@@ -22,6 +22,11 @@ h1 {
 
 #about_us_text {
   text-align: center;
+}
+
+.steps {
+  margin-top: 10px;
+  margin-left: 50px;
 }
 
 .initial-text {
