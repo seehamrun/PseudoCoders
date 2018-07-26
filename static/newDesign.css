@@ -16,13 +16,13 @@ h1 {
   margin-top: 220px;
 }
 
+.initial-text {
+  margin-left: 50px;
+}
+
 .plain-text {
   margin-left: 50px;
   margin-bottom: 50px;
-}
-
-.search {
-  margin-left: 50px;
 }
 
 body {

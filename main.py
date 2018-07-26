@@ -85,11 +85,23 @@ class PostHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/post.html')
-        return self.response.write(template.render())
+        self.response.write(template.render())
+
+        # schedule =
+        # schedule_data = {
+        #     "name": schedule['NAME']
+        #     "address": schedule['ADDRESS']
+        #     "type": schedule['TYPE']
+        #     "price_level": schedule['PRICE']
+        #     "rating": schedule['RATING']
+        # }
+        # return self.response.write(template.render(schedule_data))
 
     def post(self):
+        user_id = users.get_current_user().user_id()
+        # current_value =
         events = self.request.get('schedule')
-        stored_schedule = database.Schedule(events=events) #ADD ID HERE
+        stored_schedule = database.UserFavorites(userID=user_id, favorites=schedules, current=current_value) #ADD ID HERE
         stored_schedule.put()
         #not sure how exactly this will work
 
@@ -453,7 +465,6 @@ class deleteCurrentItemFromFavoritesListHandler(webapp2.RequestHandler):
         #logging.info(len(userFavoritesList[0].favorites))
         #return webapp2.redirect('/favorites')
         #return "DELETED"
-
 
 
 app = webapp2.WSGIApplication([
