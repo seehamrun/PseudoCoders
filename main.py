@@ -83,11 +83,33 @@ class MapHandler(webapp2.RequestHandler):
 
 class PostHandler(webapp2.RequestHandler):
     def get(self):
+        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
+
+        if len(userFavoritesList) == 0:
+            return webapp2.redirect('/favorites')
+
+        userFavoritesItem = userFavoritesList[0]
+        current = userFavoritesItem.current
+        if current == 0:
+            current = len(userFavoritesItem.favorites) - 1
+        else:
+            current = current - 1
+
+        content = userFavoritesItem.favorites[current].events
+        content2 = content.split("||")
+        newList = []
+        for item in content2:
+            newList.append(api_implementation.getDictionary(item))
+
+        data = {
+            "schedule": newList,
+            "hidden_data" : content
+        }
+
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/post.html')
-        return self.response.write(template.render())
+        return self.response.write(template.render(data))
 
-        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
         # schedule =
         # schedule = schedule.split('||')
         # schedule_data = {
