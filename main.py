@@ -65,6 +65,7 @@ class FavoritesHandler(webapp2.RequestHandler):
 
 class GalleryHandler(webapp2.RequestHandler):
     def get(self):
+<<<<<<< HEAD
         allPosts = database.GalleryPost.query().fetch()
         newList2 = []
         for post in allPosts:
@@ -79,6 +80,9 @@ class GalleryHandler(webapp2.RequestHandler):
             newList2.append(newList)
 
         data = {"gallery_schedules":newList2}
+=======
+
+>>>>>>> bfa487b46c6f40e212de1814460109b6b5954ad8
 
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/gallery.html')
@@ -144,11 +148,15 @@ class PostHandler(webapp2.RequestHandler):
         scheduleString = self.request.get('hiddenData')
 
         schedule = None
+<<<<<<< HEAD
         userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == user_id).fetch()
 
         if len(userFavoritesList) == 0:
             return webapp2.redirect('/')
 
+=======
+        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == user_id)
+>>>>>>> bfa487b46c6f40e212de1814460109b6b5954ad8
         userFavoritesItem = userFavoritesList[0]
         for item in userFavoritesItem.favorites:
             if item.events == scheduleString:
