@@ -164,8 +164,7 @@ class PostHandler(webapp2.RequestHandler):
         newPost = database.GalleryPost(schedule=schedule, description=description, rating=rating, title=title, poster=user_id)
         newPost.put()
 
-        webapp2.redirect('/gallery')
-
+        return webapp2.redirect('/gallery')
 
 class SearchHandler(webapp2.RequestHandler):
     def get(self):
