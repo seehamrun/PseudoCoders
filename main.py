@@ -147,7 +147,7 @@ class PostHandler(webapp2.RequestHandler):
         scheduleString = self.request.get('hiddenData')
 
         schedule = None
-        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == user_id).fetch()
+        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
 
         if len(userFavoritesList) == 0:
             return webapp2.redirect('/')
