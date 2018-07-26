@@ -27,10 +27,8 @@ class FavoritesHandler(webapp2.RequestHandler):
             userFavorites = userFavoritesList[0]
 
         favoriteSchedules = userFavorites.favorites #holds list of favoriteSchedules in Schedule forms
-        current = userFavorites.current #current one to display
 
-        if current is None:
-            current = 0
+        if userFavorites.current is None:
             userFavorites.current = 0
             userFavorites.put()
 
@@ -46,7 +44,7 @@ class FavoritesHandler(webapp2.RequestHandler):
 
         data = {'numEntries' : len(favoriteSchedules)}
         if len(favoriteSchedules) > 0:
-            currentFavorite = favoriteSchedules[current] #this is a Schedule item
+            currentFavorite = favoriteSchedules[userFavorites.current] #this is a Schedule item
             eventsList = []
             logging.info(currentFavorite) # BASE VALUE ISSUE HERE
             for event in currentFavorite.events.split("||"):
