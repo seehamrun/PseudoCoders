@@ -38,6 +38,12 @@ class FavoritesHandler(webapp2.RequestHandler):
         userFavorites = userFavoritesList[0]
         favoriteSchedules = userFavorites.favorites
 
+        if userFavorites.current >= len(favoriteSchedules):
+            userFavorites.current = 0
+
+        logging.info("CURRENT: " + str(userFavorites.current))
+        logging.info("LEN OF ARRAY: " + str(len(userFavorites.favorites)))
+
         data = {'numEntries' : len(favoriteSchedules)}
         if len(favoriteSchedules) > 0:
             currentFavorite = favoriteSchedules[current] #this is a Schedule item
@@ -58,27 +64,6 @@ class FavoritesHandler(webapp2.RequestHandler):
 
     def post(self):
         return webapp2.redirect('/post')
-
-    def delete(self):
-        # userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
-        # schedules = userFavoritesList.favorites
-        # current = userFavoritesList.current
-        # #del userFavoritesList[]
-        #
-        #
-        # if userProfile == [] or userProfile == None:
-        #     userProfile = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
-        #
-        # if len(userResultsItem.schedules) == 0:
-        #     logging.info("NOTHING CAN BE DONE")
-        # elif userResultsItem.current == 0:
-        #     userProfile[0].favorites.append(userResultsItem.schedules[len(userResultsItem.schedules)-1])
-        # else:
-        #     userProfile[0].favorites.append(userResultsItem.schedules[userResultsItem.current-1])
-        # userProfile[0].put()
-
-        return webapp2.redirect('/favorites')
-
 
 class GalleryHandler(webapp2.RequestHandler):
     def get(self):
@@ -321,7 +306,7 @@ class ResultsHandler(webapp2.RequestHandler):
         # else:
         #     userResultsItem.current += 1
 
-        return webapp2.redirect('/favorites')
+        #return webapp2.redirect('/favorites')
 
 
 class AboutHandler(webapp2.RequestHandler):
@@ -451,6 +436,42 @@ class MoreHandler(webapp2.RequestHandler):
         responseHTML = jinja_env.get_template('templates/test.html')
         self.response.write(responseHTML.render(data))
 
+<<<<<<< HEAD
+=======
+class deleteCurrentItemFromFavoritesListHandler(webapp2.RequestHandler):
+    def get(self):
+        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
+
+        logging.info(len(userFavoritesList[0].favorites))
+
+        newList = []
+
+        current = userFavoritesList[0].current
+        if current == 0:
+            current = len(userFavoritesList[0].favorites) - 1
+        else:
+            current = current - 1
+
+        for int in range(len(userFavoritesList[0].favorites)):
+            if not int == current:
+                newList.append(userFavoritesList[0].favorites[int])
+        userFavoritesList[0].favorites = newList
+
+        # userFavoritesList[0].current -= 1
+        # if userFavoritesList[0].current == -1:
+        #     userFavoritesList[0].current = len(userFavoritesList[0].favorites) - 1
+        userFavoritesList[0].put()
+
+
+        logging.info(len(userFavoritesList[0].favorites))
+
+        userFavoritesList[0].put()
+        #logging.info(len(userFavoritesList[0].favorites))
+        #return webapp2.redirect('/favorites')
+        #return "DELETED"
+
+
+>>>>>>> 7e773faef60af959a56297b5f893e98bfc2e2817
 
 app = webapp2.WSGIApplication([
     ('/favorites', FavoritesHandler),
@@ -462,5 +483,10 @@ app = webapp2.WSGIApplication([
     ('/about', AboutHandler),
     ('/test', TestHandler),
     ('/more', MoreHandler),
+<<<<<<< HEAD
     ('/', MainHandler)
+=======
+    ('/', MainHandler),
+    ('/deleteCurrentItemFromFavoritesList', deleteCurrentItemFromFavoritesListHandler)
+>>>>>>> 7e773faef60af959a56297b5f893e98bfc2e2817
 ], debug=True)
