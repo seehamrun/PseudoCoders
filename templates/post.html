@@ -24,12 +24,13 @@
     <h2>Schedule Details:</h2>
 
     {% for event in schedule %}
-      <p>Name: {{name}}</p>
-      <p>Address: {{address}}</p>
-      <p>Type: {{type}}</p>
-      <p>Price Level: {{price_level}}</p>
-      <p>Rating: {{rating}} stars</p>
+      <p>Name: {{event["NAME"]}}</p>
+      <p>Address: {{event["ADDRESS"]}}</p>
+      <p>Type: {{event["TYPE"]}}</p>
+      <p>Price Level: {{event["PRICE"]}}</p>
+      <br>
     {% endfor %}
+
     </div>
     <br><br>
 
@@ -48,6 +49,7 @@
       <p>Comments (optional): </p>
       <textarea id="comments" name="comments" style="width:250px;height:150px;"></textarea>
       <br><br>
+      <input type="hidden" value="{{hidden_data}}">
       <input type="submit" class="button">
     </form>
     <!-- <p>Name: result["NAME"]</p>
