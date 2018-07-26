@@ -11,7 +11,8 @@ from google.appengine.api import urlfetch
 
 #inputs placeID and returns JSON with place details
 def fetchPlaceDetails(placeID):
-    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/details/%s?key=%s&placeid=%s" % ("json", api.googleKey, placeID)
+    #google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/details/%s?key=%s&placeid=%s" % ("json", api.googleKey, placeID)
+    google_url = "https://maps.googleapis.com/maps/api/place/details/%s?key=%s&placeid=%s" % ("json", api.googleKey, placeID)
     # logging.info(placeID)
     # logging.info(google_url)
     urlContent = urlfetch.fetch(google_url).content
@@ -21,7 +22,8 @@ def fetchPlaceDetails(placeID):
 #inputs search query and returns any amount of data
 def findPlaceRequest(query):
     newQuery = query.replace(" ", "+")
-    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/findplacefromtext/%s?input=%s&inputtype=textquery&key=%s&fields=%s" % ("json", newQuery, api.googleKey, getFields())
+    #google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/findplacefromtext/%s?input=%s&inputtype=textquery&key=%s&fields=%s" % ("json", newQuery, api.googleKey, getFields())
+    google_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/%s?input=%s&inputtype=textquery&key=%s&fields=%s" % ("json", newQuery, api.googleKey, getFields())
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
     logging.info(response)
@@ -60,7 +62,8 @@ def getFields():
 #takes latitude/longitude -> can be computed from other Google API
 #also inputs a search query
 def nearbySearchRequest(location, radius):
-    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/nearbysearch/%s?key=%s&location=%s&radius=%s" % ("json", api.googleKey, getLatitudeLongitude(location), radius)
+    #google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/place/nearbysearch/%s?key=%s&location=%s&radius=%s" % ("json", api.googleKey, getLatitudeLongitude(location), radius)
+    google_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/%s?key=%s&location=%s&radius=%s" % ("json", api.googleKey, getLatitudeLongitude(location), radius)
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
     response = response['results']
@@ -166,8 +169,8 @@ def fixFormat(stringText):
 #def getLatitudeLongitude(first_line, city, state):
 def getLatitudeLongitude(location):
     newLocation = location.replace(" ", "+")
-    #google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/geocode/json?address=%s,%s,%s&key=%s" % (first_line, city, state, api.googleKey)
-    google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s" % (newLocation, api.googleKey)
+    #google_url = "https://cors.io/?" + "https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s" % (newLocation, api.googleKey)
+    google_url = "https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s" % (newLocation, api.googleKey)
     urlContent = urlfetch.fetch(google_url).content
     #logging.info(urlContent)
     response = json.loads(urlContent)
