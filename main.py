@@ -85,6 +85,7 @@ class PostHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/post.html')
+        return self.response.write(template.render())
 
         userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
         # schedule =
@@ -169,7 +170,7 @@ class SearchHandler(webapp2.RequestHandler):
 
 
         #types = ['restaurant', 'cafe', 'shopping_mall', 'museum', 'gym','movie_theater','bakery', 'store', 'park', 'bowling_alley']
-        output = api_implementation.makeSchedules(locationVar, radiusVar, priceVar, 3, 10, types)
+        output = api_implementation.makeSchedules(locationVar, radiusVar, priceVar, 3, 7, types)
         #assume this is a list (of schedules -> lists (of events -> strings) combined with "||")
 
         #markerE = time.time()
