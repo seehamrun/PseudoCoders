@@ -27,6 +27,8 @@ h1 {
 .linkItem {
   margin-left: 70px;
   margin-top: 10px;
+  color: blue;
+  text-decoration: underline;
 }
 
 .plain-text {

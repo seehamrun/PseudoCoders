@@ -33,7 +33,11 @@ class FavoritesHandler(webapp2.RequestHandler):
             userFavorites.put()
 
         userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
+        # try:
         userFavorites = userFavoritesList[0]
+        # except IndexError:
+        #     return webapp2.redirect('/home')
+
         favoriteSchedules = userFavorites.favorites
 
         if userFavorites.current >= len(favoriteSchedules):
@@ -130,7 +134,7 @@ class PostHandler(webapp2.RequestHandler):
         return self.response.write(template.render(data))
 
     def post(self):
-        user_id = users.get_current_user().user_id()
+        user_id = users.get_current_user().nickname()
         title = self.request.get('title')
         rating = int(self.request.get('rating'))
         description = self.request.get('description')
@@ -373,7 +377,7 @@ class MainHandler(webapp2.RequestHandler):
         if user:
             nickname = user.nickname()
             logout_url = users.create_logout_url('/')
-            greeting = 'Welcome, {}! <br><a href="{}"><center><img src="/images/signout.png" height="46" width="191"></center></a>'.format(nickname, logout_url)
+            greeting = 'Welcome, {}! <br><br><a href="{}"><center><img src="/images/signout.png" height="46" width="191"></center></a>'.format(nickname, logout_url)
         else:
             login_url = users.create_login_url('/')
             greeting = '<a href="{}"><center><img src="/images/signinblue.png" height="46" width="191"></center></a>'.format(login_url)
