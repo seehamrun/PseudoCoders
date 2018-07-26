@@ -85,15 +85,16 @@ class PostHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/post.html')
-        self.response.write(template.render())
 
+        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
         # schedule =
+        # schedule = schedule.split('||')
         # schedule_data = {
-        #     "name": schedule['NAME']
-        #     "address": schedule['ADDRESS']
-        #     "type": schedule['TYPE']
-        #     "price_level": schedule['PRICE']
-        #     "rating": schedule['RATING']
+        #     "name": schedule[0]
+        #     "address": schedule[1]
+        #     "type": schedule[2]
+        #     "price_level": schedule[3]
+        #     "rating": schedule[4]
         # }
         # return self.response.write(template.render(schedule_data))
 
