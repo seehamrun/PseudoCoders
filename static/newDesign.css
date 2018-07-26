@@ -8,6 +8,10 @@ html, body {
     font-size: 20px;
 }
 
+.no-scroll {
+    overflow: hidden;
+}
+
 h1 {
   margin-top: 130px;
 }

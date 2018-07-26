@@ -96,17 +96,17 @@ class GalleryHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/gallery.html')
         return self.response.write(template.render(data))
 
-class MapHandler(webapp2.RequestHandler):
-    def get(self):
-        self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('templates/map.html')
-        # location =
-        # schedule =
-        map_image_url = {
-            "map_image_url": "https://www.google.com/maps/embed/v1/directions?origin=+chicago,+il&waypoints=+river+forest,+il|+naperville,+il&destination=+oak+park,+il&key=%s" % (api.googleKey)
-            #maps.create_map_url(location, schedule)
-        }
-        return self.response.write(template.render(map_image_url))
+# class MapHandler(webapp2.RequestHandler):
+#     def get(self):
+#         self.response.headers['Content-Type'] = 'text/html'
+#         template = jinja_env.get_template('templates/map.html')
+#         # location =
+#         # schedule =
+#         map_image_url = {
+#             "map_image_url": "https://www.google.com/maps/embed/v1/directions?origin=+chicago,+il&waypoints=+river+forest,+il|+naperville,+il&destination=+oak+park,+il&key=%s" % (api.googleKey)
+#             #maps.create_map_url(location, schedule)
+#         }
+#         return self.response.write(template.render(map_image_url))
 
 class PostHandler(webapp2.RequestHandler):
     def get(self):
@@ -388,11 +388,11 @@ class MainHandler(webapp2.RequestHandler):
 
         self.response.write('<html><body><center><div id="login_text">{}</div></center></body></html>'.format(greeting))
 
-class TestHandler(webapp2.RequestHandler):
-    def get(self):
-        self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('templates/test.html')
-        return self.response.write(template.render())
+# class TestHandler(webapp2.RequestHandler):
+#     def get(self):
+#         self.response.headers['Content-Type'] = 'text/html'
+#         template = jinja_env.get_template('templates/test.html')
+#         return self.response.write(template.render())
 
 class MoreHandler(webapp2.RequestHandler):
     def get(self):
@@ -540,12 +540,12 @@ class favoritesEmptyHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/favorites', FavoritesHandler),
     ('/gallery', GalleryHandler),
-    ('/map', MapHandler),
+    # ('/map', MapHandler),
     ('/post', PostHandler),
     ('/results', ResultsHandler),
     ('/search', SearchHandler),
     ('/about', AboutHandler),
-    ('/test', TestHandler),
+    # ('/test', TestHandler),
     ('/more', MoreHandler),
     ('/', MainHandler),
     ('/gettingstarted', InstructionsHandler),
