@@ -176,31 +176,37 @@ main {
 }
 
 .favs {
-    margin-left: 150px;
-    width: 300px;
-    border: 20px solid purple;
-    padding: 25px;
+    margin-left: 300px;
+    width: 400px;
+    border: 10px solid purple;
+    padding: 20px;
+    margin-top: -15px;
+
+
 
 }
 
 .rapper {
   vertical-align: text-top;
   position: absolute;
-  right: 0px;
+  right: 125px;
   width: 300px;
   padding: 10px;
   margin: 250px;
-  margin-top: -750px;
-}
-
-#deleteFav {
-
-}
-
-#postGallery {
-
+  margin-top: -650px;
 }
 
 .linkItem{
   size: 150%
+}
+
+.rapper div img {
+    height: 120px;
+    width: 120px;
+    display: block;
+}
+h1 {
+position: relative;
+top: -15px;
+left: 450px;
 }
