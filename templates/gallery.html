@@ -22,17 +22,20 @@
     <div class="plain-text">
     <h1> Gallery</h1>
     {% for post in gallery_schedules %}
-      <p>Title: {{post[0]}}</p>
-      <p>By User {{post[1]}}</p>
-      {% for event in post %}
-      <p>Name: {{post[2]["NAME"]}}</p>
-      <p>Address: {{post[2]["ADDRESS"]}}</p>
-      <p>Type: {{post[2]["TYPE"]}}</p>
-      <p>Price Level: {{post[2]["PRICE"]}}</p>
+      <p>Title: {{post['title']}}</p>
+      <p>By User {{post['poster']}}</p>
+      {% for event in post['schedule'] %}
+      <p>Name: {{event["NAME"]}}</p>
+      <p>Address: {{event["ADDRESS"]}}</p>
+      <p>Type: {{event["TYPE"]}}</p>
+      <p>Price Level: {{event["PRICE"]}}</p>
       <br>
       {% endfor %}
-      <p>Rating: {{post[3]}}</p>
-      <p>Description: {{post[4]}}</p>
+      <p>Rating: {{post['rating']}}</p>
+      <p>Description: {{post['description']}}</p>
+      <br>
+      <br>
+      <br>
     {% endfor %}
     <a href="/">Back to Main Page</a>
       </div>
