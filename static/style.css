@@ -1,5 +1,9 @@
 /*Ethan's Loading thing*/
 
+#hidden{
+  display: None;
+}
+
 #loadingMessage{
   margin-top: 100px;
   text-align: center;
