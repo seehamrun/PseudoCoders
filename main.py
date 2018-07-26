@@ -65,11 +65,24 @@ class FavoritesHandler(webapp2.RequestHandler):
 
 class GalleryHandler(webapp2.RequestHandler):
     def get(self):
-        
+        allPosts = database.GalleryPost.query().fetch()
+        newList2 = []
+        for post in allPosts:
+            newList = []
+            newList.append(post.title)
+            newList.append(post.poster)
+            newList3 = []
+            for item in post.schedule.events.split("||"):
+                newList3.append(api_implementation.getDictionary(item))
+            newList.append(post.rating)
+            newList.append(post.description)
+            newList2.append(newList)
+
+        data = {"gallery_schedules":newList2}
 
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/gallery.html')
-        return self.response.write(template.render())
+        return self.response.write(template.render(data))
 
 class MapHandler(webapp2.RequestHandler):
     def get(self):
@@ -126,12 +139,16 @@ class PostHandler(webapp2.RequestHandler):
     def post(self):
         user_id = users.get_current_user().user_id()
         title = self.request.get('title')
-        rating = self.request.get('rating')
+        rating = int(self.request.get('rating'))
         description = self.request.get('description')
         scheduleString = self.request.get('hiddenData')
 
         schedule = None
-        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID = user_id)
+        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == user_id).fetch()
+
+        if len(userFavoritesList) == 0:
+            return webapp2.redirect('/')
+
         userFavoritesItem = userFavoritesList[0]
         for item in userFavoritesItem.favorites:
             if item.events == scheduleString:
