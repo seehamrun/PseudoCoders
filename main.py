@@ -515,6 +515,12 @@ class deleteCurrentItemFromFavoritesListHandler(webapp2.RequestHandler):
         #return webapp2.redirect('/favorites')
         #return "DELETED"
 
+class InstructionsHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        responseHTML = jinja_env.get_template('templates/gettingstarted.html')
+        self.response.write(responseHTML.render())
+
 
 app = webapp2.WSGIApplication([
     ('/favorites', FavoritesHandler),
@@ -527,5 +533,6 @@ app = webapp2.WSGIApplication([
     ('/test', TestHandler),
     ('/more', MoreHandler),
     ('/', MainHandler),
+    ('/gettingstarted', InstructionsHandler),
     ('/deleteCurrentItemFromFavoritesList', deleteCurrentItemFromFavoritesListHandler)
 ], debug=True)
