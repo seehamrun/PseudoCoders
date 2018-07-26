@@ -391,7 +391,6 @@ class MoreHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/more.html')
         return self.response.write(template.render())
 
-
     def post(self):
         # #THIS IS A TEST OF THE fetchPlaceDetails FUNCTION:
         # self.response.headers['Content-Type'] = 'text/html'
