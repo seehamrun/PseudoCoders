@@ -382,7 +382,7 @@ class MainHandler(webapp2.RequestHandler):
             login_url = users.create_login_url('/')
             greeting = '<a href="{}"><center><img src="/images/signinblue.png" height="46" width="191"></center></a>'.format(login_url)
 
-        self.response.write('<html><body><div id="login_text" style="text-align: center;">{}</div></body></html>'.format(greeting))
+        self.response.write('<html><body><center><div id="login_text">{}</div></center></body></html>'.format(greeting))
 
 class TestHandler(webapp2.RequestHandler):
     def get(self):
