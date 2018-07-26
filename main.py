@@ -89,7 +89,7 @@ class PostHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/post.html')
         self.response.write(template.render())
 
-        # schedule = 
+        # schedule =
         # schedule_data = {
         #     "name": schedule['NAME']
         #     "address": schedule['ADDRESS']
@@ -436,8 +436,6 @@ class MoreHandler(webapp2.RequestHandler):
         responseHTML = jinja_env.get_template('templates/test.html')
         self.response.write(responseHTML.render(data))
 
-<<<<<<< HEAD
-=======
 class deleteCurrentItemFromFavoritesListHandler(webapp2.RequestHandler):
     def get(self):
         userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
@@ -471,8 +469,6 @@ class deleteCurrentItemFromFavoritesListHandler(webapp2.RequestHandler):
         #return "DELETED"
 
 
->>>>>>> 7e773faef60af959a56297b5f893e98bfc2e2817
-
 app = webapp2.WSGIApplication([
     ('/favorites', FavoritesHandler),
     ('/gallery', GalleryHandler),
@@ -483,10 +479,6 @@ app = webapp2.WSGIApplication([
     ('/about', AboutHandler),
     ('/test', TestHandler),
     ('/more', MoreHandler),
-<<<<<<< HEAD
-    ('/', MainHandler)
-=======
     ('/', MainHandler),
     ('/deleteCurrentItemFromFavoritesList', deleteCurrentItemFromFavoritesListHandler)
->>>>>>> 7e773faef60af959a56297b5f893e98bfc2e2817
 ], debug=True)
