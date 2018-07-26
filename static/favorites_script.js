@@ -11,10 +11,7 @@ function refresh() {
 function deleteCall() {
   var result = confirm("Want to delete?");
   if (result) {
-    $.ajax({
-    url: '/favorites',
-    type: 'delete',
-    //success: refresh
+    
 });
 }}
 
