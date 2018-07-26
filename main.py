@@ -65,7 +65,7 @@ class FavoritesHandler(webapp2.RequestHandler):
 
 class GalleryHandler(webapp2.RequestHandler):
     def get(self):
-        
+
 
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/gallery.html')
@@ -131,7 +131,7 @@ class PostHandler(webapp2.RequestHandler):
         scheduleString = self.request.get('hiddenData')
 
         schedule = None
-        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID = user_id)
+        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == user_id)
         userFavoritesItem = userFavoritesList[0]
         for item in userFavoritesItem.favorites:
             if item.events == scheduleString:
