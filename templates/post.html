@@ -1,10 +1,11 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Planner Pro</title>
+    <title>Pro Planner</title>
     <link rel="stylesheet" href="/static/newDesign.css"></link>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
     <link rel="icon" href="http://www.jmkxyy.com/planner-icon-png/planner-icon-png-17.jpg">
+    <!-- <script src="/static/post_script.js"></script> -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
@@ -46,10 +47,10 @@
         <option value="1">One star</option>
       </select>
       <br><br>
-      <p>Comments (optional): </p>
-      <textarea id="comments" name="comments" style="width:250px;height:150px;"></textarea>
+      <p>Description: </p>
+      <textarea id="description" name="description" style="width:250px;height:150px;"></textarea>
       <br><br>
-      <input type="hidden" value="{{hidden_data}}">
+      <input type="hidden" name="hiddenData" value="{{hidden_data}}">
       <input type="submit" class="button">
     </form>
     <!-- <p>Name: result["NAME"]</p>

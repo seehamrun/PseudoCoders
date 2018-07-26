@@ -65,14 +65,32 @@ class FavoritesHandler(webapp2.RequestHandler):
 
 class GalleryHandler(webapp2.RequestHandler):
     def get(self):
+        allPosts = database.GalleryPost.query().fetch()
+        regularList = []
+        for post in allPosts:
+            newList = {}
+            newList['title']=post.title
+            newList['poster']=post.poster
+            newList3 = []
+            for item in post.schedule.events.split("||"):
+                newList3.append(api_implementation.getDictionary(item))
+            newList['schedule'] = newList3
+            newList['rating'] = post.rating
+            newList['description'] = post.description
+            regularList.append(newList)
+
+        logging.info(regularList)
+
+        data = {"gallery_schedules":regularList}
+
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/gallery.html')
-        return self.response.write(template.render())
+        return self.response.write(template.render(data))
 
 class MapHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('templates/.html')
+        template = jinja_env.get_template('templates/map.html')
         # location =
         # schedule =
         map_image_url = {
@@ -110,24 +128,32 @@ class PostHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/post.html')
         return self.response.write(template.render(data))
 
-        # schedule =
-        # schedule = schedule.split('||')
-        # schedule_data = {
-        #     "name": schedule[0]
-        #     "address": schedule[1]
-        #     "type": schedule[2]
-        #     "price_level": schedule[3]
-        #     "rating": schedule[4]
-        # }
-        # return self.response.write(template.render(schedule_data))
-
     def post(self):
         user_id = users.get_current_user().user_id()
-        # current_value =
-        events = self.request.get('schedule')
-        stored_schedule = database.UserFavorites(userID=user_id, favorites=schedules, current=current_value) #ADD ID HERE
-        stored_schedule.put()
-        #not sure how exactly this will work
+        title = self.request.get('title')
+        rating = int(self.request.get('rating'))
+        description = self.request.get('description')
+        scheduleString = self.request.get('hiddenData')
+
+        schedule = None
+        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
+
+        if len(userFavoritesList) == 0:
+            return webapp2.redirect('/')
+
+        userFavoritesItem = userFavoritesList[0]
+        for item in userFavoritesItem.favorites:
+            if item.events == scheduleString:
+                schedule = item
+                break
+
+        if schedule is None:
+            return webapp2.redirect('/')
+
+        newPost = database.GalleryPost(schedule=schedule, description=description, rating=rating, title=title, poster=user_id)
+        newPost.put()
+
+        return webapp2.redirect('/gallery')
 
 class SearchHandler(webapp2.RequestHandler):
     def get(self):
@@ -346,12 +372,12 @@ class MainHandler(webapp2.RequestHandler):
         if user:
             nickname = user.nickname()
             logout_url = users.create_logout_url('/')
-            greeting = 'Welcome, {}! <a href="{}">sign out</a>'.format(nickname, logout_url)
+            greeting = 'Welcome, {}! <br><a href="{}">sign out</a>'.format(nickname, logout_url)
         else:
             login_url = users.create_login_url('/')
             greeting = '<a href="{}"><center><img src="/images/signinblue.png" height="46" width="191"></center></a>'.format(login_url)
 
-        self.response.write('<html><body><div id="login_text">{}</div></body></html>'.format(greeting))
+        self.response.write('<html><body><div id="login_text" style="text-align: center;">{}</div></body></html>'.format(greeting))
 
 class TestHandler(webapp2.RequestHandler):
     def get(self):
