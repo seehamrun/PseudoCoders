@@ -11,9 +11,9 @@ function refresh() {
 function deleteCall() {
   var result = confirm("Want to delete?");
   if (result) {
-    
-});
-}}
+    $.get("/deleteCurrentItemFromFavoritesList", refresh)
+}
+}
 
 
 window.addEventListener('load', () => {

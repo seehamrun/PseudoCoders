@@ -59,27 +59,6 @@ class FavoritesHandler(webapp2.RequestHandler):
     def post(self):
         return webapp2.redirect('/post')
 
-    def delete(self):
-        # userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
-        # schedules = userFavoritesList.favorites
-        # current = userFavoritesList.current
-        # #del userFavoritesList[]
-        #
-        #
-        # if userProfile == [] or userProfile == None:
-        #     userProfile = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[])
-        #
-        # if len(userResultsItem.schedules) == 0:
-        #     logging.info("NOTHING CAN BE DONE")
-        # elif userResultsItem.current == 0:
-        #     userProfile[0].favorites.append(userResultsItem.schedules[len(userResultsItem.schedules)-1])
-        # else:
-        #     userProfile[0].favorites.append(userResultsItem.schedules[userResultsItem.current-1])
-        # userProfile[0].put()
-
-        return webapp2.redirect('/favorites')
-
-
 class GalleryHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
@@ -441,9 +420,18 @@ class MoreHandler(webapp2.RequestHandler):
 
 class deleteCurrentItemFromFavoritesListHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('templates/deleteCurrentItemFromFavoritesListHandler.html')
-        return self.response.write(template.render())
+        userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
+
+        logging.info(len(userFavoritesList[0].favorites))
+
+        current = userFavoritesList[0].current
+        userFavoritesList[0].favorites.pop(current)
+        #userFavoritesList[0].current -= 1
+        userFavoritesList[0].put()
+        #logging.info(len(userFavoritesList[0].favorites))
+        #return webapp2.redirect('/favorites')
+        return "DELETED"
+
 
 
 app = webapp2.WSGIApplication([
@@ -456,6 +444,6 @@ app = webapp2.WSGIApplication([
     ('/about', AboutHandler),
     ('/test', TestHandler),
     ('/more', MoreHandler),
-    ('/', MainHandler)
+    ('/', MainHandler),
     ('/deleteCurrentItemFromFavoritesList', deleteCurrentItemFromFavoritesListHandler)
 ], debug=True)
