@@ -23,6 +23,7 @@ class FavoritesHandler(webapp2.RequestHandler):
         if userFavoritesList == []:
             userFavorites = database.UserFavorites(userID=users.get_current_user().user_id(), favorites=[], current = 0)
             userFavorites.put()
+            return webapp2.redirect('/favorites_empty.html')
         else:
             userFavorites = userFavoritesList[0]
 
@@ -31,6 +32,9 @@ class FavoritesHandler(webapp2.RequestHandler):
         if userFavorites.current is None:
             userFavorites.current = 0
             userFavorites.put()
+
+        if len(userFavorites.favorites) == 0:
+            return webapp2.redirect('/favorites_empty.html')
 
         userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
         # try:
