@@ -44,7 +44,7 @@ a {
 }
 
 #login_text {
-  font-family: roboto;
+  font-family: 'roboto';
 }
 
 .button {
@@ -185,5 +185,13 @@ main {
   width: 300px;
   padding: 10px;
   margin: 250px;
-  margin-top: -770px;
+  margin-top: -750px;
+}
+
+#deleteFav {
+
+}
+
+#postGallery {
+
 }
