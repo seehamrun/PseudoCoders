@@ -1,5 +1,3 @@
-//IGNORE THIS FOR NOW
-
 //this will be all of our non-API js code
 function submitClick() {
   console.log("CLICK CLICK CLICK")

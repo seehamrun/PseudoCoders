@@ -21,6 +21,10 @@ h1 {
   margin-bottom: 50px;
 }
 
+.search {
+  margin-left: 50px;
+}
+
 body {
     background: #e6e6e6;
     color: #333;
