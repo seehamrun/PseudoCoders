@@ -34,7 +34,7 @@ class FavoritesHandler(webapp2.RequestHandler):
             userFavorites.put()
 
         if len(userFavorites.favorites) == 0:
-            return webapp2.redirect('/favorites_empty.html')
+            return webapp2.redirect('/favorites_empty')
 
         userFavoritesList = database.UserFavorites.query(database.UserFavorites.userID == users.get_current_user().user_id()).fetch()
         # try:
