@@ -546,7 +546,7 @@ app = webapp2.WSGIApplication([
     ('/search', SearchHandler),
     ('/about', AboutHandler),
     # ('/test', TestHandler),
-    ('/more', MoreHandler),
+    # ('/more', MoreHandler),
     ('/', MainHandler),
     ('/gettingstarted', InstructionsHandler),
     ('/deleteCurrentItemFromFavoritesList', deleteCurrentItemFromFavoritesListHandler),
